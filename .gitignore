@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+*.egg-info/
+.pytest_cache/
+.DS_Store
+
+# 定时任务运行时产物
+logs/
+.daily.lock/
+
+# 派生产物 —— 可从 data/papers/*.jsonl 重建
+papers.db
+cache/
+
+# 每天约 1.4MB 的抓取记录。不提交，因为 git 历史只增不减：
+# prune 删掉 60 天前的文件，历史里那份仍在，一年下来仓库会涨到几百 MB，
+# 保留策略就白写了。代价是这些是那天 arXiv 抓取的唯一副本（OAI 窗口过去就取不回），
+# 所以本机要有 Time Machine 或别的备份 —— 别指望 GitHub 兜底。
+data/papers/
+
+# 注意 data/feedback.jsonl 和 data/runs/ 是**提交**的（见下），别在这里加通配 data/。

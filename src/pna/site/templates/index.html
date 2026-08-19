@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}arXiv digest · archive{% endblock %}
+{% block content %}
+<header class="masthead">
+  <div class="kicker">arXiv digest
+    <span class="langswitch"><button data-set="zh">中文</button><button data-set="en">EN</button></span>
+  </div>
+  <h1><span lang="zh">往期</span><span lang="en">Archive</span></h1>
+  <div class="dek">
+    <span lang="zh">{{ days|length }} 期 · <a href="index.html">回到最新一期</a></span>
+    <span lang="en">{{ days|length }} issue{{ '' if days|length == 1 else 's' }} ·
+      <a href="index.html">back to the latest</a></span>
+  </div>
+</header>
+
+{% for d in days %}
+<article class="card">
+  <div class="chips">
+    <span class="chip score">{{ d.count }}</span>
+    {% if d.deep %}
+      <span class="chip deep" lang="zh">{{ d.deep }} 篇精读</span>
+      <span class="chip deep" lang="en">{{ d.deep }} deep</span>
+    {% endif %}
+    {% if d.count - d.deep %}
+      <span class="chip" lang="zh">{{ d.count - d.deep }} 篇速览</span>
+      <span class="chip" lang="en">{{ d.count - d.deep }} at a glance</span>
+    {% endif %}
+  </div>
+  <h2><a href="{{ d.date }}/">{{ d.date }}</a></h2>
+  {% if d.titles %}
+  <ul>{% for t in d.titles %}<li>{{ t }}</li>{% endfor %}</ul>
+  {% else %}
+  <p class="dek"><span lang="zh">无入选论文</span><span lang="en">nothing selected</span></p>
+  {% endif %}
+</article>
+{% endfor %}
+{% endblock %}

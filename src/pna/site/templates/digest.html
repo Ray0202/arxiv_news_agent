@@ -1,0 +1,291 @@
+{% extends "base.html" %}
+{% block title %}arXiv digest · {{ date }}{% endblock %}
+{% block content %}
+{% set deep_n = papers|selectattr('depth','equalto','deep')|list|length %}
+<header class="masthead">
+  <div class="kicker">arXiv digest · {{ date }}
+    <span class="langswitch"><button data-set="zh">中文</button><button data-set="en">EN</button></span>
+  </div>
+  <h1><span lang="zh">{{ deep_n }} 篇精读，{{ papers|length - deep_n }} 篇速览</span><span
+        lang="en">{{ deep_n }} deep reads, {{ papers|length - deep_n }} at a glance</span></h1>
+  <div class="dek">
+    <span lang="zh">从当日 {{ ingested or '—' }} 篇新投稿中筛出 ·
+      <a href="{{ '' if is_root else '../' }}archive.html">往期</a></span>
+    <span lang="en">filtered from {{ ingested or '—' }} new submissions ·
+      <a href="{{ '' if is_root else '../' }}archive.html">archive</a></span>
+  </div>
+</header>
+
+{% if criteria %}
+<details class="criteria">
+  <summary>
+    <span lang="zh">本期筛选条件</span><span lang="en">How these were selected</span>
+    <span class="funnel">{{ ingested }} → {{ tier1 }} → {{ papers|length }}</span>
+  </summary>
+  <div class="criteria-body">
+    <p class="funnel-note">
+      <span lang="zh">当日 {{ ingested }} 篇新投稿 → 关键词与分类命中 {{ tier1 }} 篇
+        → LLM 逐篇打分后取 {{ papers|length }} 篇。</span>
+      <span lang="en">{{ ingested }} new submissions → {{ tier1 }} matched the categories
+        and keywords → {{ papers|length }} kept after per-paper LLM scoring.</span>
+    </p>
+    <dl class="kv">
+      {% for t in criteria.topics %}
+      <dt>{{ t.name }}</dt>
+      <dd>
+        <span class="kws">{{ t.keywords|join(' · ') }}</span>
+        {% if t.description %}<br><span class="desc" lang="zh">{{ t.description }}</span>{% endif %}
+        {% if t.description_en %}<br><span class="desc" lang="en">{{ t.description_en }}</span>{% endif %}
+        {% if t.avoid %}<br><span class="avoid" lang="zh">排除：{{ t.avoid }}</span>{% endif %}
+        {% if t.avoid_en %}<br><span class="avoid" lang="en">excluded: {{ t.avoid_en }}</span>{% endif %}
+      </dd>
+      {% endfor %}
+      <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+      <dd class="kws">{{ criteria.categories|join(' · ') }}</dd>
+      <dt><span lang="zh">入选线</span><span lang="en">bar</span></dt>
+      <dd>
+        <span lang="zh">相关性打分 ≥ {{ criteria.thresholds.llm_min_score }}/10 ·
+          精读上限 {{ criteria.budget.deep_read_max_per_day }} 篇 ·
+          速览上限 {{ criteria.budget.shallow_max_per_day }} 篇</span>
+        <span lang="en">relevance ≥ {{ criteria.thresholds.llm_min_score }}/10 ·
+          at most {{ criteria.budget.deep_read_max_per_day }} deep reads ·
+          at most {{ criteria.budget.shallow_max_per_day }} at a glance</span>
+      </dd>
+      <dt><span lang="zh">模型</span><span lang="en">models</span></dt>
+      <dd class="kws">{{ criteria.models.triage }}
+        {%- if criteria.models.deep != criteria.models.triage %} · {{ criteria.models.deep }}{% endif %}</dd>
+    </dl>
+  </div>
+</details>
+{% endif %}
+
+{% if not papers %}
+<p class="empty"><span lang="zh">这一天没有通过筛选的论文。</span><span
+   lang="en">No papers cleared the filter on this day.</span></p>
+{% endif %}
+
+{% for p in papers %}
+{% set s = p.summary %}
+<article class="card">
+  <div class="chips">
+    {% if p.score is not none %}<span class="chip score" title="三级筛选相关性打分">{{ p.score }}/10</span>{% endif %}
+    <span class="chip {{ 'deep' if p.depth == 'deep' else '' }}">
+      <span lang="zh">{{ '全文精读' if p.depth == 'deep' else '仅摘要' }}</span><span
+        lang="en">{{ 'full text' if p.depth == 'deep' else 'abstract only' }}</span></span>
+    {% if p.venue %}<span class="chip venue" title="{{ p.venue.detail }}">{{ p.venue.label }}</span>{% endif %}
+    {% if p.code_url %}<span class="chip code"><a href="{{ p.code_url }}">code</a></span>{% endif %}
+    {% if p.novelty %}<span class="chip">{{ p.novelty }}</span>{% endif %}
+    {% if p.confidence_note %}
+      {% if p.confidence_note.zh %}<span class="chip warn" lang="zh"
+        title="{{ s.confidence.caveat }}">{{ p.confidence_note.zh }}</span>{% endif %}
+      {% if p.confidence_note.en %}<span class="chip warn" lang="en"
+        title="{{ s.confidence.caveat_en or '' }}">{{ p.confidence_note.en }}</span>{% endif %}
+    {% endif %}
+    {% if p.unverified %}
+      <span class="chip warn"
+            title="这些数字在原文中未检索到：{{ p.unverified|map(attribute='number')|join(', ') }}">
+        <span lang="zh">{{ p.unverified|length }} 个数字未核到</span><span
+          lang="en">{{ p.unverified|length }} unverified number{{ '' if p.unverified|length == 1 else 's' }}</span></span>
+    {% endif %}
+  </div>
+
+  <h2><a href="{{ p.abs_url }}">{{ p.title }}</a></h2>
+  {% if s.tldr_zh %}<p class="lead" lang="zh">{{ s.tldr_zh }}</p>{% endif %}
+  {% if s.tldr_en %}<p class="lead" lang="en">{{ s.tldr_en }}</p>{% endif %}
+  {# No cross-language secondary line: showing the Chinese tldr under the English lead
+     put Chinese on every card in the English view, which is exactly what the switch is
+     supposed to prevent. #}
+
+  <dl class="meta">
+    {% if s.institutions %}
+      <dt><span lang="zh">机构</span><span lang="en">institutions</span></dt><dd>{{ s.institutions|join(' · ') }}</dd>
+    {% endif %}
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>{{ p.authors[:4]|join(', ') }}{% if p.authors|length > 4 %}<span lang="zh"> 等 {{ p.authors|length }} 人</span><span lang="en"> +{{ p.authors|length - 4 }} more</span>{% endif %}</dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>{{ p.categories|join(' · ') }}<span class="sep">|</span>{{ p.created }}<span class="sep">|</span>{{ p.arxiv_id }}</dd>
+    {% if s.tags %}<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>{{ s.tags|join(' · ') }}</dd>{% endif %}
+    {% if p.related_recent %}
+    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
+    <dd class="thread">
+      {% for r in p.related_recent %}
+      {% set short = r.title|truncate(42, true, '…') %}
+      {% set live = r.date in (linkable or []) %}
+      <span lang="zh">与 {{ r.date }} 的{% if live %}<a href="../{{ r.date }}/">《{{ short }}》</a>{% else %}《{{ short }}》{% endif %}相近
+        ({{ '%.2f'|format(r.similarity) }})</span>
+      <span lang="en">close to {% if live %}<a href="../{{ r.date }}/">“{{ short }}”</a>{% else %}“{{ short }}”{% endif %}
+        from {{ r.date }} ({{ '%.2f'|format(r.similarity) }})</span>
+      {% if not loop.last %}<br>{% endif %}
+      {% endfor %}
+    </dd>
+    {% endif %}
+  </dl>
+
+  <div class="rate" data-arxiv="{{ p.arxiv_id }}" data-date="{{ date }}"
+       data-signals="{{ p.signals_json }}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">{{ '展开精读' if p.depth == 'deep' else '展开' }}</span><span
+      lang="en">{{ 'read the digest' if p.depth == 'deep' else 'expand' }}</span></summary>
+    <div class="body">
+      <div lang="zh">{% for para in s.article_zh|paragraphs %}<p>{{ para }}</p>{% endfor %}</div>
+      <div lang="en">{% for para in s.article_en|paragraphs %}<p>{{ para }}</p>{% endfor %}</div>
+
+      {% if p.chosen_figures %}
+      <h3><span lang="zh">论文原图</span><span lang="en">Figures from the paper</span></h3>
+      {% for f in p.chosen_figures %}
+      <figure class="paperfig">
+        <a href="{{ f.src }}" target="_blank" rel="noopener">
+          <img src="{{ f.src }}" alt="{{ f.label or f.kind }}" loading="lazy">
+        </a>
+        {% if f.why %}<p class="why" lang="zh">{{ f.why }}</p>{% endif %}
+        {% if f.why_en %}<p class="why" lang="en">{{ f.why_en }}</p>
+        {% elif f.why %}<p class="why" lang="en">{{ f.why }}</p>{% endif %}
+        <figcaption><span class="figlabel">{{ f.label or (f.kind ~ ' ' ~ f.number) }}</span>
+          {{ f.caption|replace(f.label ~ ':', '')|trim if f.label else f.caption }}</figcaption>
+      </figure>
+      {% endfor %}
+      {% endif %}
+
+      {% if s.key_contributions %}
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh">{% for c in s.key_contributions %}<li>{{ c }}</li>{% endfor %}</ul>
+      <ul lang="en">{% for c in (s.key_contributions_en or s.key_contributions) %}<li>{{ c }}</li>{% endfor %}</ul>
+      {% endif %}
+
+      {% if s.method %}
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">{{ s.method.core_idea }}</dd>
+        <dd lang="en">{{ s.method.core_idea_en or s.method.core_idea }}</dd>
+        {% if s.method.architecture %}<dt>architecture</dt><dd>{{ s.method.architecture }}</dd>{% endif %}
+        {% if s.method.training_data %}<dt>data</dt><dd>{{ s.method.training_data }}</dd>{% endif %}
+        {% if s.method.compute %}<dt>compute</dt><dd>{{ s.method.compute }}</dd>{% endif %}
+      </dl>
+      {% endif %}
+
+      {% if s.results %}
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        {% for r in s.results %}
+        <tr><td>{{ r.benchmark }}</td><td>{{ r.metric }}</td>
+            <td class="win">{{ r.value }}</td>
+            <td class="num">{{ r.baseline }}</td><td class="num">{{ r.delta }}</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+      {% endif %}
+
+      {% if p.review %}
+      {% set rv = p.review %}
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-{{ rv.evidence_grade }}">evidence {{ rv.evidence_grade }}</span>
+        <span class="pill risk-{{ rv.evaluation_risk }}">eval risk {{ rv.evaluation_risk }}</span>
+        <span class="pill risk-{{ rv.method_risk }}">method risk {{ rv.method_risk }}</span>
+        <span class="pill">{{ rv.paper_type|replace('_',' ') }}</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf {{ '%.2f'|format(rv.quality_confidence) }}</span>
+      </div>
+
+      <ul class="claims">
+        {% for c in rv.claims %}
+        <li class="support-{{ c.support }}">
+          <span class="sup">{{ c.support|replace('_',' ') }}</span>
+          <span lang="zh">{{ c.claim }}</span><span lang="en">{{ c.claim_en }}</span>
+          <div class="why"><span lang="zh">{{ c.why }}</span><span lang="en">{{ c.why_en }}</span></div>
+          {% if c.evidence_ids %}<div class="ev">{% for e in c.evidence_ids %}<code>{{ e }}</code>{% endfor %}</div>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+
+      {% if rv.risks %}
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        {% for x in rv.risks %}
+        <li><span class="tag">{{ x.kind }}</span>
+          <span lang="zh">{{ x.text }}</span><span lang="en">{{ x.text_en }}</span>
+          {% if x.evidence_ids %}<span class="ev">{% for e in x.evidence_ids %}<code>{{ e }}</code>{% endfor %}</span>{% endif %}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if rv.unknowns %}
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        {% for x in rv.unknowns %}
+        <li><span lang="zh">{{ x.text }}</span><span lang="en">{{ x.text_en }}</span></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endif %}
+
+      {% if s.limitations %}
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        {% for l in s.limitations %}
+        <li class="{{ l.source }}"><span lang="zh">{{ l.text }}</span><span
+          lang="en">{{ l.text_en or l.text }}</span><span class="tag">{{ l.source }}</span></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if s.why_it_matters_to_me %}
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">{{ s.why_it_matters_to_me }}</span><span
+        lang="en">{{ s.why_it_matters_to_me_en or s.why_it_matters_to_me }}</span></blockquote>
+      {% endif %}
+
+      {% if p.triage_reason or p.fulltext.dropped_sections or p.unverified
+            or (s.confidence and s.confidence.caveat) %}
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+        {% if p.triage_reason %}
+          <dt lang="zh">入选理由</dt><dd lang="zh">{{ p.triage_reason }}</dd>
+        {% endif %}
+        {% if p.triage_reason_en %}
+          <dt lang="en">why selected</dt><dd lang="en">{{ p.triage_reason_en }}</dd>
+        {% endif %}
+        {% if s.confidence and s.confidence.caveat %}
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">{{ s.confidence.level }} —— {{ s.confidence.caveat }}</dd>
+        {% endif %}
+        {% if s.confidence and s.confidence.caveat_en %}
+          <dt lang="en">confidence</dt>
+          <dd lang="en">{{ s.confidence.level }} — {{ s.confidence.caveat_en }}</dd>
+        {% endif %}
+        {% if p.fulltext.dropped_sections %}
+          <dt><span lang="zh">精读省略</span><span lang="en">sections omitted</span></dt><dd>{{ p.fulltext.dropped_sections|join(' · ') }}</dd>
+        {% endif %}
+        {% if p.unverified %}
+          <dt><span lang="zh">未核到</span><span lang="en">unverified</span></dt>
+          <dd>{% for u in p.unverified %}{{ u.number }} <span class="sep">({{ u.where }})</span>
+              {% endfor %}<span lang="zh">—— 这些数字在原文中检索不到，可能是模型自行推算的</span><span
+              lang="en">— not found in the source text; the model may have derived them</span></dd>
+        {% endif %}
+      </dl>
+      {% endif %}
+    </div>
+  </details>
+</article>
+{% endfor %}
+{% endblock %}

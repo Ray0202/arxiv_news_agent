@@ -1,0 +1,214 @@
+# ============================================================================
+# 这是整条流水线唯一需要手写的配置文件。
+#
+# 只有两个 topic 是我给的种子（time-series / agent），请按你的真实兴趣扩充。
+# `avoid` 和 `description` 里的否定描述同样重要 —— 三级 LLM 打分会读它们，
+# 写清楚"不关心什么"对精度的提升往往比再加十个关键词更大。
+# ============================================================================
+
+# arXiv 分类白名单。一级筛选先按这个过滤，不在列表里的直接丢弃。
+categories:
+  - cs.LG
+  - cs.AI
+  - cs.CL
+  - cs.MA
+  - stat.ML
+
+topics:
+  - name: time-series
+    weight: 1.0
+    keywords:
+      - time series
+      - time-series
+      - forecasting
+      - temporal
+      - sequence model
+      - state space model
+      - irregular sampling
+      - anomaly detection
+    description: >
+      时间序列预测与表征学习：基础模型（TSFM）、长程依赖建模、多变量与协变量
+      建模、不规则/缺失采样、概率预测与不确定性量化。
+    avoid: >
+      纯金融量化策略与回测、纯信号处理硬件实现、单一垂直行业的应用报告
+      （如仅在某个电网数据集上调参且无方法贡献）。
+    # `*_en` 只用于网页上"筛选条件"那一块的英文视图。留空的话英文视图会省略这段
+    # 说明，而不是在英文标题下印一段中文。喂给模型的仍然是上面的中文原文。
+    description_en: >
+      Time-series forecasting and representation learning: foundation models (TSFM),
+      long-range dependencies, multivariate and covariate modelling, irregular or
+      missing sampling, probabilistic forecasting and uncertainty quantification.
+    avoid_en: >
+      Pure quantitative-finance strategies and backtests, signal-processing hardware,
+      and single-vertical application reports with no methodological contribution
+      (e.g. tuning on one grid dataset).
+
+  - name: agent
+    weight: 1.0
+    keywords:
+      - LLM agent
+      - language agent
+      - tool use
+      - tool calling
+      - multi-agent
+      - planning
+      - ReAct
+      - agentic
+      - memory
+      - environment interaction
+    description: >
+      基于大模型的智能体：工具调用与函数执行、长程规划与任务分解、多智能体
+      协作与通信协议、记忆机制、与环境/代码库/操作系统的交互，以及相应的
+      评测基准。
+    avoid: >
+      传统强化学习中不涉及语言模型的 multi-agent RL、纯博弈论理论分析、
+      仅做 prompt 微调的经验性报告。
+    description_en: >
+      LLM-based agents: tool and function calling, long-horizon planning and task
+      decomposition, multi-agent collaboration and communication protocols, memory
+      mechanisms, interaction with environments, codebases and operating systems, and
+      the benchmarks that evaluate them.
+    avoid_en: >
+      Classical multi-agent RL with no language model involved, purely game-theoretic
+      analysis, and empirical reports that only tune prompts.
+
+# ---------------------------------------------------------------------------
+# 各级漏斗阈值
+# ---------------------------------------------------------------------------
+thresholds:
+  # 一级刻意低精度高召回，别动它。实测：13 篇被三级打到 8-9 分的论文，一级分只有 1.0，
+  # 其中包括当天排第一、9 分进精读的那篇。提到 2.0 会把它们全部误杀。
+  # 这一层每天多花的打分钱（约 $0.14）买的就是这个召回率。
+  keyword_min_score: 1.0
+  # 二级语义召回不用绝对余弦阈值。实测 bge-small 的相似度地板很高——两篇完全无关的
+  # 摘要也有 ~0.45，松散相关的有 ~0.62——所以"cos > 0.32"等于全部放行。
+  # 改用 memory.rescue_min_margin：正样本相似度减负样本相似度，差值消掉这个公共分量。
+  # 三级：0-10。注意这个阈值是**按模型校准**的，换模型要重看分布：
+  #   gpt-5.4-mini  ≥6 → 84 篇, ≥7 → 63, ≥8 → 38, ≥9 → 7
+  #   deepseek-v4   ≥6 → 50 篇
+  # 而且 read_depth=deep 只会给 8 分以上，所以这个阈值不改变篇数（篇数由下面的上限决定），
+  # 它决定的是浅读名额从哪个池子里挑。8 分对应"明确落在关注主题内"。
+  llm_min_score: 8
+
+# ---------------------------------------------------------------------------
+# 每日产量与成本闸门
+# ---------------------------------------------------------------------------
+budget:
+  # 这两个数才是真正决定每天页面上有几张卡的地方。
+  deep_read_max_per_day: 3     # 全文精读
+  shallow_max_per_day: 5       # 仅摘要速览
+  # ④a Reviewer-lite：对相关性最高的这些篇做证据审计（一篇一次调用）。
+  reviewer_max_per_day: 8
+  triage_max_per_day: 400      # 进入三级打分的上限，防止某天暴涨烧钱
+  usd_max_per_day: 2.0         # 硬闸门：预估超限就截断当日深读列表
+
+# ---------------------------------------------------------------------------
+# 精读名额如何分配
+#
+# reviewer 只审计证据与主张是否匹配，不给"论文质量总分"。它影响的是**在已经相关的
+# 论文之间**谁先被精读，不是能不能入选——所以前 N 个精读名额仍按纯相关性给，
+# 避免 reviewer 误判把真正对口的新方向挤掉。
+# ---------------------------------------------------------------------------
+selection:
+  # 证据审计对选篇的影响程度。分阶段放开，两周人工标注后再决定是否往上调：
+  #   off        完全不影响，一切按相关性（reviewer 只做展示）
+  #   deep_order 只决定"已入选的论文里谁进精读档"，不改变哪 8 篇入选  ← 当前
+  #   slots      也参与决定哪些论文入选
+  evidence_influence: deep_order
+
+  pure_relevance_slots: 2      # deep_order 下：前 2 个精读名额只看相关性
+  weights:
+    relevance: 0.8
+    evidence: 0.2
+    high_risk_penalty: 0.5
+
+# ---------------------------------------------------------------------------
+# Memory：让明天的运行依赖过去发生过的事
+#
+# 只有人工标签进入偏好 memory（feedback 里 source: manual）。模型自己的打分永远
+# 不回流——否则系统会用自己的判断训练自己的召回，越用越窄。
+# 相似度只用来生成"与某月某日那篇相近"的上下文，绝不据此过滤论文。
+# ---------------------------------------------------------------------------
+memory:
+  enabled: true
+  # 语义救援：没过一级关键词阈值、但和你标过"值得深读"的论文相似的，少量补进候选池。
+  #
+  # 07-30 实测（5 条标注）：捞回 14 篇，其中 5 篇被三级打到 8-9 分 —— 命中率 35.7%，
+  # 比关键词通道自己的 29.9% 还高，$0.017/天。
+  # 但 margin 不能判断质量：8-9 分的均值 +0.062，1 分的均值 +0.060，区间完全重叠。
+  # 所以它只负责排序和限量，判断仍然全部交给三级 LLM —— 调高它只会等比例砍掉好的和坏的。
+  rescue_max_per_day: 15
+  rescue_min_margin: 0.05     # (最相似正样本 − 最相似负样本) 的下限；召回旋钮，不是质量旋钮
+  # 已见论文相似标记（只做卡片上的上下文提示，永远不参与过滤和排序）
+  similarity_lookback_days: 30
+  # 0.84 是量出来的，不是拍的。07-31 的 8 篇候选 vs 07-30 已发布的 8 篇：
+  # 噪声密集落在 0.690~0.744，真正同一条研究线的只有 RELIC ↔ SkillRise = 0.868，
+  # 中间 0.75~0.86 完全没有样本。原来写的 0.72 会标 5/8 篇，其中包括
+  # "Bias Correction of Long-memory Estimator" 配 "Metis: Memory Foundation Model"
+  # —— 只是撞了 memory 这个词。阈值放在空带里，宁可漏标也不要谎称"这个昨天讲过"。
+  similarity_floor: 0.84
+
+# ---------------------------------------------------------------------------
+# 保留策略
+#
+# 页面和数据用两个时钟，因为它们的可再生性不同：
+#   页面 = data/papers/<date>.jsonl 的纯函数，删了随时能重建，白删；
+#   数据 = 那天的 arXiv 抓取的唯一副本，OAI 的窗口过去就拿不回来了。
+# 而且 30 天的 similarity_lookback 和"标注过的论文要能查到向量"都读它。
+# 所以 data_days 会被自动抬到不低于 similarity_lookback_days，
+# 且任何一天只要含有你手工标注过的论文，就永不删除。
+# ---------------------------------------------------------------------------
+retention:
+  site_days: 10       # 保留最近 10 天的页面快照（≈170KB/天）
+  data_days: 60       # 记录 + 向量（≈2.5MB/天）；设 0 表示永不删
+
+# ---------------------------------------------------------------------------
+# 输出
+# ---------------------------------------------------------------------------
+output:
+  languages: [zh, en]          # 中英双份完整摘要
+  # 这两个上限最初是拍的，实测后按真实产出调整过一次：
+  # deepseek-v4-pro 在 500 字上限下中位数仍是 714 字，且在 schema 描述里写
+  # "HARD CEILING" 也没用。500 字 ÷ 4 段 = 每段 125 字，对技术内容本就偏紧。
+  # 结论是改上限而不是继续跟模型较劲；verify.lengths 会持续记录超标幅度，
+  # 换 prompt 或换模型后可以用这个数字判断有没有改善。
+  article_words_zh: [400, 700]
+  article_words_en: [250, 450]
+
+# ---------------------------------------------------------------------------
+# 模型与后端
+#
+# provider 只在 model id 无法唯一确定后端时才用到（两家的 model id 目前不重名，
+# 所以换后端只要改下面的 model 名字即可）。能力差异写在 src/pna/providers.py：
+#   anthropic  原生 structured outputs，显式 prompt caching
+#   deepseek   走 Anthropic 兼容端点；structured outputs 不支持，改用强制工具调用；
+#              缓存自动生效；北京时间 9-12 与 14-18 点是双倍价
+# ---------------------------------------------------------------------------
+provider: openai
+
+models:
+  triage: gpt-5.4-mini
+  deep: gpt-5.4-mini
+  shallow: gpt-5.4-mini
+  reviewer: gpt-5.4-mini
+  deep_effort: high            # OpenAI: none|low|medium|high|xhigh
+  reviewer_effort: high
+
+  # 三家可以混用，每一级独立按 model id 解析 provider：
+  #   deepseek-v4-pro / deepseek-v4-flash   （最便宜）
+  #   claude-opus-5 / claude-haiku-4-5      （需要 ANTHROPIC_API_KEY）
+  #   gpt-5.4-mini / gpt-5.4 / gpt-5.4-nano （需要 OPENAI_API_KEY）
+  #
+  # ⚠️ OpenAI 侧 max_completion_tokens 同时覆盖 reasoning 与可见输出。实测 xhigh
+  # 能把 6000 的预算全部花在 reasoning 上，返回 finish_reason=length 且内容为空串。
+  # deep 档的 16000 上限是按 high effort（约 1.5k reasoning）留足余量定的。
+
+# ---------------------------------------------------------------------------
+# 抓取
+# ---------------------------------------------------------------------------
+ingest:
+  oai_base: https://oaipmh.arxiv.org/oai
+  sets: [cs, stat]
+  # OAI 的 from/until 过滤的是 datestamp（元数据变更时间），不是投稿时间。
+  # created 距 datestamp 在这个天数内的才算"新投稿"，更早的是旧论文改元数据。
+  new_submission_window_days: 5

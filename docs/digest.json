@@ -1,0 +1,22 @@
+[
+  {
+    "date": "2026-08-19",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "A Weak Penalty Neural ODE for Learning Chaotic Dynamics from Noisy Time Series",
+      "PrivAct: Internalizing Contextual Privacy Preservation via Multi-Agent Preference Training",
+      "A Finite-Iteration Theory for Asynchronous Categorical Distributional Temporal-Difference Learning"
+    ]
+  },
+  {
+    "date": "2026-07-30",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Living-Harness Is an Interactive-Agent Evolver",
+      "Metis: Memory Foundation Model",
+      "SkillRise: Agentic Reinforcement Learning for Cross-Task Skill Evolution"
+    ]
+  }
+]

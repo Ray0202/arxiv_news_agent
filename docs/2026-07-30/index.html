@@ -1,0 +1,1563 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>arXiv digest · 2026-07-30</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,ignoredTags:['script','noscript','style','textarea','pre','code']});"></script>
+
+<script>
+  // Set before first paint so switching languages never flashes the other one.
+  (function () {
+    try {
+      // Chinese is the default view; the switch remembers any other choice.
+      var l = localStorage.getItem("pna-lang");
+      document.documentElement.setAttribute("data-lang", l === "en" ? "en" : "zh");
+    } catch (e) { document.documentElement.setAttribute("data-lang", "zh"); }
+  })();
+</script>
+<style>
+:root {
+  --bg: #fcfbf9; --surface: #ffffff; --fg: #1a1917; --fg-soft: #55514b;
+  --muted: #8a857d; --line: #e6e2da; --line-soft: #f0ede7;
+  --accent: #9c4a25; --accent-bg: #f7eee8; --warn: #8a5a12; --warn-bg: #faf3e2;
+  --ok: #3f6b45;
+  --serif: Georgia, "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16151a; --surface: #1d1c22; --fg: #eceae5; --fg-soft: #b8b3aa;
+    --muted: #8f8a81; --line: #2f2d35; --line-soft: #26242b;
+    --accent: #e0906a; --accent-bg: #2c2126; --warn: #d9a862; --warn-bg: #2a2318;
+    --ok: #8fc09a;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans);
+  font-size: 16px; line-height: 1.55;
+}
+.wrap { max-width: 46rem; margin: 0 auto; padding: 2.75rem 1.25rem 6rem; }
+
+/* ---------- masthead ---------- */
+header.masthead { border-bottom: 2px solid var(--fg); padding-bottom: .9rem; margin-bottom: 2.25rem; }
+.kicker {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: .45rem;
+}
+h1 { font-family: var(--serif); font-size: 2rem; line-height: 1.15; margin: 0 0 .5rem;
+     letter-spacing: -.015em; font-weight: 600; }
+.dek { color: var(--fg-soft); font-size: .9rem; }
+.dek a { color: var(--fg-soft); border-bottom: 1px solid var(--line); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- card ---------- */
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 1.35rem 1.45rem; margin-bottom: 1.4rem;
+}
+.chips { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; margin-bottom: .7rem; }
+.chip {
+  font-family: var(--mono); font-size: .68rem; line-height: 1.7; padding: 0 .42rem;
+  border: 1px solid var(--line); border-radius: 3px; color: var(--muted); white-space: nowrap;
+}
+.chip.score { background: var(--fg); color: var(--bg); border-color: var(--fg); font-weight: 600; }
+.chip.deep  { background: var(--accent-bg); color: var(--accent); border-color: transparent; font-weight: 600; }
+.chip.venue { background: var(--accent-bg); color: var(--accent); border-color: transparent; }
+.chip.code a { color: var(--ok); }
+.chip.warn  { background: var(--warn-bg); color: var(--warn); border-color: transparent; }
+
+.card h2 {
+  font-family: var(--serif); font-size: 1.2rem; line-height: 1.32; font-weight: 600;
+  margin: 0 0 .6rem; letter-spacing: -.005em;
+}
+.card h2 a { color: var(--fg); }
+.lead { font-size: 1.02rem; line-height: 1.7; margin: 0 0 .45rem; color: var(--fg); }
+.lead-en { font-size: .86rem; line-height: 1.6; color: var(--muted); margin: 0 0 .9rem; }
+
+/* ---------- meta grid ---------- */
+.meta {
+  display: grid; grid-template-columns: 4.2rem 1fr; gap: .3rem .75rem;
+  border-top: 1px solid var(--line-soft); padding-top: .8rem; margin-top: .2rem;
+  font-size: .82rem;
+}
+.meta dt { color: var(--muted); font-family: var(--mono); font-size: .7rem;
+           letter-spacing: .04em; padding-top: .12rem; }
+.meta dd { margin: 0; color: var(--fg-soft); }
+.meta dd .sep { color: var(--line); padding: 0 .15rem; }
+
+/* ---------- disclosure ---------- */
+details { margin-top: .9rem; }
+summary {
+  cursor: pointer; list-style: none; font-size: .8rem; font-family: var(--mono);
+  letter-spacing: .05em; text-transform: uppercase; color: var(--muted);
+  padding: .35rem 0; border-top: 1px solid var(--line-soft);
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+ "; }
+details[open] summary::before { content: "– "; }
+summary:hover { color: var(--accent); }
+
+.body { padding-top: .5rem; }
+.body > p { margin: 0 0 .95rem; line-height: 1.85; }
+.body > p:first-of-type::first-letter { font-family: var(--serif); }
+h3 {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); margin: 1.7rem 0 .6rem; padding-bottom: .3rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+ul { margin: 0 0 .9rem; padding-left: 1.15rem; }
+li { margin-bottom: .35rem; line-height: 1.7; }
+
+/* ---------- figures ---------- */
+figure.paperfig { margin: 0 0 1.4rem; }
+figure.paperfig img {
+  display: block; width: 100%; height: auto; border: 1px solid var(--line);
+  border-radius: 6px; background: #fff;
+}
+figure.paperfig .why {
+  font-size: .88rem; color: var(--fg); margin: .55rem 0 .2rem; padding-left: .6rem;
+  border-left: 2px solid var(--accent);
+}
+figure.paperfig figcaption { font-size: .76rem; color: var(--muted); line-height: 1.55; }
+figure.paperfig .figlabel { font-family: var(--mono); font-size: .68rem; color: var(--accent); }
+
+/* ---------- tables ---------- */
+.scroll { overflow-x: auto; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+th, td { text-align: left; padding: .38rem .55rem; border-bottom: 1px solid var(--line-soft);
+         white-space: nowrap; }
+th { color: var(--muted); font-weight: 500; font-family: var(--mono); font-size: .68rem;
+     letter-spacing: .06em; text-transform: uppercase; }
+td.num { font-family: var(--mono); }
+td.win { font-family: var(--mono); color: var(--ok); }
+
+/* ---------- method / limitations ---------- */
+dl.kv { margin: 0 0 1rem; font-size: .88rem; }
+dl.kv dt { font-family: var(--mono); font-size: .68rem; letter-spacing: .06em;
+           color: var(--muted); margin-top: .7rem; }
+dl.kv dd { margin: .15rem 0 0; line-height: 1.7; color: var(--fg-soft); }
+li.reader { }
+li.reader .tag { color: var(--accent); font-family: var(--mono); font-size: .66rem;
+                 border: 1px solid var(--accent); border-radius: 3px; padding: 0 .25rem;
+                 margin-left: .3rem; white-space: nowrap; }
+li.author .tag { color: var(--muted); font-family: var(--mono); font-size: .66rem;
+                 border: 1px solid var(--line); border-radius: 3px; padding: 0 .25rem;
+                 margin-left: .3rem; white-space: nowrap; }
+blockquote.relevance {
+  margin: 0 0 1rem; padding: .6rem .9rem; background: var(--accent-bg);
+  border-radius: 6px; font-size: .9rem; line-height: 1.7;
+}
+.en-body > p { font-size: .88rem; line-height: 1.7; color: var(--fg-soft); margin: 0 0 .8rem; }
+
+.meta dd.thread { font-size: .78rem; }
+.meta dd.thread a { color: var(--fg-soft); border-bottom: 1px solid var(--line); }
+
+/* ---------- feedback ---------- */
+.rate { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center;
+        margin-top: .9rem; padding-top: .7rem; border-top: 1px solid var(--line-soft); }
+.rate-label { font-family: var(--mono); font-size: .66rem; letter-spacing: .06em;
+              text-transform: uppercase; color: var(--muted); margin-right: .2rem; }
+.rate button {
+  font: inherit; font-family: var(--mono); font-size: .68rem; cursor: pointer;
+  padding: .12rem .5rem; border: 1px solid var(--line); border-radius: 3px;
+  background: transparent; color: var(--muted);
+}
+.rate button:hover { color: var(--fg); border-color: var(--fg-soft); }
+.rate button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.rate-state { font-size: .66rem; color: var(--muted); margin-left: auto; }
+.rate-state.err { color: var(--warn); }
+
+/* ---------- evidence audit ---------- */
+.audit-note { font-size: .78rem; color: var(--muted); line-height: 1.65; margin: 0 0 .8rem; }
+.profile { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .9rem; }
+.pill { font-family: var(--mono); font-size: .68rem; padding: .08rem .45rem;
+        border: 1px solid var(--line); border-radius: 3px; color: var(--muted); }
+.pill.grade-A { color: var(--ok); border-color: var(--ok); }
+.pill.grade-B { color: var(--fg-soft); }
+.pill.grade-C, .pill.grade-D { color: var(--warn); border-color: var(--warn); }
+.pill.risk-high { color: var(--warn); border-color: var(--warn); }
+ul.claims { list-style: none; padding-left: 0; }
+ul.claims > li { border-left: 2px solid var(--line); padding-left: .7rem; margin-bottom: .85rem; }
+ul.claims > li.support-direct { border-left-color: var(--ok); }
+ul.claims > li.support-partial { border-left-color: var(--warn); }
+ul.claims > li.support-absent { border-left-color: var(--accent); }
+.sup { font-family: var(--mono); font-size: .64rem; text-transform: uppercase;
+       letter-spacing: .06em; color: var(--muted); display: block; margin-bottom: .15rem; }
+.why { font-size: .82rem; color: var(--fg-soft); line-height: 1.7; margin-top: .2rem; }
+.ev { margin-top: .25rem; }
+.ev code { font-family: var(--mono); font-size: .64rem; color: var(--muted);
+           border: 1px solid var(--line-soft); border-radius: 2px;
+           padding: 0 .25rem; margin-right: .2rem; }
+ul.unknowns > li { color: var(--muted); font-size: .85rem; }
+
+/* ---------- criteria disclosure ---------- */
+details.criteria { margin: -1.4rem 0 2rem; }
+details.criteria > summary {
+  border-top: 0; border-bottom: 1px solid var(--line-soft); display: flex;
+  align-items: baseline; gap: .5rem;
+}
+details.criteria .funnel { font-size: .72rem; color: var(--accent); margin-left: auto; }
+.criteria-body { padding: .7rem 0 .3rem; font-size: .82rem; }
+.criteria-body .funnel-note { color: var(--fg-soft); margin: 0 0 .7rem; line-height: 1.7; }
+.criteria-body dl.kv { margin: 0; }
+.criteria-body dt { color: var(--accent); }
+.criteria-body .kws { font-family: var(--mono); font-size: .74rem; color: var(--fg-soft); }
+.criteria-body .desc { color: var(--muted); font-size: .78rem; line-height: 1.6; }
+.criteria-body .avoid { color: var(--warn); font-size: .78rem; line-height: 1.6; }
+
+/* ---------- language switch ---------- */
+html[data-lang="zh"] [lang="en"] { display: none; }
+html[data-lang="en"] [lang="zh"] { display: none; }
+.langswitch { display: inline-flex; border: 1px solid var(--line); border-radius: 5px;
+              overflow: hidden; margin-left: .5rem; vertical-align: -2px; }
+.langswitch button {
+  font: inherit; font-family: var(--mono); font-size: .68rem; letter-spacing: .06em;
+  padding: .1rem .5rem; border: 0; background: transparent; color: var(--muted);
+  cursor: pointer; line-height: 1.7;
+}
+.langswitch button:hover { color: var(--fg); }
+html[data-lang="zh"] .langswitch button[data-set="zh"],
+html[data-lang="en"] .langswitch button[data-set="en"] {
+  background: var(--fg); color: var(--bg);
+}
+
+.empty { color: var(--muted); text-align: center; padding: 3.5rem 0; font-style: italic; }
+footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: .78rem; line-height: 1.7; }
+
+/* KaTeX inherits our size rather than its default 1.21em, which otherwise makes inline
+   notation tower over surrounding CJK text. */
+.katex { font-size: 1em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="masthead">
+  <div class="kicker">arXiv digest · 2026-07-30
+    <span class="langswitch"><button data-set="zh">中文</button><button data-set="en">EN</button></span>
+  </div>
+  <h1><span lang="zh">3 篇精读，5 篇速览</span><span
+        lang="en">3 deep reads, 5 at a glance</span></h1>
+  <div class="dek">
+    <span lang="zh">从当日 881 篇新投稿中筛出 ·
+      <a href="../archive.html">往期</a></span>
+    <span lang="en">filtered from 881 new submissions ·
+      <a href="../archive.html">archive</a></span>
+  </div>
+</header>
+
+<details class="criteria">
+  <summary>
+    <span lang="zh">本期筛选条件</span><span lang="en">How these were selected</span>
+    <span class="funnel">881 → 127 → 8</span>
+  </summary>
+  <div class="criteria-body">
+    <p class="funnel-note">
+      <span lang="zh">当日 881 篇新投稿 → 关键词与分类命中 127 篇
+        → LLM 逐篇打分后取 8 篇。</span>
+      <span lang="en">881 new submissions → 127 matched the categories
+        and keywords → 8 kept after per-paper LLM scoring.</span>
+    </p>
+    <dl class="kv">
+      <dt>time-series</dt>
+      <dd>
+        <span class="kws">time series · time-series · forecasting · temporal · sequence model · state space model · irregular sampling · anomaly detection</span>
+<br><span class="desc" lang="zh">时间序列预测与表征学习：基础模型（TSFM）、长程依赖建模、多变量与协变量 建模、不规则/缺失采样、概率预测与不确定性量化。</span><br><span class="desc" lang="en">Time-series forecasting and representation learning: foundation models (TSFM), long-range dependencies, multivariate and covariate modelling, irregular or missing sampling, probabilistic forecasting and uncertainty quantification.</span><br><span class="avoid" lang="zh">排除：纯金融量化策略与回测、纯信号处理硬件实现、单一垂直行业的应用报告 （如仅在某个电网数据集上调参且无方法贡献）。</span><br><span class="avoid" lang="en">excluded: Pure quantitative-finance strategies and backtests, signal-processing hardware, and single-vertical application reports with no methodological contribution (e.g. tuning on one grid dataset).</span>      </dd>
+      <dt>agent</dt>
+      <dd>
+        <span class="kws">LLM agent · language agent · tool use · tool calling · multi-agent · planning · ReAct · agentic · memory · environment interaction</span>
+<br><span class="desc" lang="zh">基于大模型的智能体：工具调用与函数执行、长程规划与任务分解、多智能体 协作与通信协议、记忆机制、与环境/代码库/操作系统的交互，以及相应的 评测基准。</span><br><span class="desc" lang="en">LLM-based agents: tool and function calling, long-horizon planning and task decomposition, multi-agent collaboration and communication protocols, memory mechanisms, interaction with environments, codebases and operating systems, and the benchmarks that evaluate them.</span><br><span class="avoid" lang="zh">排除：传统强化学习中不涉及语言模型的 multi-agent RL、纯博弈论理论分析、 仅做 prompt 微调的经验性报告。</span><br><span class="avoid" lang="en">excluded: Classical multi-agent RL with no language model involved, purely game-theoretic analysis, and empirical reports that only tune prompts.</span>      </dd>
+      <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+      <dd class="kws">cs.LG · cs.AI · cs.CL · cs.MA · stat.ML</dd>
+      <dt><span lang="zh">入选线</span><span lang="en">bar</span></dt>
+      <dd>
+        <span lang="zh">相关性打分 ≥ 8/10 ·
+          精读上限 3 篇 ·
+          速览上限 5 篇</span>
+        <span lang="en">relevance ≥ 8/10 ·
+          at most 3 deep reads ·
+          at most 5 at a glance</span>
+      </dd>
+      <dt><span lang="zh">模型</span><span lang="en">models</span></dt>
+      <dd class="kws">gpt-5.4-mini</dd>
+    </dl>
+  </div>
+</details>
+
+
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip deep">
+      <span lang="zh">全文精读</span><span
+        lang="en">full text</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2607.26598">Living-Harness Is an Interactive-Agent Evolver</a></h2>
+<p class="lead" lang="zh">把失败写进可复用流程，Pass@1 提 10.07pp</p><p class="lead" lang="en">It turns evaluated failures into reusable harness updates, lifting Pass@1 by 10.07 points on $\tau^2$-Bench.</p>
+  <dl class="meta">
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Yuetian Du, Yucheng Wang, He Xu, Jiexu Xu<span lang="zh"> 等 12 人</span><span lang="en"> +8 more</span></dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.MA · cs.AI · cs.CL<span class="sep">|</span>2026-07-29<span class="sep">|</span>2607.26598</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agents · agent-memory · workflow-repair · self-evolving-systems · multi-turn-dialogue</dd>  </dl>
+
+  <div class="rate" data-arxiv="2607.26598" data-date="2026-07-30"
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;B&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.87, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.8505}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开精读</span><span
+      lang="en">read the digest</span></summary>
+    <div class="body">
+      <div lang="zh"><p>智能体常能在当前 episode 里修正错误，却把同样的执行失误带到下一轮，因为反馈只改了这次轨迹，没改驱动后续交互的 harness。静态 harness 部署后不再变，reflection 和记忆也多半只存一句教训，不存触发条件、缺失动作和流程转移，所以“该转人工”未必会变成下次真的会调工具。</p><p>关键动作是让 harness 自己按回合进化。作者把 $H_d^{(n)}$ 拆成固定执行资源 $C_d^{\mathrm{act}}$、固定的 Evolution-SOP $\psi_d$，以及会更新的状态 $S_d^{(n)}=(\mathcal{R}_d^{(n)},G_d^{(n)})$。每轮先检索相关 memory 和 graph 作为上下文，执行后再把 $(\tau_n,y_n)$ 压成 episode abstraction $e_n$，抽取候选修复 $u_n$，分别写入 episodic memory 和 state graph；工具和 base context 始终冻结。</p><p>他们在八个交互环境上测了 $\tau^2$-Bench 的 Retail、Airline、Telecom 和 MultiWOZ-2.4 的 Restaurant、Hotel、Train、Attraction、Taxi。Living-Harness 的平均 Pass@1 到 83.09 和 65.50，分别比最强 interactive baseline 的 73.02 和 55.59 高 10.07 和 9.91 个点；在 $\tau^2$-Bench 上，去掉 Evolution-SOP 会把平均分从 83.09 拉到 73.38。Table 3 还显示，冻结后的 harness state 能跨 backbone 检索复用，GLM-5 的 Taxi 可从 0.00 提到 43.08。</p><p>这说明它补的是 agent 里的流程记忆，不是再多一次 retry。真正起作用的是把失败编码成可检索的 repair edge 和触发条件，而不是一段泛化总结；但证据仍只来自两套基准、少数 backbone 和 GPT-5.2/GPT-5.1 这组设置，域外可迁移性和对 noisy evaluator 的鲁棒性还没被证明。</p></div>
+      <div lang="en"><p>LLM agents can recover inside one episode, but the same failure comes back later because feedback edits the trace, not the persistent harness. A static harness freezes tools, memory, and workflow after deployment, while reflection-style memory often stores a lesson without the trigger condition, missing action, or transition needed to prevent recurrence.</p><p>Living-Harness makes the harness state itself evolve. The actor runs with fixed execution resources $C_d^{\mathrm{act}}$ and a fixed domain Evolution-SOP $\psi_d$, while the mutable state is $S_d^{(n)}=(\mathcal{R}_d^{(n)},G_d^{(n)})$. After each rollout, $(\tau_n,y_n)$ is compressed into an episode abstraction $e_n$, extracted into candidate repairs $u_n$, and written back to episodic memory and the state graph; tools and base context stay frozen.</p><p>They test this on eight interactive environments from $\tau^2$-Bench and MultiWOZ-2.4. Living-Harness reaches 83.09 average Pass@1 on $\tau^2$-Bench and 65.50 on MultiWOZ-2.4, beating the strongest interactive baselines, Reflexion at 73.02 and ReasoningBank at 55.59, by 10.07 and 9.91 points. The ablation is telling: removing the Evolution-SOP drops the $\tau^2$-Bench average to 73.38. Frozen harness state also transfers across backbones; GLM-5 on Taxi goes from 0.00 to 43.08.</p><p>The claim is not that the model learns better next-token reasoning, but that the surrounding procedure can accumulate reusable repairs. That is a good fit for agent work, where repeat failures often come from missing workflow state rather than weak answers. The caveat is scope: the evidence comes from two benchmarks, a small set of backbones, and a setup that relies on a domain-specific Evolution-SOP and evaluator signals; broader generality is still unproven.</p></div>
+
+      <h3><span lang="zh">论文原图</span><span lang="en">Figures from the paper</span></h3>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2607.26598v2/x2.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2607.26598v2/x2.png" alt="Figure 2" loading="lazy">
+        </a>
+<p class="why" lang="zh">把 rollout–evaluate–update 和检索关系画清楚。</p><p class="why" lang="en">Shows the rollout–evaluate–update loop and retrieval path in one view.</p>
+        <figcaption><span class="figlabel">Figure 2</span>
+          Overview of Living-Harness. In episode $n$, the agent interacts with the environment under harness state $S^{(n)}$, producing trajectory $\tau_{n}$ and evaluation signals $y_{n}$. Guided by the Evolution-SOP $\psi_{d}$, these signals are converted into posterior evidence and used to update episodic memory $\mathcal{R}$ and the state graph $G$. The resulting state $S^{(n+1)}$ is written back and retrieved to guide future episodes, while tools and base context remain frozen.</figcaption>
+      </figure>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2607.26598v2/x3.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2607.26598v2/x3.png" alt="Figure 3" loading="lazy">
+        </a>
+<p class="why" lang="zh">直接看出 Evolution-SOP、memory、state graph 各自掉多少分。</p><p class="why" lang="en">Shows how much performance each of Evolution-SOP, memory, and the state graph contributes.</p>
+        <figcaption><span class="figlabel">Figure 3</span>
+          Component ablation on $\tau^{2}$ -Bench: removing the Evolution-SOP causes the largest drop, while memory and state graph ablations show complementary contributions.</figcaption>
+      </figure>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2607.26598v2/x4.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2607.26598v2/x4.png" alt="Figure 4" loading="lazy">
+        </a>
+<p class="why" lang="zh">把失败变成可执行 repair 的过程展开。</p><p class="why" lang="en">Spells out how a failure is turned into an executable repair.</p>
+        <figcaption><span class="figlabel">Figure 4</span>
+          Case study of persistent procedural repair. In Cycle 0, Reflexion recognizes that the user should be transferred but repeatedly omits the required transfer_to_human_agents() call. Guided by the Evolution-SOP, Living-Harness converts this evaluated failure into an episodic-memory entry and a state-graph repair edge. In Cycle 1, the repaired harness retrieves the missing procedure, executes the tool call, and completes the task in one attempt.</figcaption>
+      </figure>
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>把 evaluator-grounded 的失败证据变成跨 episode 的 persistent procedural repairs。</li><li>提出 Living-Harness：固定工具和 base context，只更新 episodic memory 与 state graph。</li><li>在 $\tau^2$-Bench 和 MultiWOZ-2.4 的 8 个环境上验证，平均 Pass@1 提升 10.07 和 9.91 个点，并支持跨 backbone 复用。</li></ul>
+      <ul lang="en"><li>Turns evaluator-grounded failure evidence into persistent procedural repairs across episodes.</li><li>Introduces Living-Harness: fixed tools and base context, with only episodic memory and state graph updated.</li><li>Shows gains on eight environments from $\tau^2$-Bench and MultiWOZ-2.4, with +10.07 and +9.91 Pass@1 points and cross-backbone reuse.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">Living-Harness 把 harness 切成固定执行资源 $C_d^{\mathrm{act}}$、固定的 Evolution-SOP $\psi_d$，以及会在 episode 之间演化的状态 $S_d^{(n)}=(\mathcal{R}_d^{(n)},G_d^{(n)})$。每轮先检索 $\mathcal{R}$ 和 $G$ 作为 procedural context，执行后再把 $(\tau_n,y_n)$ 压成 episode abstraction $e_n$，从中抽取候选修复 $u_n$。候选修复只写回 episodic memory 和 state graph，工具与 base context 不动，所以修复是 bounded、可累积的。</dd>
+        <dd lang="en">Living-Harness splits the harness into fixed execution resources $C_d^{\mathrm{act}}$, a fixed Evolution-SOP $\psi_d$, and a mutable state $S_d^{(n)}=(\mathcal{R}_d^{(n)},G_d^{(n)})$ that evolves across episodes. Each round retrieves $\mathcal{R}$ and $G$ as procedural context, then compresses $(\tau_n,y_n)$ into an episode abstraction $e_n$ and extracts candidate repairs $u_n$. Only episodic memory and the state graph are updated; tools and base context stay fixed, so repairs accumulate without changing the action boundary.</dd>
+<dt>architecture</dt><dd>GPT-5.2 (medium reasoning effort); actor + self-evolving modules share backbone; simulated user for $\tau^2$-Bench: GPT-5.1; fixed tools/base context; $S^{(n)}=(\mathcal{R}^{(n)},G^{(n)})$; top-$k=3$ retrieval; temperature $0.2$; top_p=1.0</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>$\tau^2$-Bench average Pass@1</td><td>Pass@1 (%)</td>
+            <td class="win">83.09</td>
+            <td class="num">Reflexion 73.02</td><td class="num">+10.07 pp</td></tr>
+        <tr><td>MultiWOZ-2.4 average Pass@1</td><td>Pass@1 (%)</td>
+            <td class="win">65.50</td>
+            <td class="num">ReasoningBank 55.59</td><td class="num">+9.91 pp</td></tr>
+        <tr><td>$\tau^2$-Bench ablation: w/o Evolution-SOP average</td><td>Pass@1 (%)</td>
+            <td class="win">73.38</td>
+            <td class="num">Full Living-Harness 83.09</td><td class="num">-9.71 pp</td></tr>
+        <tr><td>MultiWOZ-2.4 Taxi transfer</td><td>Pass@1 (%)</td>
+            <td class="win">43.08</td>
+            <td class="num">GLM-5 0.00</td><td class="num">+43.08 pp</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-B">evidence B</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.87</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-not_applicable">
+          <span class="sup">not applicable</span>
+          <span lang="zh">Living-Harness 是一种把完成的交互轨迹和评估信号转化为对 episodic memory 与 state graph 的受约束后验更新、并保持工具和基础上下文冻结的自进化 harness。</span><span lang="en">Living-Harness is a self-evolving harness that turns completed interaction trajectories and evaluator signals into bounded posterior updates of episodic memory and a state graph while keeping tools and base context frozen.</span>
+          <div class="why"><span lang="zh">这些引文直接定义了方法、状态表示和更新方程，但它们说明的是框架设计与更新规则，而不是独立的经验检验。</span><span lang="en">These citations directly define the method, state representation, and update equations, but they establish the framework design and update rule rather than an independent empirical test.</span></div>
+<div class="ev"><code>Sx1.p4</code><code>Sx1.I1.i2.p1</code><code>Sx3.SSx1.p2</code><code>Sx3.SSx1.p3</code><code>Sx3.SSx2.p1</code><code>Sx3.SSx2.p4</code><code>Sx3.E1</code><code>Sx3.E9</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在由 τ²-Bench 与 MultiWOZ-2.4 组成的八个交互环境上，Living-Harness 的平均 Pass@1 分别比最强交互基线高 10.07 和 9.91 个百分点。</span><span lang="en">Across eight interactive environments derived from τ²-Bench and MultiWOZ-2.4, Living-Harness improves average Pass@1 over the strongest interactive baseline by 10.07 and 9.91 percentage points, respectively.</span>
+          <div class="why"><span lang="zh">Table 1 直接给出了各基准上的平均 Pass@1，以及与最强交互基线的对比数值，因此该增益可以逐项核对。它只验证了这些基准和设定中的结果，而不是更广泛场景。</span><span lang="en">Table 1 directly reports the average Pass@1 values and the comparison against the strongest interactive baseline, so the gain can be checked numerically. It verifies the result only in these benchmarks and settings, not more broadly.</span></div>
+<div class="ev"><code>Sx4.SSx1.p1</code><code>Sx4.I2.i1.p1</code><code>Sx4.I2.i2.p1</code><code>Sx3.T1</code><code>Sx4.SSx2.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">实验还显示，演化出的 harness state 会在后续循环中累积恢复收益，并且可以在仅检索的设置下迁移到其他 backbone。</span><span lang="en">The experiments also show that the evolved harness state accumulates recovery gains across cycles and can be transferred to other backbones in a retrieval-only setting.</span>
+          <div class="why"><span lang="zh">表 2 直接展示了按 cycle 递增的性能变化，表 3 直接展示了冻结 harness state 在其他 backbone 上的检索式复用增益；图 4 还给出了持续修复的具体例子。它们共同支持的是所报告设置下的累积与迁移，不是任意 backbone 或任意循环长度。</span><span lang="en">Table 2 directly shows cycle-wise performance changes, Table 3 directly shows retrieval-only reuse of the frozen harness state on other backbones, and Figure 4 gives a concrete persistent-repair example. Together they support accumulation and transfer in the reported settings, not arbitrary backbones or cycle lengths.</span></div>
+<div class="ev"><code>Sx4.T2</code><code>Sx4.T3</code><code>Sx4.SSx4.p1</code><code>Sx4.F4</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">主要对比建立在 GPT-5.2 作为统一 backbone、共享工具接口和相同任务级重试预算之上，若换 backbone 或调参，差距可能改变。</span><span lang="en">The main comparisons use GPT-5.2 as a shared backbone with the same tool interface and task-level retry budget, so the gap could change under different backbones or tuning choices.</span>
+<span class="ev"><code>Sx4.SSx1.p2</code><code>Sx4.SSx1.p3</code><code>Sx4.SSx2.p1</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">实验只覆盖 τ²-Bench 的 Retail/Airline/Telecom 和 MultiWOZ-2.4 的五个域，因此对其他交互任务或更长程环境的外推仍未在提供文本中验证。</span><span lang="en">The experiments cover only Retail/Airline/Telecom in τ²-Bench and five domains in MultiWOZ-2.4, so extrapolation to other interactive tasks or longer-horizon environments remains unverified in the provided text.</span>
+<span class="ev"><code>Sx4.I2.i1.p1</code><code>Sx4.I2.i2.p1</code><code>Sx4.SSx1.p1</code></span></li>
+        <li><span class="tag">statistics</span>
+          <span lang="zh">提供文本主要给出点估计和循环轨迹，没有可核实的种子方差或显著性检验，因此结果稳定性仍依赖未展示的统计设计。</span><span lang="en">The provided text mostly reports point estimates and cycle traces, but seed variance or significance testing is not verifiable here, so stability still depends on unseen statistical design.</span>
+<span class="ev"><code>Sx3.T1</code><code>Sx4.T2</code><code>Sx4.T3</code><code>Sx4.SSx1.p3</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">补充材料摘要声称包含更完整的限制讨论，但该限制段落未出现在提供文本中，无法核实作者自述的限制。</span><span lang="en">The supplement summary says it contains a fuller limitations discussion, but that section is absent from the provided text, so the authors&#39; self-stated limitations cannot be verified.</span></li>
+        <li><span lang="zh">作者声称代码将很快公开，但在提供文本中无法核实实际仓库是否已经可用。</span><span lang="en">The authors say the code will be made public soon, but actual repository availability cannot be verified from the provided text.</span></li>
+        <li><span lang="zh">提供文本没有显示种子数量、重复实验设置或显著性检验的完整细节，因此这些统计细节无法在此核实。</span><span lang="en">The provided text does not show the full details of seed counts, repeated-trial setup, or significance tests, so these statistical details cannot be verified here.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="reader"><span lang="zh">只在 $\tau^2$-Bench 和 MultiWOZ-2.4 的 8 个环境上验证，其他 interactive agent 任务是否同样有效未测。</span><span
+          lang="en">It is evaluated only on eight environments from $\tau^2$-Bench and MultiWOZ-2.4, so generality to other interactive-agent tasks is untested.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">方法依赖 domain-specific Evolution-SOP 和 evaluator signals；评测器更噪或规则更弱时是否稳定未知。</span><span
+          lang="en">The method depends on a domain-specific Evolution-SOP and evaluator signals, so robustness under noisier or weaker evaluators is unknown.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">跨 backbone 复用只展示了 4 个模型，且核心实验都围绕 GPT-5.2，泛化到更多 base model 还没证实。</span><span
+          lang="en">Cross-backbone reuse is shown on only four models, and the core experiments still revolve around GPT-5.2, so broader base-model generalization is unproven.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">它把 agent 复盘从“改回答”推进到“改流程”，正对记忆、workflow 和工具调用修复。</span><span
+        lang="en">It shifts agent reflection from better answers to better procedures, which is directly relevant to memory, workflow, and tool-use repair.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">自进化LLM交互式agent框架</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Self-evolving LLM interactive agent harness</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip deep">
+      <span lang="zh">全文精读</span><span
+        lang="en">full text</span></span>
+<span class="chip">notable</span><span class="chip warn" lang="zh"
+        title="正文被截断，6.3 之后的结论未见。">正文被截断</span><span class="chip warn" lang="en"
+        title="The paper text is truncated; claims after 6.3 are unseen.">text truncated</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2607.26760">Metis: Memory Foundation Model</a></h2>
+<p class="lead" lang="zh">Metis 把记忆压进参数态，NextMem Avg 到 50.82。</p><p class="lead" lang="en">Metis internalizes memory as parametric state and reaches 50.82 Avg on NextMem without context.</p>
+  <dl class="meta">
+      <dt><span lang="zh">机构</span><span lang="en">institutions</span></dt><dd>MemTensor (Shanghai) Technology Co., Ltd. · Renmin University of China · National University of Singapore · Shanghai Jiao Tong University · Tongji University</dd>
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Zeyu Zhang, Ziliang Guo, Yihang Sun, Xichong Zhang<span lang="zh"> 等 17 人</span><span lang="en"> +13 more</span></dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.CL · cs.LG<span class="sep">|</span>2026-07-29<span class="sep">|</span>2607.26760</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agent · parametric-memory · stateful-models · mid-training · long-context</dd>  </dl>
+
+  <div class="rate" data-arxiv="2607.26760" data-date="2026-07-30"
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;C&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;high&#34;, &#34;quality_confidence&#34;: 0.74, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.4166}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开精读</span><span
+      lang="en">read the digest</span></summary>
+    <div class="body">
+      <div lang="zh"><p>智能体的记忆大多还挂在外面：RAG、检索拼接、TTT 都把 backbone 维持成无状态预测器，记忆目标和模型本体分开，端到端训练难，推理还要额外检索。Metis 就是要修这个错位。</p><p>关键动作是把记忆改成参数态，直接塞进 backbone。它在每层放一个 local memory block 和一个 hyper memory block：前者存压缩后的历史，后者从当前 token 里选高分位置并更新记忆；读出时把 memory attention 和原 attention 按 $\gamma$ 混合。训练时再用 memory reconstruction、remember/forget/update/reflect 和多实体、污染样本，把记忆操作学成模型内生行为。</p><p>在 no-context 设定下，Metis-27B 的 MemOps (Gold) Avg 为 24.76，优于 Temp-LoRA-9B 的 13.51；LoCoMo (Gold) Avg 为 26.74，优于 11.72；NextMem Avg 为 50.82，优于 30.97。作者还报告 Metis test set Avg 73.77，对 Temp-LoRA-27B 的 23.86 提升明显。相比只靠 backbone，Metis 能保住跨轮信息。</p><p>这篇工作的价值是把记忆从外挂模块变成可优化的内部状态，比较适合 LLM agent 的持续交互。但它自己也承认，固定大小压缩会丢信息，长程任务和语义混叠仍会掉点，所以它更像可行的 native-memory 底座，不是最终答案。</p></div>
+      <div lang="en"><p>Agents still bolt memory onto the outside. RAG, retrieve-then-concatenate, and TTT keep the backbone as a stateless predictor; the memory objective sits apart from the model, so end-to-end training is awkward and inference pays extra retrieval cost. Metis is aimed at that mismatch.</p><p>The move is to make memory a parametric state inside the backbone. Metis adds a local memory block and a hyper memory block: one stores compressed history, the other picks salient tokens and updates the state; readout mixes memory attention with ordinary self-attention. Mid-training then teaches reconstruction, remember/forget/update/reflect behavior, plus regularization for multi-fact interference and memory pollution.</p><p>On no-context evaluation, Metis-27B gets 24.76 Avg on MemOps (Gold) versus Temp-LoRA-9B at 13.51, 26.74 Avg on LoCoMo (Gold) versus 11.72, and 50.82 Avg on NextMem versus 30.97. The paper also reports 73.77 Avg on its Metis test set, far above Temp-LoRA-27B at 23.86. In other words, it preserves cross-turn information without replaying the source context.</p><p>The strong part is the claim that memory can be trained into the model rather than appended beside it. The catch is the same fixed-size state that makes this efficient: the authors say long-horizon tasks lose information and some latent states blur together, so this is a plausible native-memory substrate, not a finished replacement for external memory.</p></div>
+
+      <h3><span lang="zh">论文原图</span><span lang="en">Figures from the paper</span></h3>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2607.26760v2/figure_intro_extensive_memory.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2607.26760v2/figure_intro_extensive_memory.png" alt="Figure 1" loading="lazy">
+        </a>
+<p class="why" lang="zh">直接展示从 external memory 到 native memory 的概念转折。</p><p class="why" lang="en">Shows the conceptual shift from external memory to native memory.</p>
+        <figcaption><span class="figlabel">Figure 1</span>
+          From external memory to native memory.</figcaption>
+      </figure>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2607.26760v2/memory_capacity.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2607.26760v2/memory_capacity.png" alt="Figure 3" loading="lazy">
+        </a>
+<p class="why" lang="zh">给出 step-level 和 trajectory-level 的 memory capacity 证据。</p><p class="why" lang="en">Shows the step-level and trajectory-level memory capacity evidence.</p>
+        <figcaption><span class="figlabel">Figure 3</span>
+          Results of memory capacity at the step-level (left) and trajectory-level (right).</figcaption>
+      </figure>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2607.26760v2/case_study.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2607.26760v2/case_study.png" alt="Figure 5" loading="lazy">
+        </a>
+<p class="why" lang="zh">案例里能看到 Metis 在对话场景中的具体成功和混淆。</p><p class="why" lang="en">Case studies expose how Metis behaves in conversational settings.</p>
+        <figcaption><span class="figlabel">Figure 5</span>
+          Case studies of Metis on different conversational scenarios.</figcaption>
+      </figure>
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>提出 memory foundation model 的定义，把记忆拆成 native memory state 和 native memory procedure。</li><li>提出 Metis：local memory block + hyper memory block，把写入、读取、忘记、更新都放进前向计算。</li><li>构造 357,137 个 primary samples 和 609,443 个 auxiliary samples 做 mid-training，并公开代码与 checkpoints。</li></ul>
+      <ul lang="en"><li>Define memory foundation models by separating native memory state from native memory procedure.</li><li>Propose Metis, which adds local and hyper memory blocks and moves writing, reading, forgetting, and updating into forward computation.</li><li>Build 357,137 primary samples and 609,443 auxiliary samples for mid-training, and release code and checkpoints.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">Metis 用固定大小的 $\mathbf{M}^{(l)}_t$ 和 $\mathbf{S}^{(l)}_t$ 表示每层的 native memory state。写入时，hyper memory block 从当前层 hidden states 里按 $\rho$ 选 token，经过 $\tilde{\mathbf{W}}_K$、$\tilde{\mathbf{W}}_V$ 投影后更新记忆；读出时，用 $\tilde{\mathbf{Q}}^{(l)}_t\mathbf{M}^{(l)}_t$ 做 memory attention，再和原 self-attention 按 $\gamma$ 混合。训练阶段冻结 backbone，只中训 memory 参数，用 reconstruction、operation 和 regularization 三类目标学出 remember/forget/update/reflect。</dd>
+        <dd lang="en">Metis represents native memory with fixed-size states $\mathbf{M}^{(l)}_t$ and $\mathbf{S}^{(l)}_t$ in each layer. On write, the hyper memory block selects tokens by $\rho$, projects them through $\tilde{\mathbf{W}}_K$ and $\tilde{\mathbf{W}}_V$, and updates memory; on read, $\tilde{\mathbf{Q}}^{(l)}_t\mathbf{M}^{(l)}_t$ forms memory attention that is mixed with ordinary self-attention by $\gamma$. Mid-training freezes the backbone and optimizes memory-only parameters with reconstruction, operation, and regularization losses for remember/forget/update/reflect.</dd>
+<dt>architecture</dt><dd>Qwen3.5-4B/9B/27B; N Transformer blocks; Metis block = local memory block + hyper memory block; fixed-size memory state $\mathbf{M}^{(l)}_t\in\mathbb{R}^{d_k\times d_v}$, $\mathbf{S}^{(l)}_t\in\mathbb{R}^{d_k}$; memory attention + causal attention mixed by $\gamma$; GDU update.</dd><dt>data</dt><dd>Primary: 27 public benchmarks, 357,137 samples, 406.1M tokens. Auxiliary: 609,443 samples.</dd><dt>compute</dt><dd>8xH100 GPUs; BF16; AdamW; lr 2e-4; 14,000 steps (Metis-4B/27B), 8,000 steps (Metis-9B); seed 42.</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>MemOps (Gold, no-context)</td><td>median LLM-as-a-judge Avg.</td>
+            <td class="win">24.76</td>
+            <td class="num">Temp-LoRA-9B 13.51</td><td class="num">+83.3%</td></tr>
+        <tr><td>LoCoMo (Gold, no-context)</td><td>median LLM-as-a-judge Avg.</td>
+            <td class="win">26.74</td>
+            <td class="num">Temp-LoRA-9B 11.72</td><td class="num">+128.2%</td></tr>
+        <tr><td>NextMem (no-context)</td><td>median LLM-as-a-judge Avg.</td>
+            <td class="win">50.82</td>
+            <td class="num">Temp-LoRA-27B 30.97</td><td class="num">+64.0%</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-C">evidence C</span>
+        <span class="pill risk-high">eval risk high</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.74</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-partial">
+          <span class="sup">partial</span>
+          <span lang="zh">Metis 被提出为一种把记忆状态和记忆过程内化到基础模型中的记忆基础模型原型，但可见证据只在报告的短期无上下文任务上直接支持这一主张。</span><span lang="en">Metis is proposed as a prototype memory foundation model that internalizes memory state and memory procedures into the backbone, but the visible evidence directly supports this claim only on the reported short-term no-context tasks.</span>
+          <div class="why"><span lang="zh">抽象、定义和方法部分都明确给出了 native memory state / procedure 的设计，并在表 5 和表 6 的无上下文设置里展示了对应任务表现。不过，主要实验聚焦相对短期任务，且更长程能力在可见文本中没有被完整核实。</span><span lang="en">The abstract, definition, and method sections explicitly define native memory state/procedure, and Tables 5 and 6 show the corresponding performance in no-context settings. However, the main experiments focus on relatively short-term tasks, and longer-horizon capability is not fully verified in the visible text.</span></div>
+<div class="ev"><code>S1.p3</code><code>S1.p5</code><code>S1.p7</code><code>S6.SS1.p1</code><code>S6.SS2.p1</code><code>S6.SS2.p3</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">Metis 的核心实现是把 local memory block 与 hyper memory block 嵌入 Transformer，并用 memory attention 配合 memory reconstruction、memory operation 和 regularization 目标来学习存取记忆。</span><span lang="en">Metis&#39;s core implementation embeds local and hyper memory blocks inside the Transformer and learns memory storage and retrieval with memory attention plus reconstruction, operation, and regularization objectives.</span>
+          <div class="why"><span lang="zh">第 3 节给出了 local/hyper memory block、memory attention 和状态更新/读取公式，第 5 节给出了三类 mid-training 目标及其数据子集。可见文本足以支撑该方法的结构与训练配方，但没有在这里单独量化每个组件的贡献。</span><span lang="en">Section 3 gives the local/hyper memory blocks, memory attention, and state update/read formulas, and Section 5 gives the three mid-training objectives and their data subsets. The visible text is sufficient to support the method structure and training recipe, but it does not separately quantify each component&#39;s contribution here.</span></div>
+<div class="ev"><code>S3.SS2.p1</code><code>S3.SS2.p2</code><code>S3.SS2.p3</code><code>S3.SS3.p1</code><code>S3.SS3.p2</code><code>S3.SS3.p3</code><code>S5.p1</code><code>S5.SS2.p1</code><code>S5.SS2.p2</code><code>S5.SS3.p1</code><code>S5.SS4.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在表 5 和表 6 的 no-context 设置中，Metis-27B 在所列基线里取得最佳平均分，并在记忆操作与记忆型 QA 两类任务上都保持可用表现。</span><span lang="en">In the no-context setting of Tables 5 and 6, Metis-27B achieves the best average scores among the listed baselines and remains usable on both memory-operation and memory-based QA tasks.</span>
+          <div class="why"><span lang="zh">表 5 和表 6 的 no-context 行直接显示 Metis-27B 的平均分最高，正文也明确总结其在无上下文条件下优于 Temp-LoRA 和 δ-Mem 等基线。这个结论只对应所报告的数据集与设置，不外推到未见的长程场景。</span><span lang="en">The no-context rows in Tables 5 and 6 directly show Metis-27B has the highest average scores, and the text explicitly summarizes that it outperforms baselines such as Temp-LoRA and δ-Mem under no-context conditions. This conclusion applies only to the reported datasets and settings, not to unseen long-horizon scenarios.</span></div>
+<div class="ev"><code>S6.T5</code><code>S6.SS2.p1</code><code>S6.SS2.p2</code><code>S6.T6</code><code>S6.SS2.p3</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">无上下文提升的比较基线来自 Qwen3.5、Temp-LoRA 和 δ-Mem，但提供文本没有核实这些方法是否在同等调参或训练预算下完成比较。</span><span lang="en">The no-context gains are compared against Qwen3.5, Temp-LoRA, and δ-Mem, but the provided text does not verify whether these methods were tuned or budgeted comparably.</span>
+<span class="ev"><code>S6.SS1.p3</code><code>S6.SS1.p4</code><code>S6.T5</code><code>S6.T6</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">主要实验聚焦相对短期任务，而长程能力只被提到在后文另述，因此当前可见证据对长交互场景的外推有限。</span><span lang="en">The main experiments focus on relatively short-term tasks, while long-horizon capability is only mentioned as being discussed later, so the visible evidence has limited reach to long-interaction settings.</span>
+<span class="ev"><code>S6.SS1.p1</code><code>S1.p7</code></span></li>
+        <li><span class="tag">ablation</span>
+          <span lang="zh">方法由 GDN-based update、memory query、γ 融合和多类训练目标共同组成，但可见文本只展示原则和公式，组件贡献的独立量化不可在此验证。</span><span lang="en">The method combines GDN-based update, memory query, γ fusion, and multiple training objectives, but the visible text only gives principles and formulas, so the independent contribution of each component cannot be verified here.</span>
+<span class="ev"><code>S3.SS3.p2</code><code>S3.SS3.p3</code><code>S3.SS4.p4</code><code>S5.p1</code><code>S5.SS2.p1</code><code>S5.SS3.p1</code><code>S5.SS4.p1</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">第 6.3 节、第 6.6 节和附录未见，因此无法核实消融、长程实验以及基线或提示细节。</span><span lang="en">Sections 6.3, 6.6, and the appendices are not visible, so ablations, long-horizon experiments, and baseline or prompt details cannot be verified.</span></li>
+        <li><span lang="zh">文本后半部分被截断，因此无法核实作者在讨论、结论和附录中的全部表述。</span><span lang="en">The latter part of the text is truncated, so the authors&#39; full discussion, conclusion, and appendix statements cannot be verified.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="author"><span lang="zh">作者承认固定大小的 memory state 会压缩丢失信息，长程任务会退化。</span><span
+          lang="en">The authors note that the fixed-size memory state loses information and degrades on long-horizon tasks.</span><span class="tag">author</span></li>
+        <li class="author"><span lang="zh">作者承认 latent space 里的语义混叠会造成 information confusion。</span><span
+          lang="en">The authors note that semantic blending in latent space can cause information confusion.</span><span class="tag">author</span></li>
+        <li class="reader"><span lang="zh">从读者角度看，本文主要给出 no-context 和 LLM-as-a-judge 结果，长程与开放式交互的证据还不完整。</span><span
+          lang="en">From a reader side, the paper mostly reports no-context and LLM-as-a-judge results, so long-horizon and open-ended interaction evidence is incomplete.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">这是 LLM agent 记忆的正面命题：把跨轮信息从 RAG 外挂改成参数态，最贴近持续交互。</span><span
+        lang="en">Directly relevant to agent memory: it moves cross-turn information from RAG-style external stores into parametric state.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">原生记忆机制与智能体记忆</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Native memory mechanism for agents</dd>
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">low —— 正文被截断，6.3 之后的结论未见。</dd>
+          <dt lang="en">confidence</dt>
+          <dd lang="en">low — The paper text is truncated; claims after 6.3 are unseen.</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip deep">
+      <span lang="zh">全文精读</span><span
+        lang="en">full text</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2607.26784">SkillRise: Agentic Reinforcement Learning for Cross-Task Skill Evolution</a></h2>
+<p class="lead" lang="zh">顺序 RL 把经验写成 skill document，Pass@1 提 2.3-8.5pp。</p><p class="lead" lang="en">A shared policy that writes an evolving skill document lifts Pass@1 by 2.3-8.5 points on three agent benchmarks.</p>
+  <dl class="meta">
+      <dt><span lang="zh">机构</span><span lang="en">institutions</span></dt><dd>Zhejiang University · National University of Singapore · Shanghai Jiao Tong University · Meituan</dd>
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Zhiyuan Yao, Yuxin Chen, Zhengxi Lu, Zishan Xu<span lang="zh"> 等 16 人</span><span lang="en"> +12 more</span></dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.LG · cs.AI<span class="sep">|</span>2026-07-29<span class="sep">|</span>2607.26784</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>agentic-rl · llm-agents · skill-learning · cross-task-transfer</dd>  </dl>
+
+  <div class="rate" data-arxiv="2607.26784" data-date="2026-07-30"
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.91, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.902}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开精读</span><span
+      lang="en">read the digest</span></summary>
+    <div class="body">
+      <div lang="zh"><p>LLM agent 换到同族新任务时，学到的套路常被直接丢掉。现有 agentic RL 把每个任务当独立 episode，或把技能学习拆成提炼、检索、执行多阶段管线，导致迁移到底来自技能还是别的模块，难以分清。重复试同一题能缓解，但多半只对单例有效。</p><p>SkillRise 的关键动作，是让同一 policy 在一串相关任务里轮流做两件事：先用当前 skill document $S_{i-1}$ 解题，再把这次轨迹改写成下一题可用的 $S_i$。训练时，解题只看当前回报，整理只看后续任务的折扣回报，$\gamma=0.6$；再按序列位置和角色做 group-relative advantage，把两种信号拆开。</p><p>在 ALFWorld、WebShop、ScienceWorld 上，Qwen3-1.7B/4B 的 SkillRise 取得最强 Pass@1：85.9%、84.4%、54.6%，比最强 baseline GiGPO 高 2.3、7.1、8.5 个百分点。Pass@3 也最好：92.2%、96.1%、61.0%。它还在重复尝试同一任务时超过 LaMer；在 ALFWorld 上把相关序列从 $K=2$ 拉到 $K=6$，Pass@1 从 83.6% 升到 87.5%。</p><p>这说明它学到的不是单次反思，而是可跨任务复用的整理策略。代价也清楚：序列构造依赖 task-family metadata，实验只做到 4B backbone 和三个文本、可验证回报环境，开放式多模态场景还没被证明。</p></div>
+      <div lang="en"><p>LLM agents still forget what they just learned when the next task is nearby but not identical. Standard agentic RL treats each task as an independent episode. Multi-stage skill pipelines go the other way and split extraction, retrieval, and execution, which makes the credit assignment muddy: is the gain from the skill, the memory, or the retriever? Repeated retries on one task help, but often only within that instance.</p><p>SkillRise’s move is simple: one policy both solves and curates. It runs through a sequence of related tasks, solves task $x_i$ with the current skill document $S_{i-1}$, then rewrites that document into $S_i$ for the next task. Solving is trained on the current reward; curation is trained on discounted downstream rewards with $\gamma=0.6$. A role-aware group-relative PPO objective keeps the two signals from collapsing into one.</p><p>On ALFWorld, WebShop, and ScienceWorld, a Qwen3-1.7B/4B backbone with SkillRise gets the best Pass@1: 85.9%, 84.4%, and 54.6%, beating the strongest baseline, GiGPO, by 2.3, 7.1, and 8.5 points. Pass@3 is also best: 92.2%, 96.1%, and 61.0%, with gains over the best baseline ranging from 0.8 to 5.5 points. It also beats LaMer on repeated attempts, and on ALFWorld its Pass@1 rises from 83.6% at $K=2$ to 87.5% at $K=6$ as the related test sequence gets longer.</p><p>The paper’s real claim is not a better retry trick, but a reusable curation policy that turns earlier interactions into later gains. The caveat is that the setup still assumes task-family metadata for sequence construction, and the evidence stops at three text environments and backbones up to 4B. It remains open whether the same scheme works when task relations must be discovered online, or when reward is less cleanly verifiable.</p></div>
+
+      <h3><span lang="zh">论文原图</span><span lang="en">Figures from the paper</span></h3>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2607.26784v1/method_overview.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2607.26784v1/method_overview.png" alt="Figure 1" loading="lazy">
+        </a>
+<p class="why" lang="zh">把解题、整理和跨任务 credit assignment 的关系一次画清，正文里不如图直观。</p><p class="why" lang="en">It makes the solve/curate split and the cross-task credit assignment explicit in one view.</p>
+        <figcaption><span class="figlabel">Figure 1</span>
+          Overview of SkillRise. (a) Related task instances are organized from simple to challenging. (b) A shared policy alternates between solving each task and curating an evolving skill document, which serves as the sole information channel across tasks. (c) Task solving receives the current task reward, while skill curation receives discounted rewards from subsequent tasks; group-relative advantages are computed among trials with the same role and sequence position.</figcaption>
+      </figure>
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>把相关但不同的任务实例排成序列，用后续任务回报直接检验前面学到的技能能否迁移。</li><li>提出 SkillRise，让同一 policy 在解题和改写 skill document 之间交替，并用解题回报与后续回报做解耦 credit assignment。</li><li>在 ALFWorld、WebShop 和 ScienceWorld 上拿到最强 Pass@1，并在重复尝试和更长测试序列上继续受益。</li></ul>
+      <ul lang="en"><li>It orders related but distinct task instances into sequences and uses later-task outcomes to test whether earlier skills transfer.</li><li>It introduces SkillRise, where one policy alternates between solving and rewriting a skill document, with decoupled credit assignment across the two roles.</li><li>It gets the best Pass@1 on ALFWorld, WebShop, and ScienceWorld, and still improves with repeated attempts and longer test-time sequences.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">SkillRise 把跨任务 skill learning 变成序列决策：相关但不同的实例 $x_1,\dots,x_K$ 被排成递进序列，policy $\pi_\theta$ 在每个位置先用 $S_{i-1}$ 解题，再把轨迹 $\tau_i$ 和奖励 $r_i$ 写回成新的 $S_i$。任务解答用 $r_i$ 做监督，skill curation 用 $\sum_{j=i+1}^K \gamma^{j-i} r_j$ 做监督，再用 role-aware group-relative PPO 把两种回报分开优化。</dd>
+        <dd lang="en">SkillRise turns cross-task skill learning into a sequence problem over related but distinct instances $x_1,\dots,x_K$. A shared policy $\pi_\theta$ solves each task with the current document $S_{i-1}$, then rewrites the interaction trace $\tau_i$ and reward $r_i$ into a new document $S_i$. Solving is supervised by $r_i$, while curation is supervised by $\sum_{j=i+1}^K \gamma^{j-i} r_j$, and role-aware group-relative PPO keeps the two returns separate.</dd>
+<dt>architecture</dt><dd>Qwen3-1.7B/4B; shared policy $\pi_\theta$; ordered sequences of $K=3$ tasks; $N=8$ independent trials; evolving skill document $S_i$; solve/curate alternating phases; role-aware clipped PPO</dd><dt>data</dt><dd>ALFWorld TextWorld (6 task families, 128 held-out instances); WebShop 1,000-product synthetic-goal version, 128 held-out instances; ScienceWorld, 128 held-out instances</dd><dt>compute</dt><dd>8 NVIDIA H800 GPUs; FSDP + vLLM; actor lr $1\times10^{-6}$; mini-batch 128; max response length 1,024 tokens; up to 150 updates; temperature 0.7; 384 task plays/update</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>ALFWorld</td><td>Pass@1 success rate</td>
+            <td class="win">85.9%</td>
+            <td class="num">GiGPO 83.6%</td><td class="num">+2.3pp</td></tr>
+        <tr><td>WebShop</td><td>Pass@1 success rate</td>
+            <td class="win">84.4%</td>
+            <td class="num">GiGPO 77.3%</td><td class="num">+7.1pp</td></tr>
+        <tr><td>ScienceWorld</td><td>Pass@1 success rate</td>
+            <td class="win">54.6%</td>
+            <td class="num">GiGPO 46.1%</td><td class="num">+8.5pp</td></tr>
+        <tr><td>ALFWorld</td><td>Pass@3 success rate</td>
+            <td class="win">92.2%</td>
+            <td class="num">LaMer 91.4%</td><td class="num">+0.8pp</td></tr>
+        <tr><td>WebShop</td><td>Pass@3 success rate</td>
+            <td class="win">96.1%</td>
+            <td class="num">LaMer 94.5%</td><td class="num">+1.6pp</td></tr>
+        <tr><td>ScienceWorld</td><td>Pass@3 success rate</td>
+            <td class="win">61.0%</td>
+            <td class="num">GiGPO 55.5%</td><td class="num">+5.5pp</td></tr>
+        <tr><td>ALFWorld cross-task test-time scaling</td><td>Pass@1 success rate</td>
+            <td class="win">87.5% at $K=6$</td>
+            <td class="num">83.6% at $K=2$</td><td class="num">+3.9pp</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-A">evidence A</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.91</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在ALFWorld、WebShop和ScienceWorld上，SkillRise在所比较的方法中取得了最高的Pass@1，并分别比最强基线GiGPO高2.3、7.1和8.5个百分点。</span><span lang="en">On ALFWorld, WebShop, and ScienceWorld, SkillRise attains the highest Pass@1 among the compared methods, beating the strongest baseline GiGPO by 2.3, 7.1, and 8.5 points, respectively.</span>
+          <div class="why"><span lang="zh">表1直接给出了三项基准上的Pass@1结果，并在主结果段落中明确写出相对GiGPO的差距，因此可以直接支撑这一定量结论；但这只覆盖文中列出的比较对象和当前实验设置。</span><span lang="en">Table 1 directly reports Pass@1 on the three benchmarks, and the main-results paragraph explicitly states the margins over GiGPO, so the quantitative claim is directly supported; the evidence is limited to the compared methods and the reported setup.</span></div>
+<div class="ev"><code>S4.T1</code><code>S4.SS2.SSS0.Px1.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在同一批保留任务上，SkillRise把跨任务训练得到的技能整理策略迁移到重复尝试中，Pass@2和Pass@3都优于比较方法。</span><span lang="en">On the held-out tasks, the curation strategy learned from cross-task training transfers to repeated attempts on the same task, where SkillRise achieves the best Pass@2 and Pass@3.</span>
+          <div class="why"><span lang="zh">表2和对应文字明确把该实验定义为对同一保留任务的重复尝试，并报告SkillRise在Pass@2/3上优于所有比较方法，因此可以直接支撑“迁移到重复尝试”这一结论。</span><span lang="en">Table 2 and the accompanying text explicitly frame the experiment as repeated attempts on the same held-out task and report that SkillRise outperforms all compared methods on Pass@2/3, so the transfer-to-retry claim is directly supported.</span></div>
+<div class="ev"><code>S4.T2</code><code>S4.SS2.SSS0.Px2.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在ALFWorld上，SkillRise会随着测试时相关任务序列变长而单调提升，并且在相同GPU配置下比RetroAgent和SkillRL具有更低的运行时间开销。</span><span lang="en">On ALFWorld, SkillRise improves monotonically as the related-task sequence gets longer at test time, and under the same GPU setup it runs much faster than RetroAgent and SkillRL.</span>
+          <div class="why"><span lang="zh">图2和第5.1节直接报告了K从2到6时的单调提升，而第5.4节和图4直接给出了与RetroAgent、SkillRL的运行时间倍数，因此这两个现象在当前文本中都得到直接验证；不过它们只在ALFWorld和作者复现的管线设置下成立。</span><span lang="en">Figure 2 and Section 5.1 directly report monotonic improvement as K grows from 2 to 6, while Section 5.4 and Figure 4 directly report runtime multiples versus RetroAgent and SkillRL, so both phenomena are directly verified in the provided text; however, they are only established for ALFWorld and the reproduced pipeline setup.</span></div>
+<div class="ev"><code>S5.SS1.p1</code><code>S5.F4</code><code>S5.SS4.p2</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">训练与比较设定对基线很敏感：所有可训练方法使用同一Qwen3骨干和同等的task plays/更新，但LaMer、SkillRise与SkillRL复现的交互结构不同，且SkillRL还依赖Gemini-2.5-Pro教师，可能改变优势幅度。</span><span lang="en">The comparison is sensitive to setup choices: all trainable methods use the same Qwen3 backbone and the same number of task plays per update, but LaMer, SkillRise, and the reproduced SkillRL differ in interaction structure, and SkillRL additionally depends on a Gemini-2.5-Pro teacher, which could change the margin.</span>
+<span class="ev"><code>S4.SS1.SSS0.Px3.p1</code><code>S4.SS1.SSS0.Px2.p1</code><code>S5.SS4.p1</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">结果只在三种文本型基准的128个保留实例上验证，而作者也明确把更大模型、多模态和真实场景留作未来工作，因此外推到这些设置的结论不确定。</span><span lang="en">The results are verified only on 128 held-out instances from three text-based benchmarks, and the authors explicitly leave larger models, multimodal settings, and real-world tasks as future work, so extrapolation to those settings is uncertain.</span>
+<span class="ev"><code>S4.SS1.SSS0.Px1.p1</code><code>S8.p1</code></span></li>
+        <li><span class="tag">construction</span>
+          <span lang="zh">相关任务序列依赖任务族元数据、贪心分组和由简单到复杂的排序；若换一种序列构造方式，跨任务收益可能不同。</span><span lang="en">The related-task sequences depend on task-family metadata, greedy grouping, and simple-to-complex ordering; a different sequence-construction heuristic could change the cross-task gains.</span>
+<span class="ev"><code>S3.SS1.p1</code><code>S3.SS1.p2</code><code>S8.p1</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">提供的摘录未包含Figure 2、3、4的完整图面和附录细节，因此无法进一步核实种子级重复实验、显著性检验或完整超参数搜索范围。</span><span lang="en">The provided excerpt does not include the full Figure 2, 3, or 4 panels or appendix details, so seed-level repetition, significance testing, and the full hyperparameter search range cannot be further verified.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="author"><span lang="zh">它依赖 task-family metadata 来构造相关序列，开放式任务流里的自动分组还没验证。</span><span
+          lang="en">It relies on task-family metadata to construct related sequences, and automatic grouping in open-ended task streams is not validated.</span><span class="tag">author</span></li>
+        <li class="author"><span lang="zh">实验只覆盖到 4B backbone，未测试更大模型。</span><span
+          lang="en">The experiments only go up to a 4B backbone, so larger models were not tested.</span><span class="tag">author</span></li>
+        <li class="reader"><span lang="zh">评测只在三个文本环境和可验证回报上完成，跨模态或难验证任务上的泛化仍未知。</span><span
+          lang="en">Evaluation is limited to three text environments with verifiable rewards, so generalization to multimodal or hard-to-verify tasks remains unknown.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">直接对应 LLM agent 的记忆与长程规划：把跨任务经验写成可复用 skill document。</span><span
+        lang="en">Directly relevant to LLM agents: it turns cross-task experience into reusable memory and tests whether that memory helps long-horizon planning across related tasks.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">跨任务技能学习与规划</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Cross-task skill learning and planning</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip ">
+      <span lang="zh">仅摘要</span><span
+        lang="en">abstract only</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2607.27083">Scores Are Not Decisions: Cost-Aware Stopping for Tool Acquisition in LLM Agents</a></h2>
+<p class="lead" lang="zh">CAM-DF 把工具排名变成停止决策，在线少用 37% 工具且成功率相近。</p><p class="lead" lang="en">CAM-DF turns tool rankings into cost-aware stopping, using 37% fewer tools online with comparable success.</p>
+  <dl class="meta">
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Yicheng Feng, Yan Zhang, Yan Cheng, Wei Qi</dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.LG · cs.AI<span class="sep">|</span>2026-07-29<span class="sep">|</span>2607.27083</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agents · tool-selection · cost-sensitive-learning · stopping-rule · retrieval</dd>  </dl>
+
+  <div class="rate" data-arxiv="2607.27083" data-date="2026-07-30"
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;B&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.93, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.8595}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开</span><span
+      lang="en">expand</span></summary>
+    <div class="body">
+      <div lang="zh"><p>LLM agent 现在不是“找不到工具”，而是“拿多少工具才划算”。只看 relevance ranking 不够，因为高分不等于值得继续收集；工具有异质成本时，拿多了会增加开销、context load 和 privacy exposure，拿少了又会欠信息。</p><p>关键动作是把工具前缀上的“现在停还是继续拿”写成 cost-aware marginal decision-focused stopping, 即 CAM-DF。它直接学离线增益：当前停下与最佳继续之间的差值，差值的符号决定标签，大小决定这次错误该按多少 payoff 加权。作者还给出 Bayes-aligned 的证明，并指出只看 score 的规则在异质成本下是次优的；CAM-DF-lite 则是一个更紧凑、可解释的版本。</p><p>实验覆盖 1,343 个任务和 5 个 tool-use domains。摘要只明确说，在 $\tau$-bench Retail 上，CAM-DF 在可部署方法里拿到最高 payoff，并且在 5 个 ranking sources 和 2 个 cost regimes 上都优于 predict-then-threshold 基线。作者还声称在高 cost pressure 和更弱 ranking 下收益更大。</p><p>这篇工作的价值很直接：它补的是 agent harness 里“何时停”的决策层，而不是再做一个更会打分的 retriever。它适合已有工具排序、但想把执行前的工具集压小的系统；不过摘要没有给出各基准的绝对数值，也没看到完整消融，因而对泛化和代价敏感度的边界还只能部分判断。</p></div>
+      <div lang="en"><p>LLM agents are no longer bottlenecked only by tool finding; they are bottlenecked by how many tools to acquire. A ranking over candidate tools is not enough, because relevance alone does not tell you whether one more tool is worth its cost. With heterogeneous costs, over-acquisition raises execution cost, context load, and privacy exposure; under-acquisition leaves the task under-informed.</p><p>The move here is to learn a cost-aware stopping rule over ranked tool prefixes, called CAM-DF. Instead of training on scores, it trains on the offline gap between stopping now and the best continuation: the sign of that gap gives the label, and its magnitude weights each error by the payoff at stake. The paper also states a Bayes-alignment result for this objective, and shows that score-only rules are suboptimal when costs differ. CAM-DF-lite is the compact, interpretable version.</p><p>The abstract reports evaluation on 1,343 tasks across five tool-use domains. On $\tau$-bench Retail, CAM-DF achieves the highest payoff among deployable methods, and beats a predict-then-threshold baseline across five ranking sources and two cost regimes. The authors also claim larger gains when rankings are weaker and cost pressure is higher.</p><p>So the contribution is a decision layer, not another retriever: it converts existing rankings into lower-cost acquisition choices without fine-tuning the LLM. That is most relevant when a system already has tool scores but still wastes budget at execution time. The limits are still visible from the abstract: no absolute numbers beyond the 37% tool reduction are given, and the evidence for generality across domains is only summarized, not inspectable here.</p></div>
+
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>把工具获取问题形式化为基于 ranked prefixes 的 cost-aware stopping。</li><li>用离线 continuation gap 的符号做标签、幅度做加权，直接优化停止决策。</li><li>在 1,343 个任务上验证，并报告在线比 full access 少用 37% 工具。</li></ul>
+      <ul lang="en"><li>Formulates tool acquisition as cost-aware stopping over ranked prefixes.</li><li>Trains on the offline continuation gap, using its sign as the label and its magnitude as the weight.</li><li>Evaluates on 1,343 tasks and reports 37% fewer tools than full access in live execution.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">CAM-DF 在 ranked tool prefixes 上学习停止函数，而不是学习工具分数本身。训练目标是当前停止与最佳继续之间的 offline payoff gap：gap&gt;0 表示应停，gap&lt;0 表示应继续，且用 gap 的绝对值给错误加权，从而把“错一次”的代价和收益挂钩。作者称该目标与 stopping target Bayes-aligned，并给出 score-only 规则在 heterogeneous costs 下次优的结论。</dd>
+        <dd lang="en">CAM-DF learns a stopping function over ranked tool prefixes rather than another tool score. The training target is the offline payoff gap between stopping now and the best continuation: a positive gap means stop, a negative gap means continue, and the magnitude weights the error so mistakes are scaled by the payoff at stake. The paper claims this objective is Bayes-aligned with the stopping target and shows that score-only rules are suboptimal under heterogeneous costs.</dd>
+<dt>architecture</dt><dd>CAM-DF; CAM-DF-lite</dd><dt>data</dt><dd>1,343 tasks across five tool-use domains; $\tau$-bench Retail</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>$\tau$-bench Retail</td><td>payoff</td>
+            <td class="win">highest among deployable methods</td>
+            <td class="num">predict-then-threshold baseline</td><td class="num"></td></tr>
+        <tr><td>five ranking sources</td><td>payoff</td>
+            <td class="win">better than predict-then-threshold across all five</td>
+            <td class="num">predict-then-threshold baseline</td><td class="num"></td></tr>
+        <tr><td>two cost regimes</td><td>payoff</td>
+            <td class="win">better than predict-then-threshold across both</td>
+            <td class="num">predict-then-threshold baseline</td><td class="num"></td></tr>
+        <tr><td>live execution</td><td>tools exposed</td>
+            <td class="win">37% fewer than full access</td>
+            <td class="num">full access</td><td class="num">-37%</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-B">evidence B</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.93</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">CAM-DF 将工具获取建模为基于排序前缀的代价感知停止，并用按收益差加权的目标学习停止点；给定文本中的理论结果表明该目标与离线停止标签 Bayes 对齐，且在异质成本下仅靠分数排序不足以得到最优获取规则。</span><span lang="en">CAM-DF formulates tool acquisition as cost-aware stopping over ranked prefixes and learns the stop point with a payoff-gap-weighted objective; the text&#39;s theory shows this target is Bayes-aligned with the offline stopping label, and that score-only rules are insufficient under heterogeneous costs.</span>
+          <div class="why"><span lang="zh">S4.SS2.p1 与 Thmtheorem2.p1 直接给出加权风险的 Bayes 最优决策形式，而 Thmproposition3.p1 直接证明了在异质成本下分数单调规则无法复现最优选择。S1.p3 说明这是作者实际采用的 stopping 设定，而不是纯概念描述。</span><span lang="en">S4.SS2.p1 and Thmtheorem2.p1 directly state the Bayes-optimal form of the weighted risk, and Thmproposition3.p1 directly proves that score-monotone rules cannot reproduce the optimum under heterogeneous costs. S1.p3 shows this is the actual stopping formulation used by the authors, not just a conceptual framing.</span></div>
+<div class="ev"><code>S1.p3</code><code>S4.SS2.p1</code><code>Thmtheorem2.p1</code><code>Thmproposition3.p1</code></div>        </li>
+        <li class="support-partial">
+          <span class="sup">partial</span>
+          <span lang="zh">在 1,343 个任务和五个域的报告评估中，CAM-DF 在大多数设置里领先或接近领先，并且收益在异质成本、较高成本压力和更弱排序源下更大。</span><span lang="en">Across the reported evaluation on 1,343 tasks and five domains, CAM-DF leads or is near the lead in most settings, and its gains are larger under heterogeneous costs, higher cost pressure, and weaker ranking sources.</span>
+          <div class="why"><span lang="zh">S6.T2 和 S6.SS1.SSS0.Px1.p1 直接给出主表和跨域结果；S6.SS1.SSS0.Px2.p1 与 S6.SS3.SSS0.Px1.p1 直接展示了收益随 λ、成本离散度和 scorer AUC 变化的趋势。由于 Airline 结果不一致、Atlas 使用了不同的 payoff/版本设定，且部分域只报告了更窄的比较，所以这里更适合记为强 partial。</span><span lang="en">S6.T2 and S6.SS1.SSS0.Px1.p1 directly give the main table and cross-domain outcomes; S6.SS1.SSS0.Px2.p1 and S6.SS3.SSS0.Px1.p1 directly show that gains vary with λ, cost dispersion, and scorer AUC. Because Airline is inconclusive, Atlas uses a different payoff/version setup, and some domains report narrower comparisons, this is better treated as strong partial support.</span></div>
+<div class="ev"><code>S1.p4</code><code>S6.T2</code><code>S6.SS1.SSS0.Px1.p1</code><code>S6.SS1.SSS0.Px2.p1</code><code>S6.SS3.SSS0.Px1.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在 Retail 的实时执行中，CAM-DF 将预执行读工具暴露从 7 个降到 4.4 个，同时观测到的任务成功率与完整访问相近。</span><span lang="en">In live execution on Retail, CAM-DF reduced pre-execution read-tool exposure from 7 to 4.4 tools while observed task success remained close to full access.</span>
+          <div class="why"><span lang="zh">S6.SS3.SSS0.Px2.p1 直接报告了工具暴露下降、成功率数值以及与 full access 的统计比较。该段还明确说明检验没有建立 non-inferiority，因此它支持“观测上相近”，但不支持更强的等效断言。</span><span lang="en">S6.SS3.SSS0.Px2.p1 directly reports the exposure drop, success rates, and the statistical comparison against full access. The passage also explicitly says the tests do not establish non-inferiority, so it supports only &#39;observationally similar,&#39; not a stronger equivalence claim.</span></div>
+<div class="ev"><code>S6.SS3.SSS0.Px2.p1</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">相对收益依赖于基线与调参协议；验证集按 payoff 选参，且在高成本压力下，固定深度或简单阈值在部分设置中会变得更有竞争力甚至反转。</span><span lang="en">The relative gains depend on the baseline and tuning protocol; parameters are selected by validation payoff, and at high cost pressure fixed-depth or simple-threshold rules become more competitive or even reverse in some settings.</span>
+<span class="ev"><code>S6.SS0.SSS0.Px2.p1</code><code>S6.SS1.SSS0.Px2.p1</code><code>S6.SS3.SSS0.Px1.p1</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">跨域结论主要在 Retail 之外的异构成本设置中验证，而且 Airline 只有 28 个任务且结果不一致；换一个任务分布或成本结构，收益幅度可能改变。</span><span lang="en">The cross-domain conclusion is mostly validated outside Retail under heterogeneous costs, and Airline has only 28 tasks with inconsistent results; a different task distribution or cost structure could change the effect size.</span>
+<span class="ev"><code>S6.T1</code><code>S6.T2</code><code>S6.SS1.SSS0.Px1.p1</code></span></li>
+        <li><span class="tag">statistics</span>
+          <span lang="zh">实时成功率只在 Retail 上做了端到端评估，且作者明确说这些检验没有建立非劣性；如果更严格要求等效或非劣性，结论会更弱。</span><span lang="en">The live success rate is evaluated end-to-end only on Retail, and the authors explicitly say the tests do not establish non-inferiority; if stricter equivalence or non-inferiority were required, the conclusion would be weaker.</span>
+<span class="ev"><code>S6.SS3.SSS0.Px2.p1</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">提供文本未包含附录 B/C/D/F 和表 A5–A20 的完整内容，因此实现细节、更多消融和额外统计结果无法在这里核验。</span><span lang="en">The provided text does not include the full contents of Appendices B/C/D/F or Tables A5–A20, so implementation details, additional ablations, and extra statistical results cannot be checked here.</span></li>
+        <li><span lang="zh">live evaluation 的完整协议、用户模拟器设定以及更细的训练/验证划分细节只被引用未展开，因此这些细节无法从当前摘录中确认。</span><span lang="en">The full live-evaluation protocol, user-simulator setup, and finer train/validation split details are only referenced but not expanded, so these details cannot be confirmed from the current excerpt.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="reader"><span lang="zh">摘要没有给出各基准的绝对成功率或 payoff 数值。</span><span
+          lang="en">The abstract does not report absolute success-rate or payoff values on the benchmarks.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">仅见摘要，无法核对 Bayes-alignment 证明、消融和实现细节。</span><span
+          lang="en">Only the abstract is available, so the Bayes-alignment proof, ablations, and implementation details cannot be checked.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">它直接对应 agent 的 tool calling、记忆/检索前置筛选和执行成本控制。</span><span
+        lang="en">It directly targets tool calling, pre-execution retrieval, and cost control in LLM agents.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">工具选择停靠的决策方法</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Cost-aware stopping for tool acquisition</dd>
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">low —— 仅有摘要</dd>
+          <dt lang="en">confidence</dt>
+          <dd lang="en">low — abstract only</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">8/10</span>    <span class="chip ">
+      <span lang="zh">仅摘要</span><span
+        lang="en">abstract only</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2607.15715">Behavioral Controllability of Agentic Models for Information Extraction: From Fixed Workflows to Reflective Agents</a></h2>
+<p class="lead" lang="zh">反思和记忆能改行为，但未必提取更准</p><p class="lead" lang="en">Reflection and memory change agent behavior, but the abstract does not show they improve extraction accuracy.</p>
+  <dl class="meta">
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Lujia Zhang, Xingzhou Chen, Hongwei Feng</dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.AI<span class="sep">|</span>2026-07-29<span class="sep">|</span>2607.15715</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agents · information-extraction · tool-use · memory · evaluation</dd>  </dl>
+
+  <div class="rate" data-arxiv="2607.15715" data-date="2026-07-30"
+       data-signals="{&#34;relevance&#34;: 8, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;shallow&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;high&#34;, &#34;quality_confidence&#34;: 0.9, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.37}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开</span><span
+      lang="en">expand</span></summary>
+    <div class="body">
+      <div lang="zh"><p>固定 workflow 在信息抽取里常把任务做完，却看不出反思、记忆这些 agentic 组件到底改了什么。作者盯住 conference-paper dataset extraction，想分清“行为变了”与“结果真变好”是不是一回事。</p><p>关键动作是把同一任务放进统一 harness，比较 fixed workflow 和 reflective agent 变体，再加一个优化过的 agent 条件 S2；S2 用更丰富的 PDF tools 和动态 tool selection。评估重点放在 process-level behavior：tool execution、retries、reflection、memory use、runtime、failure recovery，coverage 和 field completeness 只算次要结果。</p><p>摘要没有给出具体分数，只说他们系统性刻画了这些机制何时改变系统行为，以及这些变化是否改善 task completion。也就是说，这篇更像是在测 agent 的“工作方式”而不是单看抽取指标。</p><p>它的价值在于把 agentic 组件拆成可观察、可比较的过程信号，适合判断一个信息抽取系统到底是更会做事，还是只是更会显得在思考。局限也很清楚：只有摘要，且没有看到覆盖率、完整性或 S2 相对基线的具体数值。</p></div>
+      <div lang="en"><p>Fixed workflows can finish extraction jobs without revealing whether reflection or memory actually matter. This paper targets conference-paper dataset extraction and asks a narrower question: do agentic components change behavior in a way that is observable and controllable, and do those changes translate into better task completion?</p><p>The core move is to compare a fixed workflow baseline with reflective agent variants under one evaluation harness, then add an optimized agent condition, S2, that uses richer PDF tools and dynamic tool selection. The authors treat process signals as first-class: tool execution, retries, reflection, memory use, runtime, and failure recovery. Coverage and field completeness are secondary outcomes, not the main lens.</p><p>The abstract does not report headline scores. What it does claim is a characterization of when agentic mechanisms change system behavior and whether those changes improve task completion. The emphasis is therefore on behavior tracing, not on a single leaderboard number.</p><p>For a reader interested in LLM agents, the useful part is the attempt to separate “looks agentic” from “actually helps.” For information extraction, that is a sensible diagnostic setup, but from the abstract alone it is impossible to judge how much better S2 is, or whether the gains survive beyond this PDF dataset setting.</p></div>
+
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>把 fixed workflow 和 reflective agent 放进同一套 harness 比较。</li><li>把 tool execution、retries、reflection、memory use 当作主要观测量。</li><li>定义了带更丰富 PDF tools 和动态 tool selection 的优化条件 S2。</li></ul>
+      <ul lang="en"><li>Compares fixed workflows and reflective agents under a single harness.</li><li>Treats tool execution, retries, reflection, and memory use as primary observables.</li><li>Defines an optimized S2 condition with richer PDF tools and dynamic tool selection.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">在 conference-paper dataset extraction 上做对照实验：固定 workflow、带 reflection 的 agent 变体、以及优化条件 S2。核心不是只看最终抽取分数，而是看 agentic 机制是否改变过程行为，包括 tool execution、retries、memory use 和 failure recovery；S2 进一步加入更丰富的 PDF tools 与 dynamic tool selection。</dd>
+        <dd lang="en">The paper runs controlled comparisons on conference-paper dataset extraction: a fixed workflow, reflective agent variants, and an optimized condition S2. The point is not only final extraction quality but whether agentic mechanisms change process behavior, including tool execution, retries, memory use, and failure recovery; S2 adds richer PDF tools and dynamic tool selection.</dd>
+<dt>architecture</dt><dd>fixed workflow baseline; reflective agent variants; optimized agent condition S2 with richer PDF tools and dynamic tool selection</dd><dt>data</dt><dd>conference-paper dataset extraction; scholarly PDFs</dd>      </dl>
+
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-A">evidence A</span>
+        <span class="pill risk-high">eval risk high</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.90</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在同一 NeurIPS 2024 语料和输出预算下，S1a/S1b 相比 S0 只带来小幅覆盖提升（158→165/168），同时 link grounding 仍然偏低且不稳定。</span><span lang="en">Under the same NeurIPS 2024 corpus and output budget, S1a/S1b only yield a modest coverage gain over S0 (158→165/168), while link grounding remains low and non-monotonic.</span>
+          <div class="why"><span lang="zh">表 1 和图 3 给出了精确的记录数、每篇数据集数与 link rate，并明确说明这些结果来自同一语料与相同输出预算下的比较，因此足以支持“小幅提升、但 link 仍偏低且不稳定”的说法；这些指标本身并不能证明新增记录都正确。</span><span lang="en">Table 1 and Figure 3 give exact record counts, datasets-per-paper, and link rates, and the text states that these are compared under the same corpus and output budget, so the evidence supports a modest improvement with persistently weak/non-monotonic linking; these metrics do not by themselves prove that the added records are all correct.</span></div>
+<div class="ev"><code>S6.SSx1.p1</code><code>S6.SSx1.p2</code><code>S6.T1.1.1</code><code>S6.F3</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">与固定 workflow 相比，agent 条件暴露出更丰富且可观测的过程轨迹，包括 observation、reflection、retry、memory 和显著更长的日志。</span><span lang="en">Compared with the fixed workflow, the agent conditions expose richer and more observable process traces, including observation, reflection, retry, memory, and much longer logs.</span>
+          <div class="why"><span lang="zh">S3.SSx3.p1 先把可观测性定义为这些日志化事件，S6.SSx3.p2 与表 2 则直接报告了观察、反思、重试、记忆相关标记以及 50,189 行对 7,084 行的日志差异，因此证据足以支撑“过程更丰富、更可观测”。</span><span lang="en">S3.SSx3.p1 defines observability in terms of these logged events, and S6.SSx3.p2 plus Table 2 directly report observation, reflection, retry, and memory markers as well as the 50,189-line versus 7,084-line log difference, so the evidence supports a richer and more observable process trace.</span></div>
+<div class="ev"><code>S3.SSx3.p1</code><code>S6.SSx3.p2</code><code>S6.T2.1.1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在 S1a 与 S1b 之间，LLM reflection 只带来很小的汇总产出变化，但明显增加了诊断性过程信号，因此其主要作用更偏向 trace 而不是覆盖。</span><span lang="en">Between S1a and S1b, LLM reflection changes the aggregate output only slightly but substantially increases diagnostic process signals, so its main value is more in trace visibility than in coverage.</span>
+          <div class="why"><span lang="zh">文中直接指出 S1a 与 S1b 的记录数差异很小，并把 LLM reflection 的主要预期效果描述为更深的诊断与更有用的过程 trace；同时，表 2 的日志信号显示了明显更多的 reflection/retry 相关活动，因此可以直接支持这一判断。</span><span lang="en">The text explicitly states that the record-count gap between S1a and S1b is small and describes the main expected effect of LLM reflection as deeper diagnosis and a more useful process trace; Table 2’s log signals also show much more reflection/retry-related activity, so this claim is directly supported.</span></div>
+<div class="ev"><code>S6.SSx3.p1</code><code>S6.SSx3.p2</code><code>S6.SSx3.p3</code><code>S6.SSx4.p1</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">statistics</span>
+          <span lang="zh">这组结果是单次描述性运行，没有重复实验或统计检验，因此 158/165/168 这类小差异可能随运行波动改变。</span><span lang="en">These results come from a single descriptive run without repeated trials or statistical testing, so small differences like 158/165/168 could change with run-to-run variability.</span>
+<span class="ev"><code>S5.SSx2.p2</code><code>S5.SSx5.p1</code></span></li>
+        <li><span class="tag">other</span>
+          <span lang="zh">S1a/S1b 的过程计数来自共享 agent log，表 2 的 reflection/retry/observation 计数并非严格按条件独立切分。</span><span lang="en">The process counts for S1a/S1b come from a shared agent log, so the reflection/retry/observation counts in Table 2 are not strictly separated by condition.</span>
+<span class="ev"><code>S6.SSx3.p2</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">语料仅限 NeurIPS 2024、每次最多 50 篇，且使用固定的 openPangu-Embedded-7B 服务栈，因此外推到其他模型、任务或服务配置存在不确定性。</span><span lang="en">The corpus is limited to NeurIPS 2024, with at most 50 papers per run, and uses a fixed openPangu-Embedded-7B serving stack, so generalization to other models, tasks, or serving setups is uncertain.</span>
+<span class="ev"><code>S5.SSx1.p1</code><code>S5.SSx2.p1</code><code>S7.SSx4.p1</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">附录 Table 3 中列出的具体控制参数数值在所给摘录里不可见。</span><span lang="en">The exact control-parameter values listed in Appendix Table 3 are not visible in the provided excerpt.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="reader"><span lang="zh">摘要没有给出覆盖率、field completeness 或 task completion 的具体数值。</span><span
+          lang="en">The abstract gives no numeric results for coverage, field completeness, or task completion.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">只看到 conference-paper dataset extraction 这一类 PDF 任务，外推到其他信息抽取场景很弱。</span><span
+          lang="en">Only conference-paper dataset extraction is described, so transfer to other extraction settings is uncertain.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">和 agent 评测、记忆、工具调用直接相关；对时间序列几乎无关。</span><span
+        lang="en">Directly relevant to agent evaluation, memory, and tool use; only marginally relevant to time series.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">反思与记忆的可控性评测</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Controllability of reflection and memory</dd>
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">low —— 仅有摘要</dd>
+          <dt lang="en">confidence</dt>
+          <dd lang="en">low — abstract only</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">8/10</span>    <span class="chip ">
+      <span lang="zh">仅摘要</span><span
+        lang="en">abstract only</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2607.26212">Multi-Agent Debate Strategies: Survey, Taxonomy, and Challenges</a></h2>
+<p class="lead" lang="zh">141 篇综述：MAD 配置隐含过多，难以横比</p><p class="lead" lang="en">A survey of 141 MAD papers shows the field implicitly converges on a narrow, undercompared design pattern.</p>
+  <dl class="meta">
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Quim Motger, Marc Oriol, Jordi Marco, Xavier Franch</dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.SE · cs.AI<span class="sep">|</span>2026-07-28<span class="sep">|</span>2607.26212</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>multi-agent-debate · llm-agents · taxonomy · survey · benchmarking</dd>  </dl>
+
+  <div class="rate" data-arxiv="2607.26212" data-date="2026-07-30"
+       data-signals="{&#34;relevance&#34;: 8, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;shallow&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;high&#34;, &#34;quality_confidence&#34;: 0.84, &#34;paper_type&#34;: &#34;survey&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.388}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开</span><span
+      lang="en">expand</span></summary>
+    <div class="body">
+      <div lang="zh"><p>多智能体 debate 被寄望于提升 LLM agent 的准确性和鲁棒性，但相关研究术语混乱，设计维度也没有被系统拆开。结果是，不同论文看似在比方法，实际常常在比一组没说清的配置。</p><p>作者做的是系统综述，覆盖 141 篇 primary studies，并把 MAD 拆成三维：参与者、interaction mechanisms、agreement protocols。配套还给出 formal notations，用来把具体 MAD 配置写成可比较的形式。</p><p>综述发现，领域已经隐式收敛到一套很窄的模式：静态、fully connected topology、verbatim exchange、short-term memory 和 voting resolution。论文的判断是，这些选择更多靠习惯而不是系统比较，因而那些更有潜力的替代方案长期处在边缘。</p><p>这篇工作的价值主要在“把问题说清楚”。它更像研究地图和基准规范，而不是新算法；真正的短板也在这里：结论来自文献归纳，不是统一实验，因而只能说明现状与空白，不能证明某个具体 debate 规则必然更好。</p></div>
+      <div lang="en"><p>Multi-agent debate is supposed to make LLM agents more accurate and robust, but the literature has grown into a tangle of inconsistent terms and implicit design choices. That makes cross-paper comparisons shaky: two systems can both be called MAD while differing on several hidden dimensions.</p><p>The paper’s move is to turn MAD into a three-part taxonomy: who participates, how arguments are exchanged, and how the debate resolves. It supports that with formal notation so a concrete debate setup can be written down instead of described loosely.</p><p>The survey covers 141 primary studies. Its main empirical claim is that the field has converged by convention on a narrow recipe: static, fully connected topologies, verbatim exchange, short-term memory, and voting-based resolution. The authors argue these settings were rarely chosen after controlled comparison, while other options remain marginal.</p><p>The contribution is mainly descriptive but useful: it gives the field a shared vocabulary, a map of the design space, and a possible schema for machine-readable MAD specifications. The limitation is also clear from the abstract: this is a literature synthesis, not an experimental benchmark, so it can show what the field has done and where it is thin, but not which debate policy wins under a controlled protocol.</p></div>
+
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>基于 141 篇 primary studies，系统梳理 MAD 文献并指出术语与配置描述不一致。</li><li>提出覆盖参与者、interaction mechanisms、agreement protocols 的三维 taxonomy，并配套 formal notation。</li><li>总结出领域隐式收敛到静态 fully connected、verbatim exchange、short-term memory、voting 的窄设计模式。</li></ul>
+      <ul lang="en"><li>Systematically reviews 141 primary studies and shows that MAD terminology and configuration reporting are inconsistent.</li><li>Introduces a three-dimensional taxonomy over participants, interaction mechanisms, and agreement protocols, with formal notation.</li><li>Finds an implicit convergence toward a narrow pattern: static fully connected topologies, verbatim exchange, short-term memory, and voting.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">作者把 MAD 的一个具体设置拆成三个轴：谁参与辩论、消息如何在参与者间流动、以及最后怎样达成一致。论文强调这些轴背后其实有大约十几个相互作用的设计决策，所以如果不显式记录，跨研究比较就会失真。</dd>
+        <dd lang="en">The paper decomposes a MAD setup into three axes: who participates, how messages move among agents, and how agreement is reached. It stresses that a single configuration hides roughly a dozen interacting decisions, so comparisons are unreliable unless those choices are made explicit.</dd>
+<dt>data</dt><dd>141 primary studies</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>MAD literature review</td><td>primary studies surveyed</td>
+            <td class="win">141</td>
+            <td class="num"></td><td class="num"></td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-A">evidence A</span>
+        <span class="pill risk-high">eval risk high</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">survey</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.84</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">本文对 MAD 进行了系统性文献综述，覆盖 141 篇原始研究，并基于这些论文抽取出 151 种具体 MAD 配置用于量化分析。</span><span lang="en">This paper presents a systematic literature review of MAD covering 141 primary studies and derives 151 distinct MAD configurations for quantitative analysis.</span>
+          <div class="why"><span lang="zh">摘要和检索结果明确给出 141 篇原始研究；方法部分又说明量化分析基于 141 篇论文派生出 151 个 distinct MAD approaches。证据直接支撑综述规模与分析对象，但只覆盖所纳入语料，而不额外证明更广泛文献的完整性。</span><span lang="en">The abstract and search results explicitly report 141 primary studies, and the methods section states that the quantitative analysis derives 151 distinct MAD approaches from those 141 papers. This directly supports the review&#39;s scope and analysis set, but only for the included corpus and not completeness beyond it.</span></div>
+<div class="ev"><code>S1.I1.i1.p1</code><code>S2.SS5.p3</code><code>S2.SS5.p6</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">本文提出了一个三维 MAD 分类法，分别刻画参与者、交互机制和一致性/协议，并为这些维度给出形式化定义。</span><span lang="en">The paper proposes a three-dimensional MAD taxonomy covering participants, interaction mechanisms, and agreement protocols, with formal definitions for these dimensions.</span>
+          <div class="why"><span lang="zh">摘要直接声明三维 taxonomy；后文对 participants、interaction、agreement 三个维度分别给出定义性命题和分解，证据足以支撑“提出了三维分类法”这一说法。</span><span lang="en">The abstract directly states the three-dimensional taxonomy, and the body gives definition statements and decomposition for participants, interaction, and agreement. The cited evidence directly supports the claim that the paper proposes such a taxonomy.</span></div>
+<div class="ev"><code>S1.I1.i2.p1</code><code>S4.Thmtheorem1.p1</code><code>S4.Thmtheorem2.p1</code><code>S4.Thmtheorem3.p1</code><code>S5.Thmtheorem1.p1</code><code>S5.Thmtheorem2.p1</code><code>S5.Thmtheorem3.p1</code><code>S6.Thmtheorem1.p1</code><code>S6.Thmtheorem2.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">综述显示，MAD 研究在交互与记忆设计上高度集中于静态、全连接、逐字自然语言交换和短期记忆，而在一致性上，客观任务多用 collective/majority vote，主观任务更常交给 judge-based meta-agents。</span><span lang="en">The review shows that MAD research is concentrated around static, fully connected, verbatim natural-language exchange with short-term memory, while agreement for objective tasks often uses collective/majority vote and subjective tasks more often use judge-based meta-agents.</span>
+          <div class="why"><span lang="zh">RQ3 和 RQ4 的 key findings 直接总结了这类收敛模式：静态、全连接、逐字、短期记忆是主流，而多数任务在客观问题上走 collective/majority vote、在主观任务上走 judge-based 方案。证据来自作者对样本语料的编码汇总，直接支撑这一文献层面的趋势判断。</span><span lang="en">The key findings for RQ3 and RQ4 explicitly summarize this convergence pattern: static, fully connected, verbatim, short-term settings dominate, and agreement for objective tasks tends toward collective/majority vote while subjective tasks often use judge-based schemes. The evidence comes from the authors&#39; coding of the surveyed corpus and directly supports this literature-level trend.</span></div>
+<div class="ev"><code>S5.I3.ix1.p1</code><code>S5.I3.ix2.p1</code><code>S5.I3.ix4.p1</code><code>S5.I3.ix5.p1</code><code>S5.SS1.SSS1.p2</code><code>S5.SS1.SSS2.p2</code><code>S5.SS3.SSS1.p2</code><code>S5.SS3.SSS3.p2</code><code>S5.SS3.SSS3.p3</code><code>S6.I1.i1.p1</code><code>S6.I1.i2.p1</code><code>S6.I2.i2.p1</code><code>S6.I3.ix1.p1</code><code>S6.I3.ix2.p1</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">construction</span>
+          <span lang="zh">检索策略刻意优先精确率而非召回率，并且只在 Scopus 的标题/摘要/关键词上做初始检索再接一轮前后向引文追踪，因此文献集合对检索词与数据库选择较敏感。</span><span lang="en">The search strategy intentionally prioritized precision over recall, and the initial search was run only over Scopus titles/abstracts/keywords plus one round of backward and forward snowballing, so the corpus is sensitive to query and database choice.</span>
+<span class="ev"><code>S2.SS2.p3</code><code>S2.SS2.p4</code><code>S2.SS4.p1</code><code>S2.SS5.p1</code><code>S2.SS5.p2</code><code>S2.SS5.p3</code></span></li>
+        <li><span class="tag">statistics</span>
+          <span lang="zh">分类法和比例统计依赖归纳编码，而且 141 篇论文被展开成 151 个 MAD 配置，某些百分比按配置而非按论文计算，因此类别占比会随编码与计数规则变化。</span><span lang="en">The taxonomy and prevalence statistics depend on inductive coding, and 141 papers are expanded into 151 MAD approaches; some percentages are computed over approaches rather than papers, so category shares can change with coding and counting rules.</span>
+<span class="ev"><code>S2.SS5.p6</code><code>S3.p1</code><code>S4.SS1.SSS2.p1</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">研究范围只包含自然语言任务且排除了人类参与的辩论，因此这些结论只适用于该操作化边界下的 MAD 子集，换一个定义边界时分布可能改变。</span><span lang="en">The study scope includes only natural-language tasks and excludes human participation, so these conclusions apply only to the MAD subset defined by that operational boundary, and the distribution may change under a different boundary.</span>
+<span class="ev"><code>S2.SS1.p5</code><code>S2.T2.2</code><code>S2.SS3.p1</code><code>S2.SS3.p3</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">提供的文本在后文被截断，因此无法核实第 8 节 threats to validity 和第 9 节结论里是否还有额外局限或修正。</span><span lang="en">The provided text is truncated later on, so the threats-to-validity discussion in Section 8 and the conclusions in Section 9 cannot be verified for additional limitations or revisions.</span></li>
+        <li><span lang="zh">无法从当前摘录核实复制包的具体内容、数据抽取表的完整字段，以及这些材料是否足以重建全部编码结果。</span><span lang="en">The current excerpt does not let me verify the exact contents of the replication package, the full fields of the extraction table, or whether those materials are sufficient to reconstruct all coding results.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="reader"><span lang="zh">结论来自文献综述，不是统一实验，因此不能证明某种 debate 设计在控制条件下一定更好。</span><span
+          lang="en">The conclusions come from a literature review, not a controlled experiment, so they do not prove that any debate design is best under matched conditions.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">摘要没有给出 taxonomy 的覆盖率检验或编码一致性细节，横比结论仍依赖作者的归纳。</span><span
+          lang="en">The abstract does not report coverage checks or coding agreement details for the taxonomy, so the comparative claims still depend on the authors’ synthesis.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">和 agent 记忆、协作协议、长程任务分解直接相关。</span><span
+        lang="en">Directly relevant to agent memory, collaboration protocols, and long-horizon task decomposition.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">多智能体辩论综述与分类</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Survey and taxonomy of multi-agent debate</dd>
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">low —— 仅有摘要</dd>
+          <dt lang="en">confidence</dt>
+          <dd lang="en">low — abstract only</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">8/10</span>    <span class="chip ">
+      <span lang="zh">仅摘要</span><span
+        lang="en">abstract only</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2607.26490">EvoPINN: Agentic Discovery of Executable Algorithms for Physics-Informed Neural Networks</a></h2>
+<p class="lead" lang="zh">EvoPINN 用执行校验的 agent 自动搜出更低 $L_2$ 误差的 PINN 算法</p><p class="lead" lang="en">EvoPINN uses execution-checked agents to discover PINN algorithms that reduce relative $L_{2}$ error.</p>
+  <dl class="meta">
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Peng Yin, Kai Li, Yifan Zhang, Jian Cheng</dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.AI · cs.LG · cs.NE<span class="sep">|</span>2026-07-29<span class="sep">|</span>2607.26490</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>pinns · llm-agents · algorithm-discovery · scientific-computing · pde</dd>  </dl>
+
+  <div class="rate" data-arxiv="2607.26490" data-date="2026-07-30"
+       data-signals="{&#34;relevance&#34;: 8, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.9, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.82}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开</span><span
+      lang="en">expand</span></summary>
+    <div class="body">
+      <div lang="zh"><p>PINN 常靠人工反复试错来调神经表示、loss 和优化程序，结果在严格的 PDE 数值约束下很难稳定；直接让 LLM 生成代码又容易给出数学上不合法或数值上不稳的方案。</p><p>EvoPINN 把问题改写成“可执行算法发现”。它把神经表示和训练程序解耦，让 LLM agent 在有记忆的搜索过程中提出程序化修改，再用结构验证和预算匹配的 PDE 评测筛掉不合格候选，保证每一步都能跑、且比较公平。</p><p>摘要只说明它在振荡、椭圆、耗散和非线性输运等 PDE 设定上做了广泛实验，并且找到的 PDE-specialized learning algorithms 能显著降低 relative $L_{2}$ error；其中自动发明的 SLRC-PINN 在参数匹配比较下仍保持收益。没有给出具体数值、数据集或绝对提升幅度。</p><p>这条线索对科学计算里的 agentic discovery 很直接：它不是在做更会写 PINN 代码的助手，而是在用执行结果筛选算法结构。但摘要也没证明它能跨更大规模 PDE 家族泛化，或在更强的基线和更细的消融下仍然稳。</p></div>
+      <div lang="en"><p>PINNs still depend on hand-tuned neural representations, loss terms, and optimization schedules, and that trial-and-error breaks down fast under strict PDE constraints. Plain LLM code generation is not enough either, because many proposed programs are mathematically invalid or numerically unstable.</p><p>EvoPINN turns this into an execution-grounded algorithm discovery problem. It decouples neural representations from training programs, lets an LLM agent propose memory-conditioned program edits, and filters candidates through structural verification plus budget-matched PDE evaluation so only runnable, comparable methods survive.</p><p>The abstract claims broad experiments across oscillatory, elliptic, dissipative, and nonlinear transport PDE regimes. EvoPINN finds PDE-specialized learning algorithms that significantly reduce relative $L_{2}$ error, and its autonomously invented SLRC-PINN still helps under parameter-matched comparisons. No concrete numbers, datasets, or ablation details are given in the abstract.</p><p>For scientific-computing agents, the main point is that the search target is not text or code completion but executable algorithm design under hard constraints. The limitation is equally clear: from the abstract alone, we cannot tell how wide the gains are, whether the method scales beyond the reported PDE regimes, or how much each module matters.</p></div>
+
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>把 PINN 设计问题改写为执行约束下的算法发现。</li><li>用带记忆的 LLM agent 提出程序修改，并用结构验证与预算匹配评测筛选候选。</li><li>自动发现 SLRC-PINN，并在参数匹配比较下保持收益。</li></ul>
+      <ul lang="en"><li>Recasts PINN design as algorithm discovery under execution constraints.</li><li>Uses a memory-conditioned LLM agent plus structural checks and budget-matched evaluation to filter candidates.</li><li>Autonomously discovers SLRC-PINN, whose gains persist under parameter-matched comparisons.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">将神经表示与训练程序解耦，形成模块化搜索空间；LLM agent 基于记忆状态迭代提出程序级修改。每个候选都要通过严格结构验证，并在预算匹配的 PDE 评测下比较，避免不可执行或不公平的方案。</dd>
+        <dd lang="en">The method decouples neural representations from training programs to define a modular search space. An LLM agent then iteratively proposes memory-conditioned program edits. Every candidate is passed through strict structural verification and budget-matched PDE evaluation to reject invalid or unfair designs.</dd>
+      </dl>
+
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-A">evidence A</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.90</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在四个 PDE 基准上，冻结后的 EvoPINN 在共享训练预算下相对种子 PINN 持续取得更低的相对 L2 误差，并在 Poisson2D、Burgers1D 和 Wave1D 上优于所选专家基线。</span><span lang="en">Across four PDE benchmarks, the frozen EvoPINN consistently achieves lower relative L2 error than the seed PINN under a shared training budget, and it outperforms the selected expert baseline on Poisson2D, Burgers1D, and Wave1D.</span>
+          <div class="why"><span lang="zh">表 1 直接给出了四个基准上的均值与标准差，并注明所有方法使用相同训练资源预算；文本还明确说明 EvoPINN 在四个基准上都优于 seed PINN，且在三个基准上优于专家基线。Heat2D 上专家略优，因此该证据支持的是“多数任务上优于专家基线”，而不是“全部任务”。</span><span lang="en">Table 1 directly reports mean and standard deviation on four benchmarks under the shared training-resource budget; the text also states that EvoPINN beats the seed PINN on all four tasks and the expert baseline on three of them. Heat2D is a slight exception, so the evidence supports “better than the expert baseline on most tasks,” not all of them.</span></div>
+<div class="ev"><code>S5.SS1.SSS0.Px1.p1</code><code>S5.SS1.SSS0.Px2.p1</code><code>S5.T1</code><code>S5.SS2.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在 Burgers1D 的参数匹配控制实验中，SLRC-PINN 相比参数匹配的全局 MLP 以及多种结构化基线取得更低的平均和中位数相对 L2 误差。</span><span lang="en">In the capacity-matched Burgers1D control experiment, SLRC-PINN achieves lower mean and median relative L2 error than the parameter-matched global MLP and several structured baselines.</span>
+          <div class="why"><span lang="zh">表 3 直接给出了 SLRC-PINN、参数匹配的全局 MLP、APINN、FBPINN 和 HyResPINNs 的均值/中位数/参数量，并注明所有模型在相同训练预算下比较。对应文本明确指出 SLRC-PINN 的均值和中位数误差最低。</span><span lang="en">Table 3 directly lists mean, median, and parameter counts for SLRC-PINN, the parameter-matched global MLP, APINN, FBPINN, and HyResPINNs, and it states that all models are compared under identical training budgets. The accompanying text explicitly says SLRC-PINN has the lowest mean and median error.</span></div>
+<div class="ev"><code>S5.SS4.p1</code><code>S5.SS4.SSS0.Px3.p1</code><code>S5.T3.2.1</code><code>S5.T3</code><code>S5.SS4.SSS0.Px3.p2</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在 Wave1D 和 Heat2D 的邻近参数迁移测试中，冻结后的 EvoPINN 在若干偏移参数上保持比种子 PINN 更低的误差，并通常与或优于专家基线。</span><span lang="en">In the neighboring-parameter transfer tests on Wave1D and Heat2D, frozen EvoPINN maintains lower error than the seed PINN at the shifted parameters and is usually competitive with or better than the expert baseline.</span>
+          <div class="why"><span lang="zh">表 5 直接列出了 Wave1D 的 a=3.5/4.0/4.5 和 Heat2D 的 kx=15π/20π/25π 这些邻近参数点的结果；文本说明这些都是冻结后的 zero-shot 重训。结果中 EvoPINN 在这些点上均明显优于 seed PINN，并在大多数设置上不弱于专家基线。</span><span lang="en">Table 5 directly reports results at neighboring parameter settings for Wave1D (a=3.5/4.0/4.5) and Heat2D (kx=15π/20π/25π); the text says these are frozen zero-shot retraining tests. Across these settings, EvoPINN is consistently better than the seed PINN and is competitive with or better than the expert baseline in most cases.</span></div>
+<div class="ev"><code>S5.SS6.p1</code><code>S5.T5.2.1</code><code>S5.T5</code><code>S5.SS6.p2</code><code>S5.SS6.p3</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">基线集合和比较方式可能改变结论：论文只在统一管线下比较了 16 个专家变体、3 种自动化搜索框架，并对每个 PDE 选取最佳专家或最佳搜索结果做最终重训。</span><span lang="en">The conclusion could change with a different baseline set or comparison protocol: the paper compares against 16 expert variants and 3 automated search frameworks under a unified pipeline, then retrains the best expert or best search result per PDE for the final report.</span>
+<span class="ev"><code>S5.SS1.SSS0.Px3.p1</code><code>S5.SS3.p1</code><code>S5.T1</code><code>S5.T2</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">泛化范围仍然有限：正文只覆盖四类 PDE 基准，迁移实验也只测试了两个方程家族上的少量邻近参数偏移。</span><span lang="en">The generalization scope is still limited: the main text covers only four PDE benchmark regimes, and transfer is tested only at a few neighboring parameter shifts in two equation families.</span>
+<span class="ev"><code>S5.SS1.SSS0.Px1.p1</code><code>S5.SS6.p1</code><code>S5.T5</code></span></li>
+        <li><span class="tag">statistics</span>
+          <span lang="zh">结果依赖于有限次数的评估汇总：论文报告的是 5 个评估种子的均值和标准差，而不是更强的推断统计；此外搜索还固定了单一 LLM、温度和候选评估上限。</span><span lang="en">The results depend on a limited evaluation summary: the paper reports means and standard deviations over five evaluation seeds rather than stronger inferential statistics; the search also fixes a single LLM, temperature, and candidate-evaluation cap.</span>
+<span class="ev"><code>S5.SS1.SSS0.Px2.p1</code><code>S5.SS1.SSS0.Px4.p1</code><code>S5.T1</code><code>S5.T2</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">提供的正文引用了 Appendix B，但其中关于诊断摘要构造、奖励设计、验证与修复流程、以及 Algorithm 1 的细节未包含在当前文本中。</span><span lang="en">The main text refers to Appendix B, but the details of diagnostic-summary construction, reward design, verification/repair procedures, and Algorithm 1 are not included in the provided text.</span></li>
+        <li><span lang="zh">提供的正文引用了 Appendix C，但关于 Telemetry-Conditioned Resampling and Optimizer Policy 的详细机制审计未包含在当前文本中。</span><span lang="en">The main text refers to Appendix C, but the detailed mechanism audit for the Telemetry-Conditioned Resampling and Optimizer Policy is not included in the provided text.</span></li>
+        <li><span lang="zh">提供的正文引用了 Appendix D，但完整超参数与实现细节未包含在当前文本中。</span><span lang="en">The main text refers to Appendix D, but the full hyperparameter and implementation details are not included in the provided text.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="reader"><span lang="zh">仅有摘要，缺少具体 benchmark、数值结果和消融。</span><span
+          lang="en">Only the abstract is available, so concrete benchmarks, numbers, and ablations are missing.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">摘要未说明 SLRC-PINN 的结构细节，难判断改进来自哪一部分。</span><span
+          lang="en">The abstract does not specify SLRC-PINN&#39;s structure, so it is hard to attribute the gains to any component.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">未看到更广 PDE 家族或更强基线下的泛化证据。</span><span
+          lang="en">There is no visible evidence of generalization to a wider PDE family or stronger baselines.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">和 agentic discovery、科学计算中的可执行算法搜索相关，但与时间序列关系薄。</span><span
+        lang="en">Relevant to agentic discovery and executable algorithm search in scientific computing, but only weakly tied to time-series work.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">LLM代理自动发现可执行PINN算法</dd>
+          <dt lang="en">why selected</dt><dd lang="en">LLM agent discovers executable PINN algorithms</dd>
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">low —— 仅有摘要</dd>
+          <dt lang="en">confidence</dt>
+          <dd lang="en">low — abstract only</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">8/10</span>    <span class="chip ">
+      <span lang="zh">仅摘要</span><span
+        lang="en">abstract only</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2607.26724">UrbanDS: A Graph-Guided LLM Multi-Agent System for Data-Intensive Urban Tasks</a></h2>
+<p class="lead" lang="zh">用数据集图让 LLM 智能体先找对数据，再分工执行</p><p class="lead" lang="en">UrbanDS uses a dataset graph so LLM agents retrieve the right urban data before parallel execution.</p>
+  <dl class="meta">
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Zhilun Zhou, Jianghao Yu, Yuming Lin, yongjun yang<span lang="zh"> 等 7 人</span><span lang="en"> +3 more</span></dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.AI<span class="sep">|</span>2026-07-29<span class="sep">|</span>2607.26724</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agent · data-science · multi-agent · retrieval · urban-computing</dd>  </dl>
+
+  <div class="rate" data-arxiv="2607.26724" data-date="2026-07-30"
+       data-signals="{&#34;relevance&#34;: 8, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.9, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.82}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开</span><span
+      lang="en">expand</span></summary>
+    <div class="body">
+      <div lang="zh"><p>现有 data science agents 多半默认输入数据已给齐；一到城市这类数据密集场景，就会卡在海量、异构数据仓库里，不知道该检索哪些数据，也难把空间、时间和语义关系一起用起来。结果不是计划空转，就是执行建立在错数据上。</p><p>UrbanDS 的关键动作是先把“数据集”本身做成可检索的图。Data Profiling Agent 为每个数据集提炼 skill，Relation Agent 再把数据集间关系写进统一 dataset graph；运行时 Planner Agent 先从图里挑任务相关数据集并生成执行计划，多个 Execution Agents 分头处理，共享进度和中间结果到 common memory，最后由 Report Agent 汇总日志并可接受用户反馈再改写。</p><p>摘要只给出定性结果：作者说 UrbanDS-Bench 覆盖代表性 data analysis 和 modeling 任务；在 general 和 urban benchmarks 上，UrbanDS 都优于现有 data science agents，且在武汉东西湖区城市运营平台上已部署。没有给出具体数值，所以无法判断提升幅度。</p><p>这篇工作的价值在于，它把 agent 的瓶颈从“会不会写代码”前移到“会不会在大仓库里找对数据”。但摘要没交代图的规模、技能表示、检索规则和消融，也没有给出与哪些 baseline 的具体差距；现在只能把它看成一个面向城市数据检索与编排的系统，而不是已被充分量化的方法。</p></div>
+      <div lang="en"><p>Most data science agents assume the relevant datasets are already handed to them. That breaks in data-intensive urban settings, where the hard part is discovering which sources matter inside large, heterogeneous repositories and then reconciling spatial, temporal, and semantic links across them.</p><p>UrbanDS moves that bottleneck into a dataset graph. A Data Profiling Agent extracts a skill for each dataset, a Relation Agent adds inter-dataset links, and a Planner Agent retrieves task-relevant datasets before drafting an execution plan. Multiple Execution Agents then process the data in parallel, sharing progress and intermediate results through common memory, and a Report Agent turns the logs into a report that can be refined from user feedback.</p><p>The abstract only reports qualitative evaluation. UrbanDS-Bench covers representative data analysis and modeling tasks, and the system is said to outperform existing data science agents on both general and urban benchmarks. The paper also says UrbanDS has been deployed on the urban operations platform of Dongxihu District, Wuhan, but no numbers are given in the abstract.</p><p>The main contribution is shifting agent design from code generation toward dataset discovery and orchestration. The weak spot, at least from the abstract, is that we do not see the graph scale, retrieval policy, ablations, or benchmark gaps, so the strength of the claim is not yet quantifiable.</p></div>
+
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>构建统一的 dataset graph，把数据集技能和关系显式化。</li><li>用 Planner-Agent/Execution-Agents/Report-Agent 的分工来处理数据密集型城市任务。</li><li>提出 UrbanDS-Bench，并声称在 general 和 urban benchmarks 上优于现有 data science agents。</li></ul>
+      <ul lang="en"><li>Build a unified dataset graph that makes dataset skills and relations explicit.</li><li>Use a Planner-Agent / Execution-Agents / Report-Agent split for data-intensive urban tasks.</li><li>Introduce UrbanDS-Bench and report better performance than existing data science agents on general and urban benchmarks.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">先为每个数据集抽取可复用 skill，再把数据集间关系写入统一 dataset graph。运行时由 Planner Agent 基于图检索任务相关数据集并生成计划，多个 Execution Agents 共享 common memory 并行执行，最后由 Report Agent 汇总结果并支持用户反馈迭代。</dd>
+        <dd lang="en">First extract a reusable skill for each dataset, then encode dataset-to-dataset relations in a unified dataset graph. At runtime, a Planner Agent retrieves task-relevant datasets and drafts a plan, multiple Execution Agents run in parallel with shared common memory, and a Report Agent synthesizes the logs with optional user-feedback refinement.</dd>
+<dt>architecture</dt><dd>Data Profiling Agent; Relation Agent; Planner Agent; multiple Execution Agents; common memory; Report Agent</dd><dt>data</dt><dd>UrbanDS-Bench; general benchmarks; urban benchmarks</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>UrbanDS-Bench</td><td>tasks covered</td>
+            <td class="win">representative data analysis and modeling tasks</td>
+            <td class="num"></td><td class="num"></td></tr>
+        <tr><td>general and urban benchmarks</td><td>performance</td>
+            <td class="win">outperforms existing data science agents</td>
+            <td class="num">existing data science agents</td><td class="num"></td></tr>
+        <tr><td>Dongxihu District urban operations platform</td><td>deployment</td>
+            <td class="win">deployed</td>
+            <td class="num"></td><td class="num"></td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-A">evidence A</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.90</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">UrbanDS-Bench 由来自中国 10 个城市的 94 个数据集组成，包含 450 个分析问题和 8 个建模任务，并通过匿名化数据池迫使代理先发现相关数据再分析。</span><span lang="en">UrbanDS-Bench consists of 94 datasets from 10 Chinese cities, includes 450 analysis questions and 8 modeling tasks, and anonymizes the data pool so agents must discover relevant datasets before analysis.</span>
+          <div class="why"><span lang="zh">正文直接给出了数据集规模、城市覆盖、问题数量和匿名化数据池的构造方式；这些证据足以核实 benchmark 的组成及其数据发现设置，但不能单独证明它覆盖了所有真实城市分析场景。</span><span lang="en">The cited passages directly specify the dataset count, city coverage, question count, and anonymized pool construction; this is enough to verify the benchmark’s composition and discovery-oriented setup, but not enough to show coverage of all real-world urban analysis scenarios.</span></div>
+<div class="ev"><code>S1.p4</code><code>S1.I1.i2.p1</code><code>S5.SS1.p1</code><code>S5.SS1.p2</code><code>S5.SS2.p2</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在论文列出的基线中，UrbanDS 在 UrbanDS-Bench 和 CoDA-Bench 上取得了最佳报告结果，并在所有建模指标上也领先。</span><span lang="en">Among the baselines listed in the paper, UrbanDS reports the best results on UrbanDS-Bench and CoDA-Bench and also leads on all modeling metrics.</span>
+          <div class="why"><span lang="zh">表 1 和表 2 直接展示了逐项数值，UrbanDS 在这些表中均为最优；这些结果支持相对提升，但未呈现方差或显著性检验。</span><span lang="en">Tables 1 and 2 directly show the per-metric numbers, and UrbanDS is best in those tables; this supports the reported relative gains, but the text does not show variance or significance testing.</span></div>
+<div class="ev"><code>S6.T1</code><code>S6.T2</code><code>S6.SS2.p2</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">消融实验表明，去掉数据关系或数据技能都会降低 UrbanDS 在两个基准上的表现，且技能消融的下降更大。</span><span lang="en">The ablation study shows that removing either dataset relations or dataset skills lowers UrbanDS’s performance on both benchmarks, with a larger drop when skills are removed.</span>
+          <div class="why"><span lang="zh">消融段落直接报告了去掉关系和去掉技能后的准确率下降，并指出技能消融对跨空间/时间任务影响更大；这足以支持这两个组件在当前设置下有贡献。</span><span lang="en">The ablation section directly reports lower accuracies after removing relations or skills and notes that the skill ablation hurts spatiotemporal tasks more; this is enough to support that both components contribute in the current setup.</span></div>
+<div class="ev"><code>S6.SS3.p1</code><code>S6.SS3.p2</code><code>S6.SS3.p3</code><code>S6.F4</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">对比方法大多在同一 DeepSeek-V4-Pro 设置下运行，而 DeepAnalyze 例外地使用其官方 8B 模型；不同底座模型、调参或算力预算可能改变相对排序。</span><span lang="en">Most compared methods run under the same DeepSeek-V4-Pro setup, while DeepAnalyze is the exception with its official 8B model; different backbones, tuning, or compute budgets could change the relative ranking.</span>
+<span class="ev"><code>S6.SS1.SSS3.p1</code><code>S6.I1.i3.p1</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">UrbanDS-Bench 只覆盖 10 个中国城市及若干地理、移动和社会经济数据域，因此跨地区、跨国家或非城市仓库的泛化未被验证。</span><span lang="en">UrbanDS-Bench only covers 10 Chinese cities and a set of geospatial, mobility, and socioeconomic domains, so generalization to other regions, countries, or non-urban repositories is unverified.</span>
+<span class="ev"><code>S5.SS1.p1</code><code>S5.SS1.p2</code></span></li>
+        <li><span class="tag">construction</span>
+          <span lang="zh">分析题和参考答案由确定性数据操作生成，每种任务类型只采样 5 个问题，这种构造可能让结果更贴近已知数据池而不是更开放的真实探索场景。</span><span lang="en">The analysis questions and reference answers are generated by deterministic data operations, and each task type samples only 5 questions, which may make the benchmark closer to a known data pool than to a more open-ended real exploration setting.</span>
+<span class="ev"><code>S5.SS2.p2</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">提供的文本提到附录 A 里有数据建模任务的评估细节，但附录本身未包含在这份摘录中，因此这些任务的完整划分、验证流程和防泄漏细节无法核实。</span><span lang="en">The provided text refers to Appendix A for modeling-task evaluation details, but the appendix itself is not included in this excerpt, so the full task split, validation procedure, and leakage-prevention details cannot be verified.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="reader"><span lang="zh">摘要没有给出图的规模、检索规则和消融结果，无法判断方法究竟靠哪一部分起作用。</span><span
+          lang="en">The abstract gives no graph scale, retrieval policy, or ablations, so it is unclear which part drives the gain.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">只看到摘要，现有结论都是定性主张，无法核实具体提升幅度。</span><span
+          lang="en">Only the abstract is available, so the claims remain qualitative and the size of the gains cannot be verified.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">和 agent 直接相关：它把记忆、检索和任务编排放到数据集层，适合数据密集环境。</span><span
+        lang="en">Directly relevant to agents: it pushes memory, retrieval, and orchestration to the dataset level for data-intensive settings.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">图谱检索+多智能体数据科学流程</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Graph-guided multi-agent data science pipeline</dd>
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">low —— 仅有摘要</dd>
+          <dt lang="en">confidence</dt>
+          <dd lang="en">low — abstract only</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<footer>
+  <span lang="zh">由 <span style="font-family:var(--mono)">paper-news-agent</span> 生成。
+  摘要由 LLM 撰写；每个数字都在原文中做过字符串核对，未核到的会在卡片上标注。判断与取舍仍以原论文为准。</span>
+  <span lang="zh"><br>标注默认写入 data/feedback.jsonl；若页面不是通过 <span
+    style="font-family:var(--mono)">pna serve</span> 打开的，标注会暂存在浏览器里 ——
+    <a href="#" onclick="pnaExportFeedback();return false">导出 feedback.jsonl</a>
+    后用 <span style="font-family:var(--mono)">pna feedback --import</span> 收回。</span>
+  <span lang="en">Generated by <span style="font-family:var(--mono)">paper-news-agent</span>.
+  Summaries are LLM-written; every number is string-checked against the source text and
+  anything not found is flagged on the card. Defer to the paper itself.<br>
+  Labels go to data/feedback.jsonl. Opened outside <span style="font-family:var(--mono)">pna
+  serve</span> they are held in the browser —
+  <a href="#" onclick="pnaExportFeedback();return false">export feedback.jsonl</a>
+  and run <span style="font-family:var(--mono)">pna feedback --import</span>.</span>
+</footer>
+<script>
+  // Feedback. `pna serve` accepts POST /api/feedback and appends to
+  // data/feedback.jsonl. On a static host (GitHub Pages) there is no such endpoint, so
+  // the label is kept in localStorage and `pna feedback --import` picks it up later —
+  // a label given while reading must never be silently dropped.
+  (function () {
+    var KEY = "pna-feedback";
+    function stored() {
+      try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return []; }
+    }
+    function remember(entry) {
+      try {
+        var all = stored(); all.push(entry);
+        localStorage.setItem(KEY, JSON.stringify(all));
+      } catch (e) {}
+    }
+    function chosen() {
+      var map = {};
+      stored().forEach(function (e) { map[e.arxiv_id] = e.label; });
+      return map;
+    }
+
+    var already = chosen();
+    document.querySelectorAll(".rate").forEach(function (box) {
+      var id = box.getAttribute("data-arxiv");
+      var state = box.querySelector(".rate-state");
+      function paint(label) {
+        box.querySelectorAll("button").forEach(function (b) {
+          b.setAttribute("aria-pressed", String(b.getAttribute("data-label") === label));
+        });
+      }
+      if (already[id]) paint(already[id]);
+
+      box.querySelectorAll("button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var entry = {
+            arxiv_id: id,
+            date: box.getAttribute("data-date"),
+            label: btn.getAttribute("data-label"),
+            at: new Date().toISOString(),
+            source: "manual",
+            signals: JSON.parse(box.getAttribute("data-signals") || "{}"),
+          };
+          paint(entry.label);
+          remember(entry);
+          state.textContent = "";
+          state.className = "rate-state";
+          fetch("/api/feedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(entry),
+          }).then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            state.textContent = "saved";
+          }).catch(function () {
+            state.textContent = "saved locally — pna feedback --import";
+            state.className = "rate-state err";
+          });
+        });
+      });
+    });
+
+    // Export what is in localStorage, for the static-hosting path.
+    window.pnaExportFeedback = function () {
+      var blob = new Blob([stored().map(function (e) { return JSON.stringify(e); }).join("\n")],
+                          { type: "application/x-ndjson" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "feedback.jsonl";
+      a.click();
+    };
+  })();
+
+  document.querySelectorAll(".langswitch button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var l = b.getAttribute("data-set");
+      document.documentElement.setAttribute("data-lang", l);
+      try { localStorage.setItem("pna-lang", l); } catch (e) {}
+    });
+  });
+</script>
+</div>
+</body>
+</html>

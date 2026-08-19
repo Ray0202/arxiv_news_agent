@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>arXiv digest · archive</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,ignoredTags:['script','noscript','style','textarea','pre','code']});"></script>
+
+<script>
+  // Set before first paint so switching languages never flashes the other one.
+  (function () {
+    try {
+      // Chinese is the default view; the switch remembers any other choice.
+      var l = localStorage.getItem("pna-lang");
+      document.documentElement.setAttribute("data-lang", l === "en" ? "en" : "zh");
+    } catch (e) { document.documentElement.setAttribute("data-lang", "zh"); }
+  })();
+</script>
+<style>
+:root {
+  --bg: #fcfbf9; --surface: #ffffff; --fg: #1a1917; --fg-soft: #55514b;
+  --muted: #8a857d; --line: #e6e2da; --line-soft: #f0ede7;
+  --accent: #9c4a25; --accent-bg: #f7eee8; --warn: #8a5a12; --warn-bg: #faf3e2;
+  --ok: #3f6b45;
+  --serif: Georgia, "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16151a; --surface: #1d1c22; --fg: #eceae5; --fg-soft: #b8b3aa;
+    --muted: #8f8a81; --line: #2f2d35; --line-soft: #26242b;
+    --accent: #e0906a; --accent-bg: #2c2126; --warn: #d9a862; --warn-bg: #2a2318;
+    --ok: #8fc09a;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans);
+  font-size: 16px; line-height: 1.55;
+}
+.wrap { max-width: 46rem; margin: 0 auto; padding: 2.75rem 1.25rem 6rem; }
+
+/* ---------- masthead ---------- */
+header.masthead { border-bottom: 2px solid var(--fg); padding-bottom: .9rem; margin-bottom: 2.25rem; }
+.kicker {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: .45rem;
+}
+h1 { font-family: var(--serif); font-size: 2rem; line-height: 1.15; margin: 0 0 .5rem;
+     letter-spacing: -.015em; font-weight: 600; }
+.dek { color: var(--fg-soft); font-size: .9rem; }
+.dek a { color: var(--fg-soft); border-bottom: 1px solid var(--line); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- card ---------- */
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 1.35rem 1.45rem; margin-bottom: 1.4rem;
+}
+.chips { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; margin-bottom: .7rem; }
+.chip {
+  font-family: var(--mono); font-size: .68rem; line-height: 1.7; padding: 0 .42rem;
+  border: 1px solid var(--line); border-radius: 3px; color: var(--muted); white-space: nowrap;
+}
+.chip.score { background: var(--fg); color: var(--bg); border-color: var(--fg); font-weight: 600; }
+.chip.deep  { background: var(--accent-bg); color: var(--accent); border-color: transparent; font-weight: 600; }
+.chip.venue { background: var(--accent-bg); color: var(--accent); border-color: transparent; }
+.chip.code a { color: var(--ok); }
+.chip.warn  { background: var(--warn-bg); color: var(--warn); border-color: transparent; }
+
+.card h2 {
+  font-family: var(--serif); font-size: 1.2rem; line-height: 1.32; font-weight: 600;
+  margin: 0 0 .6rem; letter-spacing: -.005em;
+}
+.card h2 a { color: var(--fg); }
+.lead { font-size: 1.02rem; line-height: 1.7; margin: 0 0 .45rem; color: var(--fg); }
+.lead-en { font-size: .86rem; line-height: 1.6; color: var(--muted); margin: 0 0 .9rem; }
+
+/* ---------- meta grid ---------- */
+.meta {
+  display: grid; grid-template-columns: 4.2rem 1fr; gap: .3rem .75rem;
+  border-top: 1px solid var(--line-soft); padding-top: .8rem; margin-top: .2rem;
+  font-size: .82rem;
+}
+.meta dt { color: var(--muted); font-family: var(--mono); font-size: .7rem;
+           letter-spacing: .04em; padding-top: .12rem; }
+.meta dd { margin: 0; color: var(--fg-soft); }
+.meta dd .sep { color: var(--line); padding: 0 .15rem; }
+
+/* ---------- disclosure ---------- */
+details { margin-top: .9rem; }
+summary {
+  cursor: pointer; list-style: none; font-size: .8rem; font-family: var(--mono);
+  letter-spacing: .05em; text-transform: uppercase; color: var(--muted);
+  padding: .35rem 0; border-top: 1px solid var(--line-soft);
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+ "; }
+details[open] summary::before { content: "– "; }
+summary:hover { color: var(--accent); }
+
+.body { padding-top: .5rem; }
+.body > p { margin: 0 0 .95rem; line-height: 1.85; }
+.body > p:first-of-type::first-letter { font-family: var(--serif); }
+h3 {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); margin: 1.7rem 0 .6rem; padding-bottom: .3rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+ul { margin: 0 0 .9rem; padding-left: 1.15rem; }
+li { margin-bottom: .35rem; line-height: 1.7; }
+
+/* ---------- figures ---------- */
+figure.paperfig { margin: 0 0 1.4rem; }
+figure.paperfig img {
+  display: block; width: 100%; height: auto; border: 1px solid var(--line);
+  border-radius: 6px; background: #fff;
+}
+figure.paperfig .why {
+  font-size: .88rem; color: var(--fg); margin: .55rem 0 .2rem; padding-left: .6rem;
+  border-left: 2px solid var(--accent);
+}
+figure.paperfig figcaption { font-size: .76rem; color: var(--muted); line-height: 1.55; }
+figure.paperfig .figlabel { font-family: var(--mono); font-size: .68rem; color: var(--accent); }
+
+/* ---------- tables ---------- */
+.scroll { overflow-x: auto; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+th, td { text-align: left; padding: .38rem .55rem; border-bottom: 1px solid var(--line-soft);
+         white-space: nowrap; }
+th { color: var(--muted); font-weight: 500; font-family: var(--mono); font-size: .68rem;
+     letter-spacing: .06em; text-transform: uppercase; }
+td.num { font-family: var(--mono); }
+td.win { font-family: var(--mono); color: var(--ok); }
+
+/* ---------- method / limitations ---------- */
+dl.kv { margin: 0 0 1rem; font-size: .88rem; }
+dl.kv dt { font-family: var(--mono); font-size: .68rem; letter-spacing: .06em;
+           color: var(--muted); margin-top: .7rem; }
+dl.kv dd { margin: .15rem 0 0; line-height: 1.7; color: var(--fg-soft); }
+li.reader { }
+li.reader .tag { color: var(--accent); font-family: var(--mono); font-size: .66rem;
+                 border: 1px solid var(--accent); border-radius: 3px; padding: 0 .25rem;
+                 margin-left: .3rem; white-space: nowrap; }
+li.author .tag { color: var(--muted); font-family: var(--mono); font-size: .66rem;
+                 border: 1px solid var(--line); border-radius: 3px; padding: 0 .25rem;
+                 margin-left: .3rem; white-space: nowrap; }
+blockquote.relevance {
+  margin: 0 0 1rem; padding: .6rem .9rem; background: var(--accent-bg);
+  border-radius: 6px; font-size: .9rem; line-height: 1.7;
+}
+.en-body > p { font-size: .88rem; line-height: 1.7; color: var(--fg-soft); margin: 0 0 .8rem; }
+
+.meta dd.thread { font-size: .78rem; }
+.meta dd.thread a { color: var(--fg-soft); border-bottom: 1px solid var(--line); }
+
+/* ---------- feedback ---------- */
+.rate { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center;
+        margin-top: .9rem; padding-top: .7rem; border-top: 1px solid var(--line-soft); }
+.rate-label { font-family: var(--mono); font-size: .66rem; letter-spacing: .06em;
+              text-transform: uppercase; color: var(--muted); margin-right: .2rem; }
+.rate button {
+  font: inherit; font-family: var(--mono); font-size: .68rem; cursor: pointer;
+  padding: .12rem .5rem; border: 1px solid var(--line); border-radius: 3px;
+  background: transparent; color: var(--muted);
+}
+.rate button:hover { color: var(--fg); border-color: var(--fg-soft); }
+.rate button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.rate-state { font-size: .66rem; color: var(--muted); margin-left: auto; }
+.rate-state.err { color: var(--warn); }
+
+/* ---------- evidence audit ---------- */
+.audit-note { font-size: .78rem; color: var(--muted); line-height: 1.65; margin: 0 0 .8rem; }
+.profile { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .9rem; }
+.pill { font-family: var(--mono); font-size: .68rem; padding: .08rem .45rem;
+        border: 1px solid var(--line); border-radius: 3px; color: var(--muted); }
+.pill.grade-A { color: var(--ok); border-color: var(--ok); }
+.pill.grade-B { color: var(--fg-soft); }
+.pill.grade-C, .pill.grade-D { color: var(--warn); border-color: var(--warn); }
+.pill.risk-high { color: var(--warn); border-color: var(--warn); }
+ul.claims { list-style: none; padding-left: 0; }
+ul.claims > li { border-left: 2px solid var(--line); padding-left: .7rem; margin-bottom: .85rem; }
+ul.claims > li.support-direct { border-left-color: var(--ok); }
+ul.claims > li.support-partial { border-left-color: var(--warn); }
+ul.claims > li.support-absent { border-left-color: var(--accent); }
+.sup { font-family: var(--mono); font-size: .64rem; text-transform: uppercase;
+       letter-spacing: .06em; color: var(--muted); display: block; margin-bottom: .15rem; }
+.why { font-size: .82rem; color: var(--fg-soft); line-height: 1.7; margin-top: .2rem; }
+.ev { margin-top: .25rem; }
+.ev code { font-family: var(--mono); font-size: .64rem; color: var(--muted);
+           border: 1px solid var(--line-soft); border-radius: 2px;
+           padding: 0 .25rem; margin-right: .2rem; }
+ul.unknowns > li { color: var(--muted); font-size: .85rem; }
+
+/* ---------- criteria disclosure ---------- */
+details.criteria { margin: -1.4rem 0 2rem; }
+details.criteria > summary {
+  border-top: 0; border-bottom: 1px solid var(--line-soft); display: flex;
+  align-items: baseline; gap: .5rem;
+}
+details.criteria .funnel { font-size: .72rem; color: var(--accent); margin-left: auto; }
+.criteria-body { padding: .7rem 0 .3rem; font-size: .82rem; }
+.criteria-body .funnel-note { color: var(--fg-soft); margin: 0 0 .7rem; line-height: 1.7; }
+.criteria-body dl.kv { margin: 0; }
+.criteria-body dt { color: var(--accent); }
+.criteria-body .kws { font-family: var(--mono); font-size: .74rem; color: var(--fg-soft); }
+.criteria-body .desc { color: var(--muted); font-size: .78rem; line-height: 1.6; }
+.criteria-body .avoid { color: var(--warn); font-size: .78rem; line-height: 1.6; }
+
+/* ---------- language switch ---------- */
+html[data-lang="zh"] [lang="en"] { display: none; }
+html[data-lang="en"] [lang="zh"] { display: none; }
+.langswitch { display: inline-flex; border: 1px solid var(--line); border-radius: 5px;
+              overflow: hidden; margin-left: .5rem; vertical-align: -2px; }
+.langswitch button {
+  font: inherit; font-family: var(--mono); font-size: .68rem; letter-spacing: .06em;
+  padding: .1rem .5rem; border: 0; background: transparent; color: var(--muted);
+  cursor: pointer; line-height: 1.7;
+}
+.langswitch button:hover { color: var(--fg); }
+html[data-lang="zh"] .langswitch button[data-set="zh"],
+html[data-lang="en"] .langswitch button[data-set="en"] {
+  background: var(--fg); color: var(--bg);
+}
+
+.empty { color: var(--muted); text-align: center; padding: 3.5rem 0; font-style: italic; }
+footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: .78rem; line-height: 1.7; }
+
+/* KaTeX inherits our size rather than its default 1.21em, which otherwise makes inline
+   notation tower over surrounding CJK text. */
+.katex { font-size: 1em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="masthead">
+  <div class="kicker">arXiv digest
+    <span class="langswitch"><button data-set="zh">中文</button><button data-set="en">EN</button></span>
+  </div>
+  <h1><span lang="zh">往期</span><span lang="en">Archive</span></h1>
+  <div class="dek">
+    <span lang="zh">2 期 · <a href="index.html">回到最新一期</a></span>
+    <span lang="en">2 issues ·
+      <a href="index.html">back to the latest</a></span>
+  </div>
+</header>
+
+<article class="card">
+  <div class="chips">
+    <span class="chip score">8</span>
+      <span class="chip deep" lang="zh">3 篇精读</span>
+      <span class="chip deep" lang="en">3 deep</span>
+      <span class="chip" lang="zh">5 篇速览</span>
+      <span class="chip" lang="en">5 at a glance</span>
+  </div>
+  <h2><a href="2026-08-19/">2026-08-19</a></h2>
+  <ul><li>A Weak Penalty Neural ODE for Learning Chaotic Dynamics from Noisy Time Series</li><li>PrivAct: Internalizing Contextual Privacy Preservation via Multi-Agent Preference Training</li><li>A Finite-Iteration Theory for Asynchronous Categorical Distributional Temporal-Difference Learning</li></ul>
+</article>
+<article class="card">
+  <div class="chips">
+    <span class="chip score">8</span>
+      <span class="chip deep" lang="zh">3 篇精读</span>
+      <span class="chip deep" lang="en">3 deep</span>
+      <span class="chip" lang="zh">5 篇速览</span>
+      <span class="chip" lang="en">5 at a glance</span>
+  </div>
+  <h2><a href="2026-07-30/">2026-07-30</a></h2>
+  <ul><li>Living-Harness Is an Interactive-Agent Evolver</li><li>Metis: Memory Foundation Model</li><li>SkillRise: Agentic Reinforcement Learning for Cross-Task Skill Evolution</li></ul>
+</article>
+<footer>
+  <span lang="zh">由 <span style="font-family:var(--mono)">paper-news-agent</span> 生成。
+  摘要由 LLM 撰写；每个数字都在原文中做过字符串核对，未核到的会在卡片上标注。判断与取舍仍以原论文为准。</span>
+  <span lang="zh"><br>标注默认写入 data/feedback.jsonl；若页面不是通过 <span
+    style="font-family:var(--mono)">pna serve</span> 打开的，标注会暂存在浏览器里 ——
+    <a href="#" onclick="pnaExportFeedback();return false">导出 feedback.jsonl</a>
+    后用 <span style="font-family:var(--mono)">pna feedback --import</span> 收回。</span>
+  <span lang="en">Generated by <span style="font-family:var(--mono)">paper-news-agent</span>.
+  Summaries are LLM-written; every number is string-checked against the source text and
+  anything not found is flagged on the card. Defer to the paper itself.<br>
+  Labels go to data/feedback.jsonl. Opened outside <span style="font-family:var(--mono)">pna
+  serve</span> they are held in the browser —
+  <a href="#" onclick="pnaExportFeedback();return false">export feedback.jsonl</a>
+  and run <span style="font-family:var(--mono)">pna feedback --import</span>.</span>
+</footer>
+<script>
+  // Feedback. `pna serve` accepts POST /api/feedback and appends to
+  // data/feedback.jsonl. On a static host (GitHub Pages) there is no such endpoint, so
+  // the label is kept in localStorage and `pna feedback --import` picks it up later —
+  // a label given while reading must never be silently dropped.
+  (function () {
+    var KEY = "pna-feedback";
+    function stored() {
+      try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return []; }
+    }
+    function remember(entry) {
+      try {
+        var all = stored(); all.push(entry);
+        localStorage.setItem(KEY, JSON.stringify(all));
+      } catch (e) {}
+    }
+    function chosen() {
+      var map = {};
+      stored().forEach(function (e) { map[e.arxiv_id] = e.label; });
+      return map;
+    }
+
+    var already = chosen();
+    document.querySelectorAll(".rate").forEach(function (box) {
+      var id = box.getAttribute("data-arxiv");
+      var state = box.querySelector(".rate-state");
+      function paint(label) {
+        box.querySelectorAll("button").forEach(function (b) {
+          b.setAttribute("aria-pressed", String(b.getAttribute("data-label") === label));
+        });
+      }
+      if (already[id]) paint(already[id]);
+
+      box.querySelectorAll("button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var entry = {
+            arxiv_id: id,
+            date: box.getAttribute("data-date"),
+            label: btn.getAttribute("data-label"),
+            at: new Date().toISOString(),
+            source: "manual",
+            signals: JSON.parse(box.getAttribute("data-signals") || "{}"),
+          };
+          paint(entry.label);
+          remember(entry);
+          state.textContent = "";
+          state.className = "rate-state";
+          fetch("/api/feedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(entry),
+          }).then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            state.textContent = "saved";
+          }).catch(function () {
+            state.textContent = "saved locally — pna feedback --import";
+            state.className = "rate-state err";
+          });
+        });
+      });
+    });
+
+    // Export what is in localStorage, for the static-hosting path.
+    window.pnaExportFeedback = function () {
+      var blob = new Blob([stored().map(function (e) { return JSON.stringify(e); }).join("\n")],
+                          { type: "application/x-ndjson" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "feedback.jsonl";
+      a.click();
+    };
+  })();
+
+  document.querySelectorAll(".langswitch button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var l = b.getAttribute("data-set");
+      document.documentElement.setAttribute("data-lang", l);
+      try { localStorage.setItem("pna-lang", l); } catch (e) {}
+    });
+  });
+</script>
+</div>
+</body>
+</html>
