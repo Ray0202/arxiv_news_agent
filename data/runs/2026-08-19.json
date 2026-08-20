@@ -1,13 +1,13 @@
 {
   "ingest": {
-    "oai_records": 330,
-    "kept": 272,
-    "added": 272
+    "oai_records": 1076,
+    "kept": 968,
+    "added": 696
   },
-  "written_at": "2026-08-19T00:30:15+00:00",
+  "written_at": "2026-08-20T00:19:37+00:00",
   "filter": {
-    "total": 272,
-    "passed": 49
+    "total": 968,
+    "passed": 154
   },
   "criteria": {
     "categories": [
@@ -85,57 +85,57 @@
     }
   },
   "triage": {
-    "scored": 52,
+    "scored": 169,
     "errors": 0,
-    "kept": 14,
+    "kept": 55,
     "usage": {
-      "calls": 52,
+      "calls": 169,
       "retries": 0,
-      "input_tokens": 64675,
-      "output_tokens": 3186,
+      "input_tokens": 209731,
+      "output_tokens": 10663,
       "cache_creation_input_tokens": 0,
       "cache_read_input_tokens": 0,
-      "usd": 0.0628,
+      "usd": 0.2053,
       "by_model": {
-        "gpt-5.4-mini": 0.062842
+        "gpt-5.4-mini": 0.205282
       }
     }
   },
   "review": {
     "audited": 7,
-    "skipped": 1,
+    "skipped": 0,
     "errors": 0,
-    "valid_ids": 263,
-    "invalid_ids": 4,
-    "demoted": 1,
+    "valid_ids": 237,
+    "invalid_ids": 2,
+    "demoted": 0,
     "usage": {
       "calls": 7,
       "retries": 0,
-      "input_tokens": 119865,
-      "output_tokens": 67739,
+      "input_tokens": 106288,
+      "output_tokens": 64611,
       "cache_creation_input_tokens": 0,
       "cache_read_input_tokens": 0,
-      "usd": 0.3947,
+      "usd": 0.3705,
       "by_model": {
-        "gpt-5.4-mini": 0.394725
+        "gpt-5.4-mini": 0.370466
       }
     }
   },
   "summarize": {
     "deep": 3,
-    "shallow": 5,
+    "shallow": 4,
     "errors": 0,
     "flagged": [],
     "usage": {
-      "calls": 8,
+      "calls": 7,
       "retries": 0,
-      "input_tokens": 46437,
-      "output_tokens": 48184,
+      "input_tokens": 54342,
+      "output_tokens": 45651,
       "cache_creation_input_tokens": 0,
-      "cache_read_input_tokens": 16896,
-      "usd": 0.2529,
+      "cache_read_input_tokens": 8448,
+      "usd": 0.2468,
       "by_model": {
-        "gpt-5.4-mini": 0.252921
+        "gpt-5.4-mini": 0.246821
       }
     }
   },

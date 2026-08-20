@@ -2,11 +2,11 @@
   {
     "date": "2026-08-19",
     "count": 8,
-    "deep": 3,
+    "deep": 4,
     "titles": [
-      "A Weak Penalty Neural ODE for Learning Chaotic Dynamics from Noisy Time Series",
-      "PrivAct: Internalizing Contextual Privacy Preservation via Multi-Agent Preference Training",
-      "A Finite-Iteration Theory for Asynchronous Categorical Distributional Temporal-Difference Learning"
+      "Wuying-Browser-Agent: Real-World Centric Fundamental Long-Horizon Browser Agents",
+      "SOD: Step-wise On-policy Distillation for Small Language Model Agents",
+      "Continuous Evolution Pool: Taming Recurring Concept Drift in Online Time Series Forecasting"
     ]
   },
   {
