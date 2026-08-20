@@ -36,7 +36,9 @@ trap 'rmdir "$LOCK" 2>/dev/null' EXIT
         sleep 2
     done
 
-    "$PNA" run --date auto
+    # caffeinate -i 挡住空闲睡眠。08-19 那次日志是 08:30 开始、17:19 才推送 ——
+    # 机器中途睡了，进程被挂起九小时。-i 只挡空闲睡眠，合盖照样睡，别指望它。
+    /usr/bin/caffeinate -i "$PNA" run --date auto
     code=$?
 
     # 推上去，否则 GitHub Pages 永远停在上一次。
@@ -53,6 +55,12 @@ trap 'rmdir "$LOCK" 2>/dev/null' EXIT
             # push 失败不算整体失败 —— 论文已经抓到本地了，网络问题明天会自己补上。
             git push -q origin main 2>&1 || echo "[$(date '+%F %T')] push 失败，本地已提交"
         fi
+    fi
+
+    # 失败必须能看见。第一次出问题时（ingest 撞上 Connection reset）唯一的症状是
+    # 网站没更新 —— 日志躺在 logs/ 里没人看，只能靠人发现"今天怎么没变"。
+    if [ $code -ne 0 ]; then
+        /usr/bin/osascript -e "display notification \"退出码 $code，见 logs/$(date +%F).log\" with title \"arXiv digest 失败\"" 2>/dev/null || true
     fi
 
     echo "[$(date '+%F %T')] 结束，退出码 $code"

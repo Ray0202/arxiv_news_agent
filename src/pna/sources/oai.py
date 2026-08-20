@@ -99,13 +99,48 @@ def harvest(
                 )
 
 
+# Transport-level failures that say nothing about the request and everything about the
+# network between here and arXiv. A full harvest is several hundred requests over a
+# quarter of an hour, so hitting one of these is close to certain rather than unlucky:
+# a scheduled run died on `[Errno 54] Connection reset by peer` after 16 minutes of
+# successful pagination. Retrying is the whole fix; the previous code retried 503 flow
+# control diligently and then let a TCP reset out of the loop untouched.
+_TRANSIENT = (
+    httpx.ConnectError,
+    httpx.ReadError,
+    httpx.WriteError,
+    httpx.ReadTimeout,
+    httpx.WriteTimeout,
+    httpx.ConnectTimeout,
+    httpx.RemoteProtocolError,
+    httpx.PoolTimeout,
+)
+
+
 def _fetch(client: httpx.Client, base: str, params: dict, attempts: int = 6):
     delay = 5.0
+    last: Exception | None = None
     for attempt in range(attempts):
-        resp = client.get(base, params=params)
+        try:
+            resp = client.get(base, params=params)
+        except _TRANSIENT as exc:
+            last = exc
+            if attempt == attempts - 1:
+                break
+            time.sleep(min(delay, 120.0))
+            delay = min(delay * 2, 120.0)
+            continue
         if resp.status_code == 503:
             wait = float(resp.headers.get("Retry-After", delay) or delay)
             time.sleep(min(wait, 120.0))
+            delay = min(delay * 2, 120.0)
+            continue
+        if resp.status_code >= 500:
+            # A 5xx is the server having a moment, not a bad request. Same treatment.
+            last = OAIError(f"OAI returned {resp.status_code}")
+            if attempt == attempts - 1:
+                break
+            time.sleep(min(delay, 120.0))
             delay = min(delay * 2, 120.0)
             continue
         resp.raise_for_status()
@@ -115,6 +150,10 @@ def _fetch(client: httpx.Client, base: str, params: dict, attempts: int = 6):
             if attempt == attempts - 1:
                 raise OAIError(f"unparseable OAI response: {exc}") from exc
             time.sleep(delay)
+    if last is not None:
+        raise OAIError(
+            f"OAI unreachable after {attempts} attempts: {type(last).__name__}: {last}"
+        ) from last
     raise OAIError(f"OAI still returning 503 after {attempts} attempts")
 
 

@@ -61,19 +61,39 @@ def cmd_ingest(args: argparse.Namespace, cfg: Config) -> int:
     _log(f"[ingest] harvesting {date_from}..{date} sets={sets}")
     total = kept = 0
     incoming = []
-    for rec in oai.harvest(date_from, date, sets, base=base):
-        total += 1
-        rec["is_new_submission"] = oai.is_new_submission(rec, window)
-        if args.include_revisions or rec["is_new_submission"]:
-            rec["harvest_date"] = date
-            incoming.append(mark(rec, "ingest"))
-            kept += 1
+    failure: Exception | None = None
+    try:
+        for rec in oai.harvest(date_from, date, sets, base=base):
+            total += 1
+            rec["is_new_submission"] = oai.is_new_submission(rec, window)
+            if args.include_revisions or rec["is_new_submission"]:
+                rec["harvest_date"] = date
+                incoming.append(mark(rec, "ingest"))
+                kept += 1
+    except Exception as exc:  # noqa: BLE001 - the point is to keep partial work
+        # A harvest is a quarter of an hour of paginated requests. Losing all of it to a
+        # failure on the last page is pure waste, and `merge_day` is keyed on `arxiv_id`,
+        # so a re-run tops up whatever landed rather than duplicating it.
+        failure = exc
+
     added, updated = merge_day(date, incoming)
     _log(
         f"[ingest] {total} records from OAI, {kept} new submissions "
         f"({total - kept} were metadata revisions) -> +{added} new / {updated} updated"
     )
-    write_run_log(date, {"ingest": {"oai_records": total, "kept": kept, "added": added}})
+    write_run_log(
+        date,
+        {"ingest": {"oai_records": total, "kept": kept, "added": added,
+                    "partial": failure is not None}},
+    )
+    if failure is not None:
+        # Deliberately still a failure. The saved records are an incomplete day, and
+        # letting the rest of the pipeline score and publish half a day would mark that
+        # day done — a worse outcome than no page at all. Re-run to complete it.
+        _log(f"[ingest] harvest failed after {total} records: "
+             f"{type(failure).__name__}: {failure}")
+        _log(f"[ingest] the {added} records already saved are kept; re-run to top up")
+        return 1
     return 0
 
 
