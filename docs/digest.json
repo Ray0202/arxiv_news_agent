@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-08-20",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
+      "EgoCITE: Context-Augmented Indexing and Time-Aware Retrieval for Long-Horizon Egocentric Memory",
+      "From Sequence to Structure: Relational Uncertainty Propagation for LLM Agents"
+    ]
+  },
+  {
     "date": "2026-08-19",
     "count": 8,
     "deep": 4,
