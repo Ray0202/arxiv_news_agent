@@ -111,3 +111,23 @@ def test_a_failed_harvest_keeps_what_it_already_collected(tmp_path, monkeypatch)
 
     assert code == 1, "an incomplete day must not let the pipeline continue"
     assert len(saved["2026-08-20"]) == 3, "records collected before the failure are kept"
+
+
+def test_resolve_date_defaults_to_utc_but_accepts_a_local_date():
+    """The scheduler's window is early-afternoon Pacific, where UTC is a day ahead.
+
+    In winter 16:00 PST is 00:00 UTC the next day. A UTC-derived `auto` would then target
+    a day whose papers arXiv does not announce until 17:00 PST — harvesting a day that
+    does not exist yet. Passing the local date is what prevents that, so both call shapes
+    are pinned here.
+    """
+    import datetime as dt
+
+    from pna.cli import resolve_date
+
+    # Sun 2026-12-20 local -> steps back to Friday the 18th, not forward to the 21st.
+    assert resolve_date("auto", dt.date(2026, 12, 20)) == "2026-12-18"
+    assert resolve_date("auto", dt.date(2026, 12, 21)) == "2026-12-21"  # a Monday
+    assert resolve_date("2026-08-20", dt.date(2026, 1, 1)) == "2026-08-20"  # explicit wins
+    assert resolve_date("auto") == dt.datetime.now(dt.timezone.utc).date().isoformat() \
+        or dt.datetime.now(dt.timezone.utc).date().weekday() >= 5

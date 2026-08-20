@@ -39,12 +39,23 @@ def _log(msg: str) -> None:
     print(msg, file=sys.stderr, flush=True)
 
 
-def resolve_date(value: str | None) -> str:
-    """`auto` picks the most recent weekday, since arXiv does not announce on weekends."""
+def resolve_date(value: str | None, today: dt.date | None = None) -> str:
+    """`auto` picks the most recent weekday, since arXiv does not announce on weekends.
+
+    `today` defaults to the current **UTC** date, which is what an interactive evening run
+    wants: arXiv announces at 20:00 US Eastern, so by then the UTC clock has already
+    rolled over to the day being announced.
+
+    The scheduler passes the **local** date instead, because its window is early afternoon
+    Pacific. In winter 16:00 PST is already 00:00 UTC the next day, so a UTC-derived
+    `auto` would target a day whose papers are not announced until 17:00 PST — i.e. it
+    would harvest a day that does not exist yet. The weekend step-back lives here rather
+    than in the caller so the two cannot drift apart.
+    """
     if value and value != "auto":
         dt.date.fromisoformat(value)  # validate
         return value
-    day = dt.datetime.now(dt.timezone.utc).date()
+    day = today or dt.datetime.now(dt.timezone.utc).date()
     while day.weekday() >= 5:  # 5=Sat, 6=Sun
         day -= dt.timedelta(days=1)
     return day.isoformat()

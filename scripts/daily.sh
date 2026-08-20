@@ -53,7 +53,9 @@ trap 'rmdir "$LOCK" 2>/dev/null' EXIT
     # 目标日期只在本轮第一次触发时算，之后固定复用。
     # 直接问 pna 而不是在 shell 里重算工作日逻辑 —— 两处实现同一规则迟早会漂。
     if [ ! -s "$TARGET" ]; then
-        "$PY" -c "from pna.cli import resolve_date; print(resolve_date('auto'))" > "$TARGET"
+        # 传本地日期而不是让它用 UTC：冬天 16:00 PST 就是 UTC 次日 00:00，
+        # 那时 UTC 口径会指向一个 17:00 PST 才公告的日子。
+        "$PY" -c "import datetime as dt; from pna.cli import resolve_date; print(resolve_date('auto', dt.date.today()))" > "$TARGET"
     fi
     DATE="$(cat "$TARGET")"
 
