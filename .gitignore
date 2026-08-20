@@ -21,3 +21,4 @@ cache/
 data/papers/
 
 # 注意 data/feedback.jsonl 和 data/runs/ 是**提交**的（见下），别在这里加通配 data/。
+.state/
