@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-08-21",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Can Agent Memory Systems Track Evolving State?",
+      "Mitigating Identity Essentialism in LLM Agents with Longitudinal Life Trajectories",
+      "ReCache: Efficient KV Cache Reuse and Compression for Tool-Augmented LLM Agents"
+    ]
+  },
+  {
     "date": "2026-08-20",
     "count": 8,
     "deep": 3,
