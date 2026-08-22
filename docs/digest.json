@@ -4,9 +4,9 @@
     "count": 8,
     "deep": 3,
     "titles": [
-      "Can Agent Memory Systems Track Evolving State?",
-      "Mitigating Identity Essentialism in LLM Agents with Longitudinal Life Trajectories",
-      "ReCache: Efficient KV Cache Reuse and Compression for Tool-Augmented LLM Agents"
+      "TS-Reasoner: Aligning Time Series Foundation Models with LLM Reasoning",
+      "ReCache: Efficient KV Cache Reuse and Compression for Tool-Augmented LLM Agents",
+      "An Irreducible Quantum Advantage in Aligning World Models with Reality"
     ]
   },
   {
