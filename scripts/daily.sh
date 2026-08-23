@@ -28,11 +28,23 @@ LOG="$LOG_DIR/$(date +%Y-%m-%d).log"
 # 不能用 UTC 日期：17:00 PDT 已经是 UTC 的第二天，那样最后几次重试会
 # 被当成新的一轮，把计数清零。
 CYCLE="$(date +%Y-%m-%d)"
-STAMP="$STATE/success-$CYCLE"
-TRIES="$STATE/attempts-$CYCLE"
-TARGET="$STATE/target-$CYCLE"
+TRIES="$STATE/attempts-$CYCLE"      # 每个日历日给 5 次机会
+TARGET="$STATE/target-$CYCLE"       # 本轮钉死的目标日期
 
-[ -f "$STAMP" ] && exit 0   # 今天已经成功过
+# 目标日期只在本轮第一次触发时算，之后固定复用。
+# 直接问 pna 而不是在 shell 里重算工作日逻辑 —— 两处实现同一规则迟早会漂。
+# 传本地日期而不是让它用 UTC：冬天 16:00 PST 就是 UTC 次日 00:00，
+# 那时 UTC 口径会指向一个 17:00 PST 才公告的日子。
+if [ ! -s "$TARGET" ]; then
+    "$PY" -c "import datetime as dt; from pna.cli import resolve_date; print(resolve_date('auto', dt.date.today()))" > "$TARGET"
+fi
+DATE="$(cat "$TARGET")"
+
+# 成功戳挂在**目标日期**上，不是本地日期。arXiv 周末不公告，所以周六周日的
+# auto 都退回周五 —— 挂在本地日期上的话，周五那期会被周六、周日各重做一遍。
+# 那不只是浪费：每次重跑的选择结果不同，已经发布的那期会被换成另外几篇论文。
+STAMP="$STATE/success-$DATE"
+[ -f "$STAMP" ] && exit 0
 
 # mkdir 是原子的，所以它同时是"上锁"和"检查有没有人在跑"。
 # 需要这道锁是因为一次 run 可能跑 20 分钟，跨过下一个触发时点。
@@ -50,15 +62,6 @@ fi
 trap 'rmdir "$LOCK" 2>/dev/null' EXIT
 
 {
-    # 目标日期只在本轮第一次触发时算，之后固定复用。
-    # 直接问 pna 而不是在 shell 里重算工作日逻辑 —— 两处实现同一规则迟早会漂。
-    if [ ! -s "$TARGET" ]; then
-        # 传本地日期而不是让它用 UTC：冬天 16:00 PST 就是 UTC 次日 00:00，
-        # 那时 UTC 口径会指向一个 17:00 PST 才公告的日子。
-        "$PY" -c "import datetime as dt; from pna.cli import resolve_date; print(resolve_date('auto', dt.date.today()))" > "$TARGET"
-    fi
-    DATE="$(cat "$TARGET")"
-
     n=$(( $(cat "$TRIES" 2>/dev/null || echo 0) + 1 ))
     echo "$n" > "$TRIES"
 

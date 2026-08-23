@@ -131,3 +131,32 @@ def test_resolve_date_defaults_to_utc_but_accepts_a_local_date():
     assert resolve_date("2026-08-20", dt.date(2026, 1, 1)) == "2026-08-20"  # explicit wins
     assert resolve_date("auto") == dt.datetime.now(dt.timezone.utc).date().isoformat() \
         or dt.datetime.now(dt.timezone.utc).date().weekday() >= 5
+
+
+def test_reingesting_a_day_keeps_earlier_stage_marks(tmp_path, monkeypatch):
+    """Re-harvesting must not make finished stages look unfinished.
+
+    A harvested record carries `stages={"ingest": ...}` only. A plain dict.update replaced
+    the accumulated marks, so filter/triage/summarize all saw unfinished work and redid
+    it — re-scoring 835 records and paying for fresh deep reads. Worse, the selection is
+    not stable across runs, so the day's published digest came back with different papers.
+    """
+    from pna import store
+
+    monkeypatch.setattr(store, "PAPERS_DIR", tmp_path)
+
+    store.save_day("2026-08-21", [{
+        "arxiv_id": "2608.1", "title": "old",
+        "stages": {"ingest": "t0", "filter_keyword": "t1", "triage": "t2"},
+        "triage": {"score": 9}, "summary": {"article_zh": "..."},
+    }])
+
+    # What a re-harvest of the same day looks like: fresh metadata, only `ingest` marked.
+    store.merge_day("2026-08-21", [store.mark(
+        {"arxiv_id": "2608.1", "title": "new"}, "ingest")])
+
+    rec = store.load_day("2026-08-21")[0]
+    assert rec["title"] == "new", "fresh metadata still wins"
+    assert store.has_stage(rec, "triage"), "the triage mark must survive a re-ingest"
+    assert store.has_stage(rec, "filter_keyword")
+    assert rec["triage"] == {"score": 9} and rec["summary"]["article_zh"] == "..."

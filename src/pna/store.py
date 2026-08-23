@@ -80,13 +80,25 @@ def _sort_key(rec: Record) -> tuple[float, str]:
 
 
 def merge_day(date: str, incoming: Iterable[Record]) -> tuple[int, int]:
-    """Merge records into a day file by arxiv_id. Returns (added, updated)."""
+    """Merge records into a day file by arxiv_id. Returns (added, updated).
+
+    `stages` is merged rather than replaced, and that is load-bearing. A freshly harvested
+    record carries `stages={"ingest": ...}` only, so a plain `dict.update` wiped the marks
+    left by filter/triage/summarize — every stage then saw unfinished work and redid it.
+
+    The symptom was expensive and quiet: re-ingesting an already-processed day re-scored
+    all 835 records and paid for new deep reads, and because the selection is not stable
+    across runs it republished that day's digest with *different* papers each time. Three
+    consecutive days spent ~$0.5 each rebuilding one Friday's page.
+    """
     existing = {r["arxiv_id"]: r for r in load_day(date)}
     added = updated = 0
     for rec in incoming:
         key = rec["arxiv_id"]
         if key in existing:
+            prior = existing[key].get("stages") or {}
             existing[key].update(rec)
+            existing[key]["stages"] = {**prior, **(rec.get("stages") or {})}
             updated += 1
         else:
             existing[key] = rec
