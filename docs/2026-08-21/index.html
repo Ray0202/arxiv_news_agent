@@ -249,8 +249,8 @@ footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--l
   <div class="kicker">arXiv digest · 2026-08-21
     <span class="langswitch"><button data-set="zh">中文</button><button data-set="en">EN</button></span>
   </div>
-  <h1><span lang="zh">3 篇精读，5 篇速览</span><span
-        lang="en">3 deep reads, 5 at a glance</span></h1>
+  <h1><span lang="zh">4 篇精读，4 篇速览</span><span
+        lang="en">4 deep reads, 4 at a glance</span></h1>
   <div class="dek">
     <span lang="zh">从当日 835 篇新投稿中筛出 ·
       <a href="../archive.html">往期</a></span>
@@ -300,607 +300,31 @@ footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--l
 
 <article class="card">
   <div class="chips">
-<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip deep">
-      <span lang="zh">全文精读</span><span
-        lang="en">full text</span></span>
-<span class="chip">notable</span>  </div>
-
-  <h2><a href="https://arxiv.org/abs/2510.03519">TS-Reasoner: Aligning Time Series Foundation Models with LLM Reasoning</a></h2>
-<p class="lead" lang="zh">冻结 TSFM 对齐 LLM，TimeSeriesExam OA 提 8.17 点</p><p class="lead" lang="en">Freezing TimesFM and aligning it to Qwen2.5-7B lifts TimeSeriesExam OA by 8.17 points.</p>
-  <dl class="meta">
-      <dt><span lang="zh">机构</span><span lang="en">institutions</span></dt><dd>University of Maryland, College Park · Mohamed bin Zayed University of Artificial Intelligence</dd>
-    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
-    <dd>Fangxu Yu, Hongyu Zhao, Tianyi Zhou</dd>
-    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
-    <dd>cs.CL · cs.AI<span class="sep">|</span>2026-08-19<span class="sep">|</span>2510.03519</dd>
-<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>time-series · llm · reasoning · multimodal · foundation-model</dd>    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
-    <dd class="thread">
-      <span lang="zh">与 2026-08-19 的<a href="../2026-08-19/">《SCENARIODIFF: A Scenario-level Guidance F…》</a>相近
-        (0.85)</span>
-      <span lang="en">close to <a href="../2026-08-19/">“SCENARIODIFF: A Scenario-level Guidance F…”</a>        from 2026-08-19 (0.85)</span>
-<br>      <span lang="zh">与 2026-08-19 的<a href="../2026-08-19/">《LiveHouse-TS: An Open-world Living Benchm…》</a>相近
-        (0.85)</span>
-      <span lang="en">close to <a href="../2026-08-19/">“LiveHouse-TS: An Open-world Living Benchm…”</a>        from 2026-08-19 (0.85)</span>
-    </dd>
-  </dl>
-
-  <div class="rate" data-arxiv="2510.03519" data-date="2026-08-21"
-       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;high&#34;, &#34;quality_confidence&#34;: 0.87, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.459}">
-    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
-    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
-    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
-    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
-    <span class="rate-state"></span>
-  </div>
-
-  <details>
-    <summary><span lang="zh">展开精读</span><span
-      lang="en">read the digest</span></summary>
-    <div class="body">
-      <div lang="zh"><p>现有 TSFM 会预测，却很难把新闻、背景知识和多步 reasoning 接到数值序列上；LLM/VLM 反过来懂文本，却常卡在 temporal dependence 和数值理解。把序列转字符串或从头训练时序编码器，通常还是绕不开这个语义—数值缺口。</p><p>TS-Reasoner 的动作是冻结 TimesFM-1.0-200M，用 TS-to-Text adapter 把 patch-level embedding 投到 Qwen2.5-7B-Instruct 的输入空间。Stage 1 用 120K caption pairs 做 alignment：100K template-based + 20K LLM-generated，并把 trend、frequency、periodicity、noise、local variation 等属性塞进 prompt；Stage 2 再用 30K instruction data 做 instruction tuning。</p><p>结果很稳：TimeSeriesExam 上 OA 为 54.83%，比 backbone 高 8.17 点，也分别领先同规模最强 open-source LLM、VLM 和 TSLLM 8.17、5.82、4.11 点。MTBench 上 Finance short 和 Weather short 达到 93.28 和 61.55；开放式推理任务上，Inductive Reasoning 为 54.70%，高于 ChatTS-14B 的 51.80%。属性化 caption 还把 MTLD 从 42.95 提到 133.30。</p><p>这说明 TSFM 的 temporal features 确实能给 LLM 补数值底座，且 60K 对齐样本就能压过 ChatTS-7B，10K instruction tuning 也够用。但收益仍受 base LLM reasoning capacity 限制：作者承认 TimeSeriesExam 上与 GPT-4.1 的最大差距仍在 Pattern Recognition。MTBench 还是非 peer-reviewed preprint，且 Stage 1 依赖 GPT-4.1/VLM 生成的 caption。</p></div>
-      <div lang="en"><p>TSFMs can forecast, but they usually stop at dynamics: they do not absorb news, background knowledge, or multi-step reasoning. LLMs have the opposite weakness. They can reason over text, but they are brittle on temporal dependence and numeric values. Turning the series into strings or training a time-series encoder from scratch still leaves that semantic-numeric gap open.</p><p>TS-Reasoner’s move is to freeze a pretrained TimesFM-1.0-200M, then project its patch-level features through a single-layer TS-to-Text adapter into the input space of Qwen2.5-7B-Instruct. Stage 1 aligns the two modalities with 120K caption pairs: 100K template-based pairs plus 20K LLM-generated pairs, with prompts enriched by 5 attribute types such as trend, frequency, periodicity, noise, and local variation. Stage 2 instruction-tunes on 30K samples while keeping the TSFM frozen.</p><p>The numbers are solid. On TimeSeriesExam, TS-Reasoner-7B reaches 54.83% OA, 8.17 points above the backbone and ahead of the best comparable open-source LLM, VLM, and TSLLM by 8.17, 5.82, and 4.11 points. On MTBench, it scores 93.28 on Finance short and 61.55 on Weather short. On open-ended inductive reasoning, it reaches 54.70% versus 51.80% for ChatTS-14B. The captioning analysis also matters: MTLD rises from 42.95 to 133.30.</p><p>This is a practical open-source recipe for time-series reasoning, especially when privacy or deployment cost rules out proprietary APIs. But the ceiling is still set by the base LLM. The authors note the biggest gap to GPT-4.1 remains on Pattern Recognition, and smaller backbones benefit less from the TSFM. The evidence is also benchmark-limited: MTBench is a non-peer-reviewed preprint, and stage 1 depends on captions synthesized by stronger models.</p></div>
-
-      <h3><span lang="zh">论文原图</span><span lang="en">Figures from the paper</span></h3>
-      <figure class="paperfig">
-        <a href="https://arxiv.org/html/2510.03519v3/Ablation.pdf_cropped.png" target="_blank" rel="noopener">
-          <img src="https://arxiv.org/html/2510.03519v3/Ablation.pdf_cropped.png" alt="Figure 2" loading="lazy">
-        </a>
-<p class="why" lang="zh">直接看出 TS-Reasoner 在各个基准上压过哪些同规模基线，以及幅度有多大。</p><p class="why" lang="en">Shows which comparable-scale baselines TS-Reasoner beats and by how much across the main benchmarks.</p>
-        <figcaption><span class="figlabel">Figure 2</span>
-          Results on time series understanding and reasoning benchmarks. TS-Reasoner shows a consistent advantage over the comparable-scale open-source LLMs, VLMs, and TSLLMs.</figcaption>
-      </figure>
-      <figure class="paperfig">
-        <a href="https://arxiv.org/html/2510.03519v3/captioning.png" target="_blank" rel="noopener">
-          <img src="https://arxiv.org/html/2510.03519v3/captioning.png" alt="Figure 4" loading="lazy">
-        </a>
-<p class="why" lang="zh">展示对齐数据如何从属性提示、paraphrase 和 caption 生成出来。</p><p class="why" lang="en">Shows how the alignment data are built from attribute prompts, paraphrases, and generated captions.</p>
-        <figcaption><span class="figlabel">Figure 4</span>
-          Workflow for our attribute-aware caption synthesis, designed to curate training data for alignment in stage 1. It enriches basic instructions with key attributes and generates diverse paraphrases, yielding high-fidelity captions to train TS-Reasoner effectively.</figcaption>
-      </figure>
-      <figure class="paperfig">
-        <a href="https://arxiv.org/html/2510.03519v3/text_vision.png" target="_blank" rel="noopener">
-          <img src="https://arxiv.org/html/2510.03519v3/text_vision.png" alt="Figure 8" loading="lazy">
-        </a>
-<p class="why" lang="zh">对比 textual 和 visualized time series 作为 caption 训练数据时的效果差异。</p><p class="why" lang="en">Compares caption-training performance from textual versus visualized time series inputs.</p>
-        <figcaption><span class="figlabel">Figure 8</span>
-          Results of TS-Reasoner on TimeSeriesExam (left) and MTBench (right) using textual and visualized time series for captioning as training data.</figcaption>
-      </figure>
-
-      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
-      <ul lang="zh"><li>提出 TS-Reasoner：冻结 TimesFM-1.0-200M，用 TS-to-Text adapter 把时序表示接到 Qwen2.5-7B-Instruct 上做 reasoning。</li><li>提出 attribute-aware caption synthesis，把 100K template pairs 和 20K LLM-generated pairs 变成可对齐的 120K caption data。</li><li>在 TimeSeriesExam、MTBench 和 Inductive Reasoning 上超过同规模开源 LLM/VLM/TSLLM，并把对 ChatTS-7B 的优势做到了更少数据。</li></ul>
-      <ul lang="en"><li>Propose TS-Reasoner: freeze TimesFM-1.0-200M and connect its representations to Qwen2.5-7B-Instruct through a TS-to-Text adapter for reasoning.</li><li>Propose attribute-aware caption synthesis, turning 100K template pairs and 20K LLM-generated pairs into 120K alignment captions.</li><li>Beat comparable-scale open-source LLMs, VLMs, and TSLLMs on TimeSeriesExam, MTBench, and Inductive Reasoning while using less data than ChatTS-7B.</li></ul>
-
-      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
-      <dl class="kv">
-        <dt>core idea</dt>
-        <dd lang="zh">TS-Reasoner 冻结 pretrained TSFM（TimesFM-1.0-200M），用 single-layer MLP TS-to-Text adapter 把 patch-level temporal embeddings 投到 Qwen2.5-7B-Instruct 的输入空间。Stage 1 先用 120K synthetic caption pairs 做 language-time series alignment；Stage 2 再在 30K instruction data 上做 instruction tuning。TSFM 参数全程冻结，LLM 参数可训练。</dd>
-        <dd lang="en">TS-Reasoner freezes a pretrained TSFM (TimesFM-1.0-200M) and uses a single-layer MLP TS-to-Text adapter to project patch-level temporal embeddings into the input space of Qwen2.5-7B-Instruct. Stage 1 aligns the modalities with 120K synthetic caption pairs, and Stage 2 performs instruction tuning on 30K samples. The TSFM stays frozen throughout, while the LLM is trainable.</dd>
-<dt>architecture</dt><dd>TimesFM-1.0-200M (frozen) + single-layer MLP TS-to-Text Adapter (GELU) + Qwen2.5-7B-Instruct; patch size 32; 7.3B trainable params; two-stage training.</dd><dt>data</dt><dd>Stage 1: 100K template-based pairs + 20K LLM-generated caption pairs from Chronos synthetic data and text-attributed time series; Stage 2: 30K instruction-tuning samples from (66).</dd><dt>compute</dt><dd>8×L40s GPUs; stage 1 ~20h, stage 2 ~5h.</dd>      </dl>
-
-      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
-      <div class="scroll">
-      <table>
-        <thead><tr><th>benchmark</th><th>metric</th>
-            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
-            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
-        <tbody>
-        <tr><td>TimeSeriesExam OA</td><td>accuracy</td>
-            <td class="win">54.83%</td>
-            <td class="num">Qwen2.5-7B-Instruct 46.66%</td><td class="num">+8.17 points</td></tr>
-        <tr><td>MTBench Finance short</td><td>accuracy</td>
-            <td class="win">93.28%</td>
-            <td class="num">ChatTS-14B 91.22%</td><td class="num">+2.06 points</td></tr>
-        <tr><td>MTBench Weather short</td><td>accuracy</td>
-            <td class="win">61.55%</td>
-            <td class="num">ChatTS-14B 59.22%</td><td class="num">+2.33 points</td></tr>
-        <tr><td>Inductive Reasoning</td><td>accuracy</td>
-            <td class="win">54.70%</td>
-            <td class="num">ChatTS-14B 51.80%</td><td class="num">+2.90 points</td></tr>
-        <tr><td>Caption diversity (1K captions)</td><td>MTLD</td>
-            <td class="win">133.30</td>
-            <td class="num">Template-based pairs 42.95</td><td class="num">3.10x</td></tr>
-        </tbody>
-      </table>
-      </div>
-
-      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
-      <p class="audit-note">
-        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
-          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
-        <span lang="en">This is not a quality score. It answers one question: does the
-          paper's own evidence carry its own claims. Every judgement cites the paragraph,
-          table or figure id it was read from.</span>
-      </p>
-      <div class="profile">
-        <span class="pill grade-A">evidence A</span>
-        <span class="pill risk-high">eval risk high</span>
-        <span class="pill risk-medium">method risk medium</span>
-        <span class="pill">empirical method</span>
-        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.87</span>
-      </div>
-
-      <ul class="claims">
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">在 TimeSeriesExam 和 MTBench 上，TS-Reasoner-7B 在可比规模的开源 LLM、VLM 和 TSLLM 中取得了最佳总体准确率，并在多个子任务上领先。</span><span lang="en">On TimeSeriesExam and MTBench, TS-Reasoner-7B attains the best overall accuracy among comparable-scale open-source LLMs, VLMs, and TSLLMs, and leads on multiple subtasks.</span>
-          <div class="why"><span lang="zh">Table 2 给出了两个基准上的逐项结果，S4.SS1.p2 还明确把结论限定在“可比规模的开源模型”上；这些证据直接支持了在所报告范围内领先的说法，但不延伸到专有模型，因为 GPT-4.1 在 TimeSeriesExam 总体准确率上仍更高。</span><span lang="en">Table 2 reports the per-task results on both benchmarks, and S4.SS1.p2 explicitly scopes the claim to comparable-scale open-source models; this directly supports the reported lead within that scope, but not beyond it, since GPT-4.1 remains higher on TimeSeriesExam overall accuracy.</span></div>
-<div class="ev"><code>S4.SS1.p2</code><code>S4.SS1.p3</code><code>S4.T2.7.1</code></div>        </li>
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">TS-Reasoner 的训练数据效率更高：对齐阶段用 60K 样本就达到更优总体准确率，指令微调阶段用 10K 样本即可超过 ChatTS-7B。</span><span lang="en">TS-Reasoner is more data-efficient: it reaches better overall accuracy with 60K alignment samples and surpasses ChatTS-7B with only 10K instruction-tuning samples.</span>
-          <div class="why"><span lang="zh">S4.SS2.p1 直接陈述了 60K 和 10K 的数据效率结论，Figure 5 说明这是随训练数据规模变化得到的结果；它支持相对 ChatTS-7B 的效率优势，但不检验其他数据配方或任务。</span><span lang="en">S4.SS2.p1 directly states the 60K and 10K data-efficiency result, and Figure 5 shows it as a scaling-with-data analysis; this supports the efficiency advantage relative to ChatTS-7B, but it does not test other data recipes or tasks.</span></div>
-<div class="ev"><code>S4.F5</code><code>S4.SS2.p1</code></div>        </li>
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">消融结果显示，属性感知 caption、双阶段训练和预训练 TSFM 都对性能有实质贡献。</span><span lang="en">The ablation results show that attribute-aware captions, the two-stage training recipe, and the pretrained TSFM each make a material contribution to performance.</span>
-          <div class="why"><span lang="zh">Table 6 和相应文字显示，去掉 LLM-caption/Attributes、Stage 1、Stage 2 或 TSFM 都会带来可观下降，因此直接支撑“各关键组件有效”的结论；不过这些消融主要验证组件贡献，而不是穷尽所有替代实现。</span><span lang="en">Table 6 and the surrounding text show that removing LLM-caption/Attributes, Stage 1, Stage 2, or the TSFM causes substantial drops, directly supporting the claim that each key component matters; however, these ablations validate component contributions rather than exhaust all alternative implementations.</span></div>
-<div class="ev"><code>S4.SS8.p2</code><code>S4.SS8.p3</code><code>S4.SS8.p4</code><code>S4.T6.7.1</code></div>        </li>
-      </ul>
-
-      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
-      <ul>
-        <li><span class="tag">baseline</span>
-          <span lang="zh">基线比较对输入表示和模型家族很敏感：LLM 用数值文本、VLM 用代码绘图，而 TS-Reasoner 直接接入 TSFM 特征，这会让比较同时混入模态与预处理差异。</span><span lang="en">The baseline comparison is sensitive to input representation and model family: LLMs receive numeric text, VLMs receive code-generated plots, while TS-Reasoner directly consumes TSFM features, so the comparison mixes modality and preprocessing differences.</span>
-<span class="ev"><code>S4.p2</code><code>S4.SS5.p1</code><code>S4.T2.7.1</code></span></li>
-        <li><span class="tag">generalisation</span>
-          <span lang="zh">主要结论只在 TimeSeriesExam、MTBench 和一个 inductive reasoning 数据集上被验证，因此更广泛的时间序列任务与领域迁移仍未在提供文本中得到检验。</span><span lang="en">The main conclusions are verified only on TimeSeriesExam, MTBench, and one inductive-reasoning dataset, so broader time-series tasks and domain transfer remain untested in the provided text.</span>
-<span class="ev"><code>S4.p1</code><code>S4.SS7.p1</code></span></li>
-        <li><span class="tag">construction</span>
-          <span lang="zh">对齐阶段依赖 GPT-4.1 和若干 VLM 生成合成 caption，而 Figure 7 显示下游表现会随 captioner 质量显著变化，这使训练数据构造成为关键不确定因素。</span><span lang="en">The alignment stage depends on synthetic captions generated by GPT-4.1 and several VLMs, and Figure 7 shows downstream performance varies strongly with captioner quality, making training-data construction a key uncertainty.</span>
-<span class="ev"><code>S3.SS4.p2</code><code>S3.SS4.p4</code><code>S3.SS4.p5</code><code>S4.SS3.p2</code><code>S4.SS5.p1</code></span></li>
-      </ul>
-
-      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
-      <ul class="unknowns">
-        <li><span lang="zh">提供的摘录没有包含附录 A–E 的完整内容，因此无法核实更细的推导、提示词模板、案例分析和补充实验。</span><span lang="en">The provided excerpt does not include the full contents of Appendices A–E, so finer derivations, prompt templates, case analyses, and supplementary experiments cannot be verified.</span></li>
-        <li><span lang="zh">表 2、图 5–8 只以正文摘要形式给出，完整图形细节与全部数值设置在提供文本中不可复核。</span><span lang="en">Tables 2 and Figures 5–8 are only summarized in the body text, so the full graphical details and all numeric settings cannot be checked from the provided material.</span></li>
-      </ul>
-
-      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
-      <ul>
-        <li class="reader"><span lang="zh">TimeSeriesExam 和 MTBench 都是 multiple-choice accuracy，难以完整检验开放式 reasoning 和 calibration，而且 MTBench 还是非 peer-reviewed preprint。</span><span
-          lang="en">TimeSeriesExam and MTBench are multiple-choice accuracy tests, so they only partially probe open-ended reasoning and calibration, and MTBench is still a non-peer-reviewed preprint.</span><span class="tag">reader</span></li>
-        <li class="author"><span lang="zh">作者也承认，模型仍落后 GPT-4.1，最大差距在 Pattern Recognition，说明 7B backbone 还是瓶颈。</span><span
-          lang="en">The paper itself notes a remaining gap to GPT-4.1, especially on Pattern Recognition, which shows the 7B backbone is still the bottleneck.</span><span class="tag">author</span></li>
-        <li class="reader"><span lang="zh">Stage 1 依赖 GPT-4.1/VLM 合成 caption，训练链路带有 teacher-model 依赖。</span><span
-          lang="en">Stage 1 depends on captions synthesized by GPT-4.1/VLMs, so the pipeline inherits a teacher-model dependency.</span><span class="tag">reader</span></li>
-      </ul>
-
-      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
-      <blockquote class="relevance"><span lang="zh">TSFM+LLM 对齐做时序推理，直接连到多变量预测和上下文建模。</span><span
-        lang="en">Directly relevant to TSFM-style time-series understanding and context-aware reasoning, with a clear link to forecasting and multivariate/context modeling.</span></blockquote>
-
-      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
-      <dl class="kv">
-          <dt lang="zh">入选理由</dt><dd lang="zh">TSFM与LLM对齐用于时序推理</dd>
-          <dt lang="en">why selected</dt><dd lang="en">TSFM-LLM alignment for time-series reasoning</dd>
-      </dl>
-    </div>
-  </details>
-</article>
-<article class="card">
-  <div class="chips">
-<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip deep">
-      <span lang="zh">全文精读</span><span
-        lang="en">full text</span></span>
-<span class="chip code"><a href="https://github.com/EIT-NLP/ReCache">code</a></span><span class="chip">notable</span>  </div>
-
-  <h2><a href="https://arxiv.org/abs/2608.19662">ReCache: Efficient KV Cache Reuse and Compression for Tool-Augmented LLM Agents</a></h2>
-<p class="lead" lang="zh">资源内独立缓存+裁剪，KV 内存降 92.43%，TTFT 提 3.655 倍</p><p class="lead" lang="en">Resource-local caching and pruning cut KV memory 92.43% and give a 3.655× TTFT speedup with near-dense quality.</p>
-  <dl class="meta">
-      <dt><span lang="zh">机构</span><span lang="en">institutions</span></dt><dd>Shanghai Jiao Tong University · Eastern Institute of Technology, Ningbo · Xi’an Jiaotong University</dd>
-    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
-    <dd>Yichu Fang, Sitong Wei, Haozhe Hu, Xiaoyu Shen</dd>
-    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
-    <dd>cs.CL<span class="sep">|</span>2026-08-20<span class="sep">|</span>2608.19662</dd>
-<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agents · kv-cache · tool-calling · cache-compression · inference-efficiency</dd>    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
-    <dd class="thread">
-      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《Metis: Memory Foundation Model》</a>相近
-        (0.85)</span>
-      <span lang="en">close to <a href="../2026-07-30/">“Metis: Memory Foundation Model”</a>        from 2026-07-30 (0.85)</span>
-<br>      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《Behavioral Controllability of Agentic Mod…》</a>相近
-        (0.85)</span>
-      <span lang="en">close to <a href="../2026-07-30/">“Behavioral Controllability of Agentic Mod…”</a>        from 2026-07-30 (0.85)</span>
-    </dd>
-  </dl>
-
-  <div class="rate" data-arxiv="2608.19662" data-date="2026-08-21"
-       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.86, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.892}">
-    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
-    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
-    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
-    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
-    <span class="rate-state"></span>
-  </div>
-
-  <details>
-    <summary><span lang="zh">展开精读</span><span
-      lang="en">read the digest</span></summary>
-    <div class="body">
-      <div lang="zh"><p>agentic LLM 每次都把工具和 skill schema 重新前向一遍；资源组合和顺序一变，prefix caching 就失效，预填充和 KV 存储都被重复成本拖住。现有可复用缓存要么依赖相同前缀，要么靠位置修正和重算去近似 full-context KV state，仍没把“可复用 schema”从“当前上下文”里拆开。</p><p>ReCache 的关键动作是先把每个资源单独编码成 composition-invariant KV block：resource-wise attention 切掉跨资源 attention，并把每个资源的位置从零重排。随后只让少量 layer–KV-head-group 路由看见资源块，再在 token 维度只保留 resource name、arg names、arg descriptions 和 suffix token。</p><p>在七个公开 tool/skill 数据集拼成的 benchmark 上，resource-wise attention 的 Inv-F1 为 82.3%，Dense 是 82.4%，TTFT 提升 3.655×。完整 ReCache 把 allocated KV-tensor memory 降 92.43%，attention 再提 1.423×；在 OOD 集上 Inv-F1 为 60.8%，Dense 是 66.3%，hallucination 仍只有 0.6%。</p><p>这说明 agent 的瓶颈主要不是全局资源顺序，而是重复编码和过宽的可见范围。代价是它依赖可训练 setting、稳定 schema 和 Qwen3 backbone；对 frozen model、强动态资源池或依赖跨资源顺序的场景，还没证明能直接搬过去。</p></div>
-      <div lang="en"><p>Agentic LLMs keep re-encoding tool and skill schemas. Prefix caching only helps when the reused text sits in the same prefix, so a new combination or order of retrieved resources brings the prefill cost back. Existing reusable-cache methods still lean on positional correction or recomputation to approximate the original full-context KV state, rather than separating reusable schema from the surrounding request.</p><p>ReCache makes each resource independently cacheable. Resource-wise attention removes cross-resource attention and resets positions within each resource, producing a composition-invariant KV block. It then lets only a sparse set of layer–KV-head-group routes see resource blocks, and on the token axis keeps just resource names, argument names, argument descriptions, and the suffix token.</p><p>On a benchmark assembled from seven public tool- and skill-use datasets, resource-wise attention matches Dense almost exactly: 82.3% Inv-F1 versus 82.4%, while cutting TTFT by 3.655×. The full system reduces allocated KV-tensor memory by 92.43% and speeds attention by 1.423×. On the OOD split, ReCache reaches 60.8% Inv-F1 versus Dense at 66.3%, with hallucination at 0.6%.</p><p>The main takeaway is that, in this setting, agent inference cost comes more from repeated schema encoding and overly broad cache access than from preserving global resource order. The caveat is scope: the study is built around trainable Qwen3 backbones, mainly Qwen3-4B, and assumes relatively stable schemas. Frozen models, larger architectures, and highly dynamic resource pools remain untested, so the method is not yet a drop-in answer for every agent stack.</p></div>
-
-
-      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
-      <ul lang="zh"><li>提出 ReCache，把 tool 和 skill schema 的 KV cache 按资源粒度独立复用。</li><li>用 resource-wise attention、贡献驱动的 structural pruning 和 field-aware semantic pruning 同时压缩编码、路由与 token 保留。</li><li>构建由七个公开数据集合成的统一 benchmark，并加入 resource-disjoint OOD 测试。</li></ul>
-      <ul lang="en"><li>Introduces ReCache, which reuses KV cache at the resource level for tool and skill schemas.</li><li>Combines resource-wise attention, contribution-guided structural pruning, and field-aware semantic pruning to cut redundancy.</li><li>Builds a unified benchmark from seven public datasets with resource-disjoint OOD evaluation.</li></ul>
-
-      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
-      <dl class="kv">
-        <dt>core idea</dt>
-        <dd lang="zh">ReCache 先把每个资源 $R_i$ 编成独立可复用的 KV block：resource-wise attention 去掉跨资源 attention，并把资源内位置重置为局部坐标。这样缓存与资源组合、顺序解耦，后续请求只需复用已有块。然后用 leave-one-in 的贡献分数选出少量 layer 和 KV-head-group 路由，再在 token 维度只保留 resource name、arg names、arg descriptions 和 suffix token。</dd>
-        <dd lang="en">ReCache first encodes each resource $R_i$ into an independently reusable KV block: resource-wise attention removes cross-resource attention and resets positions inside each resource to a local coordinate system. This decouples the cache from resource combinations and order, so later requests can reuse existing blocks. It then uses leave-one-in contribution scores to select a sparse set of layer and KV-head-group routes, and keeps only the resource name, argument names, argument descriptions, and suffix token on the token axis.</dd>
-<dt>architecture</dt><dd>Qwen3-4B / Qwen3-1.7B; full fine-tuning; resource-wise attention; 20 layers; 3 KV head groups (Q_l) / 7 KV head groups (Q_s); resource / context route split; field-aware semantic pruning</dd><dt>data</dt><dd>ToolACE; APIGEN; ToolMind; ToolRet; Toucan; SkillRouter; WildToolBench; 49,424 train; 5,000 subset; 1,000 IND test; 1,000 OOD test</dd><dt>compute</dt><dd>NVIDIA A800; NVIDIA RTX 5000</dd>      </dl>
-
-      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
-      <div class="scroll">
-      <table>
-        <thead><tr><th>benchmark</th><th>metric</th>
-            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
-            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
-        <tbody>
-        <tr><td>Table 2 (IND test)</td><td>Inv-F1</td>
-            <td class="win">82.3</td>
-            <td class="num">Dense 82.4</td><td class="num">-0.1pp</td></tr>
-        <tr><td>Table 2 (IND test)</td><td>TTFT</td>
-            <td class="win">7.200 ms</td>
-            <td class="num">Dense 26.319 ms</td><td class="num">-72.7%</td></tr>
-        <tr><td>Table 3 (IND test)</td><td>Mem.</td>
-            <td class="win">92.43% reduction</td>
-            <td class="num">Dense</td><td class="num">-92.43%</td></tr>
-        <tr><td>Table 3 (IND test)</td><td>Attention latency</td>
-            <td class="win">1.423× speedup</td>
-            <td class="num">Dense</td><td class="num">+42.3%</td></tr>
-        <tr><td>Table 4 (OOD test)</td><td>Inv-F1</td>
-            <td class="win">60.8</td>
-            <td class="num">Dense 66.3</td><td class="num">-8.3pp</td></tr>
-        <tr><td>Table 4 (OOD test)</td><td>Halluc.</td>
-            <td class="win">0.6</td>
-            <td class="num">Dense 0.0</td><td class="num">+0.6pp</td></tr>
-        </tbody>
-      </table>
-      </div>
-
-      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
-      <p class="audit-note">
-        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
-          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
-        <span lang="en">This is not a quality score. It answers one question: does the
-          paper's own evidence carry its own claims. Every judgement cites the paragraph,
-          table or figure id it was read from.</span>
-      </p>
-      <div class="profile">
-        <span class="pill grade-A">evidence A</span>
-        <span class="pill risk-medium">eval risk medium</span>
-        <span class="pill risk-medium">method risk medium</span>
-        <span class="pill">empirical method</span>
-        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.86</span>
-      </div>
-
-      <ul class="claims">
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">资源级注意力在去除跨资源交互并重置资源内位置后，能在表 2 的消融中把 Inv-F1 保持在与 Dense 几乎相同的水平，同时将 TTFT 从 26.319 ms 降到 7.200 ms。</span><span lang="en">After removing cross-resource interaction and resetting within-resource positions, resource-wise attention keeps Inv-F1 essentially at Dense level in Table 2 while reducing TTFT from 26.319 ms to 7.200 ms.</span>
-          <div class="why"><span lang="zh">表 2 直接给出 Dense、Block 和 Ω_full 的效果与 TTFT 数值；这些证据足以支持“几乎不损失效果并显著加速”的陈述。它没有单独证明对所有资源组合都完全不变，那部分仍主要是方法设计上的表述。</span><span lang="en">Table 2 directly reports the effectiveness and TTFT for Dense, Block, and Ω_full; this is enough to support the claim that performance is nearly preserved while prefill latency drops sharply. It does not separately prove universal invariance across all resource combinations, which remains mainly a design statement.</span></div>
-<div class="ev"><code>S3.SS0.SSS0.Px2.p2</code><code>S3.SS0.SSS0.Px2.p3</code><code>S6.T2</code><code>S6.T2.2</code></div>        </li>
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">在测试的 IND/OOD 设置下，贡献驱动的结构剪枝和字段感知语义剪枝在保持接近 Dense 的效果的同时，优于按注意力质量或通用摘要策略构造的对照，并使完整 ReCache 将 KV 张量内存降低 92.43%、注意力速度提升 1.423×。</span><span lang="en">Under the tested IND/OOD settings, contribution-guided structural pruning and field-aware semantic pruning keep performance close to Dense, outperform attention-mass or generic summarization baselines, and the full ReCache system cuts KV-tensor memory by 92.43% while speeding up attention by 1.423×.</span>
-          <div class="why"><span lang="zh">表 3 和表 4 直接报告了与 SPEED、SA、Gist、Beacon、SMP 的对照结果，以及 ReCache 的内存和注意力加速数字；这些都在提供文本中可核实。该证据只覆盖所测试的模型、预算和数据切分，而不是更一般的场景。</span><span lang="en">Tables 3 and 4 directly report the comparisons against SPEED, SA, Gist, Beacon, and SMP, as well as ReCache&#39;s memory and attention-speed numbers; all of this is verifiable in the provided text. The evidence only covers the tested models, budgets, and data splits, not more general settings.</span></div>
-<div class="ev"><code>S5.T1.2.1</code><code>S6.T3.2</code><code>S6.T4.2</code><code>S6.SS0.SSS0.Px2.p2</code><code>S6.SS0.SSS0.Px2.p3</code><code>S6.SS0.SSS0.Px2.p4</code></div>        </li>
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">作者将七个公开工具/技能数据集合并为一个统一基准，并通过可解析且 grounded 的轨迹过滤、多样性优先采样，以及训练内、资源不可见 OOD 切分来组织评测。</span><span lang="en">The authors merge seven public tool/skill datasets into a unified benchmark and organize evaluation with parseable and grounded trace filtering, diversity-first sampling, and both in-distribution and resource-disjoint OOD splits.</span>
-          <div class="why"><span lang="zh">这些段落直接说明了数据来源、过滤规则、采样策略和测试切分方式，因此可以核实基准的构建方式。它们说明了基准如何被构造，但不单独证明其在更广泛任务上的外部有效性。</span><span lang="en">These passages directly state the data sources, filtering rules, sampling strategy, and test splits, so the benchmark construction can be verified. They show how the benchmark is built, but they do not by themselves establish external validity beyond the covered task family.</span></div>
-<div class="ev"><code>S1.p5</code><code>S4.SS1.p1</code><code>S4.SS1.p2</code><code>S4.SS1.p3</code></div>        </li>
-      </ul>
-
-      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
-      <ul>
-        <li><span class="tag">baseline</span>
-          <span lang="zh">如果对 SPEED、SA、Gist、Beacon 或 SMP 采用不同的资源适配或调参方式，结构/语义剪枝相对基线的优势可能发生变化。</span><span lang="en">If SPEED, SA, Gist, Beacon, or SMP were adapted or tuned differently for the resource setting, the apparent advantage of the structural/semantic pruning methods could change.</span>
-<span class="ev"><code>S6.SS0.SSS0.Px2.p2</code><code>S6.SS0.SSS0.Px2.p3</code><code>S6.T3.2</code><code>S6.T4.2</code></span></li>
-        <li><span class="tag">generalisation</span>
-          <span lang="zh">结果主要在 Qwen3-4B 上完成，OOD 也只是同一七数据集家族中的资源不可见切分；换成其他架构或更动态的资源环境，结论未必保持。</span><span lang="en">The results are mainly obtained on Qwen3-4B, and the OOD split is only a resource-disjoint split within the same seven-dataset family; the conclusion may not hold for other architectures or more dynamic resource environments.</span>
-<span class="ev"><code>S4.SS1.p3</code><code>S4.SS3.p1</code><code>Sx1.p1</code></span></li>
-        <li><span class="tag">scale</span>
-          <span lang="zh">结构预算是依据特定模型上的 leave-one-in 分数选出来的，而且不同模型尺度对应不同的 head-group 预算；如果预算或模型规模改变，效率—效果折中可能移动。</span><span lang="en">The structural budgets are selected from leave-one-in scores on specific models, and different model scales require different head-group budgets; if the budget or model scale changes, the efficiency-effectiveness trade-off may shift.</span>
-<span class="ev"><code>S5.SS0.SSS0.Px1.p1</code><code>S5.SS0.SSS0.Px2.p1</code><code>S5.SS0.SSS0.Px3.p1</code><code>Sx1.p1</code></span></li>
-      </ul>
-
-      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
-      <ul class="unknowns">
-        <li><span lang="zh">提供文本未包含附录 A/B/C 的正文内容，因此其中的详细实验流程、附加表格和消融细节无法逐项检查。</span><span lang="en">The provided text does not include the contents of Appendices A/B/C, so the detailed experimental procedures, extra tables, and ablation details there cannot be checked item by item.</span></li>
-        <li><span lang="zh">提供文本未给出完整的超参数表、随机种子数量和所有基线的逐项调参记录，因此统计稳定性和精确复现性无法仅凭该摘录确认。</span><span lang="en">The provided text does not include the full hyperparameter table, the number of random seeds, or a complete tuning record for every baseline, so statistical stability and exact reproducibility cannot be confirmed from the excerpt alone.</span></li>
-      </ul>
-
-      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
-      <ul>
-        <li class="author"><span lang="zh">评估主要集中在 Qwen3 家族，且完整实验以 Qwen3-4B 为主；更大模型和其他架构尚未验证。</span><span
-          lang="en">Evaluation is concentrated on the Qwen3 family, with full experiments mainly on Qwen3-4B; larger models and other architectures were not tested.</span><span class="tag">author</span></li>
-        <li class="author"><span lang="zh">方法修改 attention mask 和 positional layout，因此目前只在可训练 setting 上验证；冻结模型适配未做。</span><span
-          lang="en">The method changes the attention mask and positional layout, so it was only validated in a trainable setting; adaptation to frozen models was not evaluated.</span><span class="tag">author</span></li>
-        <li class="reader"><span lang="zh">benchmark 经过去除 hallucinated traces 和 diversity-first 采样，可能低估真实生产 API 的脏数据和强动态性。</span><span
-          lang="en">The benchmark filters hallucinated traces and uses diversity-first sampling, which may understate the messiness and high dynamics of production APIs.</span><span class="tag">reader</span></li>
-      </ul>
-
-      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
-      <blockquote class="relevance"><span lang="zh">直接对 agent 的工具/schema 重复编码下刀；对函数调用缓存很相关，但不碰时间序列。</span><span
-        lang="en">Directly relevant to tool-calling agents: it attacks repeated schema encoding and KV-cache bloat, though it says little about planning or time series.</span></blockquote>
-
-      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
-      <dl class="kv">
-          <dt lang="zh">入选理由</dt><dd lang="zh">工具型LLM代理的KV缓存复用</dd>
-          <dt lang="en">why selected</dt><dd lang="en">KV cache reuse for tool-augmented agents</dd>
-      </dl>
-    </div>
-  </details>
-</article>
-<article class="card">
-  <div class="chips">
 <span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip ">
       <span lang="zh">仅摘要</span><span
         lang="en">abstract only</span></span>
-<span class="chip">notable</span>  </div>
+<span class="chip code"><a href="https://github.com/qzzqzzb/Self-Harness">code</a></span><span class="chip">notable</span>  </div>
 
-  <h2><a href="https://arxiv.org/abs/2608.19779">An Irreducible Quantum Advantage in Aligning World Models with Reality</a></h2>
-<p class="lead" lang="zh">经典世界模型加内存也无法对齐策略，单个 $qutrit$ 却能精确复现</p><p class="lead" lang="en">A finite classical world model can fail forever, while a single qutrit matches the real world&#39;s optimal policies exactly.</p>
+  <h2><a href="https://arxiv.org/abs/2606.09498">Self-Harness: Harnesses That Improve Themselves</a></h2>
+<p class="lead" lang="zh">Self-Harness 让代理先找失效点，再改自身 harness，九组设置全部提升，最高相对+132%。</p><p class="lead" lang="en">Self-Harness lets an agent mine its failures and edit its own harness, improving all nine model-benchmark pairs by up to 132%.</p>
   <dl class="meta">
     <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
-    <dd>Josep Lumbreras, Hailan Ma, Jayne Thompson, Mile Gu</dd>
+    <dd>Hangfan Zhang, Shao Zhang, Kangcong Li, Chen Zhang<span lang="zh"> 等 8 人</span><span lang="en"> +4 more</span></dd>
     <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
-    <dd>quant-ph · cs.AI · cs.LG<span class="sep">|</span>2026-08-20<span class="sep">|</span>2608.19779</dd>
-<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>world-models · quantum-advantage · agent-alignment · memory · policy-alignment</dd>  </dl>
-
-  <div class="rate" data-arxiv="2608.19779" data-date="2026-08-21"
-       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;high&#34;, &#34;evaluation_risk&#34;: &#34;high&#34;, &#34;quality_confidence&#34;: 0.93, &#34;paper_type&#34;: &#34;theory&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.441}">
-    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
-    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
-    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
-    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
-    <span class="rate-state"></span>
-  </div>
-
-  <details>
-    <summary><span lang="zh">展开</span><span
-      lang="en">expand</span></summary>
-    <div class="body">
-      <div lang="zh"><p>世界模型要先在虚拟环境里学会真实世界的奖励和偏好，但当远期事件会影响当前回报时，单纯增加经典记忆并不一定够。本文要打破的就是这种直觉：即使真实世界本身是经典的，有限经典模型也可能永远对不齐最优策略。</p><p>关键动作是构造一类真实世界，并证明任意有限经典模型在同一条可能轨迹上都会失败：要么分不清动作，而真实世界其实能区分；要么反复把次优动作的期望回报算成最高。相对地，这类真实世界都能被一个单个 $qutrit$ 的量子世界模型精确表示，因而奖励估计和偏好动作始终与真实世界一致。</p><p>摘要给出的结果是定性的，但结论很强：经典侧的误差有非零平均下界，且失败不是靠加大有限记忆就能消掉；量子侧则能做到逐步精确对齐。作者声称这是“不可约”的量子优势，优势点不在更大容量，而在表示能力本身。</p><p>这对 agent 训练里的 world model 评测很直接：如果目标是让虚拟世界保住真实世界的最优策略，仅靠经典记忆扩展可能存在结构性盲区。限制也很清楚：只有摘要，没法核对构造细节、量子模型的实现代价，或这种分离在多大范围内成立。</p></div>
-      <div lang="en"><p>World models are supposed to let agents learn and test policies in simulation before deployment, but long-range dependencies make “just add more memory” an unreliable fix. The paper targets that gap: even when the true world is classical, a finite classical model may still fail to align with it.</p><p>The key move is a constructed family of true worlds where every finite classical model breaks on the same possible trajectory. It either cannot distinguish actions that the true world does distinguish, or it keeps assigning the top expected reward to suboptimal actions. For the same worlds, the authors exhibit a quantum world model using a single qutrit that reproduces the process exactly, so reward estimates and preferred actions always match.</p><p>The abstract reports a qualitative separation rather than benchmark numbers. The classical side has a nonvanishing average reward-estimation error, and that error does not disappear by increasing any finite memory bound. The quantum side preserves exact alignment of optimal policies by construction.</p><p>For agent work, the implication is narrow but sharp: if the goal is policy alignment through world models, classical memory growth can hit a structural wall. The caveat is equally sharp: with abstract-only evidence, we cannot inspect the construction, the operational cost of the quantum model, or how broad the separation really is.</p></div>
-
-
-      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
-      <ul lang="zh"><li>构造一类真实世界，使任意有限经典世界模型都无法与最优策略对齐。</li><li>证明失败方式是统一的：要么丢失动作可区分性，要么高估次优动作。</li><li>给出单个 $qutrit$ 的量子世界模型，能逐步精确复现这些真实世界。</li></ul>
-      <ul lang="en"><li>Construct a family of true worlds for which any finite classical world model fails to align optimal policies.</li><li>Show the failure mode is uniform: either action distinguishability is lost or suboptimal actions keep getting the highest expected reward.</li><li>Give a single-qutrit quantum world model that exactly reproduces those true worlds step by step.</li></ul>
-
-      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
-      <dl class="kv">
-        <dt>core idea</dt>
-        <dd lang="zh">构造“真实世界”与世界模型的分离例子：在有长程记忆需求的轨迹上，任何有限经典模型都无法同时保持动作区分和奖励排序。证明还给出一个量子表示，使用单个 $qutrit$ 就能把同一过程精确编码，因此其期望奖励与偏好动作始终与真实世界一致。</dd>
-        <dd lang="en">The paper constructs a separation example between true worlds and world models: along trajectories with long-range memory requirements, no finite classical model can preserve both action distinguishability and reward ordering. It then gives a quantum representation, using a single qutrit, that encodes the same process exactly, so expected rewards and preferred actions always coincide with the true world.</dd>
-<dt>architecture</dt><dd>finite classical model vs single qutrit quantum world model</dd>      </dl>
-
-
-      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
-      <p class="audit-note">
-        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
-          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
-        <span lang="en">This is not a quality score. It answers one question: does the
-          paper's own evidence carry its own claims. Every judgement cites the paragraph,
-          table or figure id it was read from.</span>
-      </p>
-      <div class="profile">
-        <span class="pill grade-A">evidence A</span>
-        <span class="pill risk-high">eval risk high</span>
-        <span class="pill risk-high">method risk high</span>
-        <span class="pill">theory</span>
-        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.93</span>
-      </div>
-
-      <ul class="claims">
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">对所构造的那一族真实世界，任意有限经典世界模型都存在一条可达轨迹，使其动作值和价值的长期平均误差至少为某个固定正数。</span><span lang="en">For the constructed family of true worlds, every finite classical world model has a reachable trajectory along which its action-value and value estimates retain a positive asymptotic average error.</span>
-          <div class="why"><span lang="zh">定理 1 直接断言：存在真实世界与固定的 \(\varepsilon&gt;0\)，使得每个有限经典世界模型都是 \(\varepsilon\)-deviant。后文又明确解释这意味着动作值与价值的渐近平均误差有一个与经典记忆维度无关的正下界。</span><span lang="en">Result 1 directly states that there exist true worlds and a fixed \(\varepsilon&gt;0\) such that every finite classical world model is \(\varepsilon\)-deviant. The later discussion spells out that this means a positive lower bound on the asymptotic average action-value and value errors, independent of classical memory dimension.</span></div>
-<div class="ev"><code>Thmresult1</code><code>Thmresult1.p1</code><code>S2.p2</code><code>S4.SS2.p3</code></div>        </li>
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">对同一构造，任意有限经典模型要么在该轨迹上逐渐失去决策分辨率，要么以至少一半的频率建议次优动作并产生持续的决策损失。</span><span lang="en">For the same construction, every finite classical model either loses decision resolution along the trajectory or recommends suboptimal actions at least half the time and incurs persistent decision loss.</span>
-          <div class="why"><span lang="zh">定理 2 直接给出“类经典 treacherous”的存在性，并把失败模式限定为两种：决策分辨率损失，或平均决策损失并且渐近地至少一半时间推荐次优动作。后文再次把这一点解释为沿 \(\mathscr{F}_{\mathrm{tick}}\) 的持续次优决策或分辨率塌缩。</span><span lang="en">Result 2 directly establishes the existence of classically treacherous true worlds and restricts the failure modes to two cases: loss of decision resolution, or mean decision loss with suboptimal recommendations asymptotically at least half the time. The later discussion restates this as persistent suboptimal decisions or collapsing resolution along \(\mathscr{F}_{\mathrm{tick}}\).</span></div>
-<div class="ev"><code>Thmresult2</code><code>Thmtheorem4.p1</code><code>S2.I1.ix1.p1</code><code>S2.I1.ix2.p1</code><code>S4.SS2.p4</code></div>        </li>
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">同一族真实世界存在一个单个 qutrit 的量子世界模型，它在每个可达历史上都能精确复现条件输出，因此值、动作值和最优动作都与真实世界一致。</span><span lang="en">The same family of true worlds admits a single-qutrit quantum world model that exactly reproduces the conditional outputs at every reachable history, so the values, action-values, and optimal actions all match the true world.</span>
-          <div class="why"><span lang="zh">定理 3 和定理 4 直接声明：同一族真实世界存在单 qutrit 的精确量子世界模型，且它既保留模型基决策的正确性，也把动作值与最优值的误差消去。附录路线图进一步确认这些结论由精确实现与经典失效界共同给出。</span><span lang="en">Results 3 and 4 directly state that the same family of true worlds has an exact single-qutrit quantum world model, and that it preserves decision correctness while eliminating the action-value and optimal-value errors. The roadmap further confirms that these conclusions come from combining the exact realization with the classical lower bounds.</span></div>
-<div class="ev"><code>Thmresult3</code><code>Thmresult4</code><code>S4.SS2.p5</code><code>S4.SS2.p6</code><code>A0.I1.i3.p1</code><code>A0.I1.i4.p1</code></div>        </li>
-      </ul>
-
-      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
-      <ul>
-        <li><span class="tag">generalisation</span>
-          <span lang="zh">结果依赖一个专门构造的重置型 FRDN clock 和固定的 all-Tick 可达轨迹；换成别的真世界或别的轨迹，是否仍有同样的经典/量子间隔并未在提供文本中验证。</span><span lang="en">The result depends on a specially constructed resettable FRDN clock and a fixed all-Tick reachable trajectory; whether the same classical/quantum gap holds for other true worlds or other trajectories is not verifiable in the provided text.</span>
-<span class="ev"><code>S4.SS1.p1</code><code>S4.SS1.p6</code><code>S4.SS1.p8</code><code>S4.SS1.p9</code><code>S4.SS2.p1</code><code>S4.SS2.p4</code><code>S2.p14</code></span></li>
-        <li><span class="tag">other</span>
-          <span lang="zh">量子优势建立在理想、精确的单 qutrit 实现上；若考虑噪声、有限采样估计或训练约束，实际结论可能改变。</span><span lang="en">The quantum advantage rests on an ideal, exact single-qutrit realization; adding noise, finite-shot estimation, or training constraints could change the practical conclusion.</span>
-<span class="ev"><code>S3.p2</code><code>S4.SS2.p5</code><code>S4.SS2.p6</code><code>Sx1.SS3.SSS0.Px1.p1</code></span></li>
-        <li><span class="tag">other</span>
-          <span lang="zh">比较使用的是有限经典记忆与单个 qutrit，以及渐近平均误差这类指标；若改用有限时域或其他资源度量，结论的呈现方式可能不同。</span><span lang="en">The comparison uses finite classical memory versus a single qutrit and asymptotic average-error metrics; using finite-horizon or other resource measures could change how the conclusion appears.</span>
-<span class="ev"><code>S1.p8</code><code>S1.EGx3</code><code>Thmresult1</code><code>S2.p12</code><code>S2.p13</code><code>S4.SS2.p3</code><code>S4.F4</code></span></li>
-      </ul>
-
-      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
-      <ul class="unknowns">
-        <li><span lang="zh">提供的摘录未包含附录 B–D 的完整内容，因此无法逐步复核定理 1–4 的全部证明、参数选择和数值实现细节。</span><span lang="en">The provided excerpt does not include the full contents of Appendices B–D, so the full proofs of Results 1–4, parameter choices, and numerical implementation details cannot be checked step by step.</span></li>
-      </ul>
-
-      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
-      <ul>
-        <li class="reader"><span lang="zh">仅有摘要，无法核对构造细节、证明步骤和量子模型的实现代价。</span><span
-          lang="en">Only the abstract is available, so the construction, proof steps, and implementation cost of the quantum model cannot be checked.</span><span class="tag">reader</span></li>
-      </ul>
-
-      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
-      <blockquote class="relevance"><span lang="zh">和 agent/world model 相关，但更偏量子表示分离，和常规时间序列不直接相关。</span><span
-        lang="en">Relevant to agent world models, but the core result is a quantum separation, not a standard time-series method.</span></blockquote>
-
-      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
-      <dl class="kv">
-          <dt lang="zh">入选理由</dt><dd lang="zh">世界模型对齐与长期记忆机制</dd>
-          <dt lang="en">why selected</dt><dd lang="en">World model alignment and long-term memory</dd>
-          <dt lang="zh">可信度</dt>
-          <dd lang="zh">low —— 仅有摘要</dd>
-          <dt lang="en">confidence</dt>
-          <dd lang="en">low — abstract only</dd>
-      </dl>
-    </div>
-  </details>
-</article>
-<article class="card">
-  <div class="chips">
-<span class="chip score" title="三级筛选相关性打分">8/10</span>    <span class="chip ">
-      <span lang="zh">仅摘要</span><span
-        lang="en">abstract only</span></span>
-<span class="chip">notable</span>  </div>
-
-  <h2><a href="https://arxiv.org/abs/2409.06282">ReAugment: Model Zoo-Guided RL for Few-Shot Time Series Augmentation and Forecasting</a></h2>
-<p class="lead" lang="zh">用模型集分歧挑出易过拟合样本，再用 RL 定向增广</p><p class="lead" lang="en">A model-zoo disagreement signal picks overfit-prone series, then RL augments them toward harder regions.</p>
-  <dl class="meta">
-    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
-    <dd>Haochen Yuan, Yutong Wang, Yihong Chen, Yunbo Wang<span lang="zh"> 等 5 人</span><span lang="en"> +1 more</span></dd>
-    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
-    <dd>cs.LG<span class="sep">|</span>2026-08-20<span class="sep">|</span>2409.06282</dd>
-<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>time-series-forecasting · few-shot-learning · data-augmentation · reinforcement-learning · model-zoo</dd>  </dl>
-
-  <div class="rate" data-arxiv="2409.06282" data-date="2026-08-21"
-       data-signals="{&#34;relevance&#34;: 8, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;shallow&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;B&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.9, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.775}">
-    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
-    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
-    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
-    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
-    <span class="rate-state"></span>
-  </div>
-
-  <details>
-    <summary><span lang="zh">展开</span><span
-      lang="en">expand</span></summary>
-    <div class="body">
-      <div lang="zh"><p>少样本时间序列预测的瓶颈不是模型不够大，而是高质量训练数据太少，常规增广又很难知道该改哪一段、改成什么样。于是很多方法只能均匀扰动，结果可能把已有偏差放大。</p><p>ReAugment 的关键动作是先维护一个 forecasting model zoo，再用不同模型的预测分歧估计样本的过拟合风险，把高风险样本当作锚点。随后用 RL 学习对这些锚点做自适应变换，让生成的数据既增加训练集多样性，又把样本推向模型更容易过拟合的区域。</p><p>摘要只说它在多种 base models 上验证有效，覆盖标准 time series forecasting 和 few-shot learning 两类任务，但没有给出具体数据集、指标或提升幅度。能确认的是它不是单纯做噪声注入，而是把“选谁增广”和“怎么增广”都交给了一个基于预测分歧和 RL 的闭环。</p><p>这对少样本预测和时间序列增广都直接相关，但目前证据只来自摘要，无法判断它是否真能在更难的多变量、缺失采样或长预测窗上稳住收益。它的价值更像一个可检验的策略框架，而不是已经被充分量化的结论。</p></div>
-      <div lang="en"><p>Few-shot time series forecasting fails first on data scarcity: there are too few reliable examples, and naive augmentation does not know which subsequences are brittle or how to rewrite them. Uniform perturbation can easily widen the wrong parts of the training distribution.</p><p>ReAugment’s core move is to keep a forecasting model zoo, measure prediction diversity across the zoo, and use that disagreement as a proxy for overfitting risk. The high-risk samples become anchor points. RL then learns to transform those anchors into new series that both diversify the training set and target regions where forecasting models are likely to overfit.</p><p>The abstract says the method is validated across a wide range of base models, on both standard forecasting and few-shot learning tasks. But it gives no datasets, metrics, or absolute gains, so the empirical claim is directionally positive rather than quantified here.</p><p>The idea is relevant to few-shot forecasting and augmentation: it turns augmentation into a selective, model-aware decision instead of a blanket perturbation scheme. The limit is straightforward: with only the abstract, we cannot tell whether the disagreement proxy is robust, whether RL is better than simpler heuristics, or how it behaves on harder multivariate or missing-data settings.</p></div>
-
-
-      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
-      <ul lang="zh"><li>用 forecasting model zoo 的预测分歧识别高过拟合风险样本。</li><li>把增广过程建模为 RL，针对锚点样本自适应生成新数据。</li><li>在多种 base models 上验证了标准预测和 few-shot 任务收益。</li></ul>
-      <ul lang="en"><li>Use disagreement in a forecasting model zoo to identify samples with high overfitting risk.</li><li>Cast augmentation as RL that adaptively generates new data from anchor samples.</li><li>Validate the method across multiple base models on standard forecasting and few-shot tasks.</li></ul>
-
-      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
-      <dl class="kv">
-        <dt>core idea</dt>
-        <dd lang="zh">维护一个 forecasting model zoo，并用各模型对同一样本的预测分歧来估计其过拟合概率。选择高风险样本作为 augmentation 的锚点后，用 RL 学习一个变换策略，把原样本映射成更有多样性、同时更能暴露模型脆弱区域的新样本。</dd>
-        <dd lang="en">Maintain a forecasting model zoo and use disagreement among its predictions as a proxy for a sample’s overfitting risk. High-risk samples become augmentation anchors, and RL learns a transformation policy that turns them into new series with more diversity and stronger coverage of brittle regions.</dd>
-<dt>architecture</dt><dd>forecasting model zoo + RL-based augmentation policy</dd>      </dl>
-
-
-      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
-      <p class="audit-note">
-        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
-          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
-        <span lang="en">This is not a quality score. It answers one question: does the
-          paper's own evidence carry its own claims. Every judgement cites the paragraph,
-          table or figure id it was read from.</span>
-      </p>
-      <div class="profile">
-        <span class="pill grade-B">evidence B</span>
-        <span class="pill risk-medium">eval risk medium</span>
-        <span class="pill risk-medium">method risk medium</span>
-        <span class="pill">empirical method</span>
-        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.90</span>
-      </div>
-
-      <ul class="claims">
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">ReAugment在论文报告的少样本与标准预测设置中，都能在多个基准数据集和多个预测骨干上降低误差。</span><span lang="en">ReAugment reduces error in both the few-shot and standard forecasting settings reported in the paper, across multiple benchmark datasets and multiple backbones.</span>
-          <div class="why"><span lang="zh">这些表格和段落直接给出了少样本与标准设置下的 MAE/MSE，对比了原始模型、若干增强基线以及不同骨干（iTransformer、PatchTST、DLinear），并显示 ReAugment 在所报告的这些设置中持续更低。它们支持“在已评估的基准与协议上有效”这一主张，但不覆盖文本之外的全部任务分布。</span><span lang="en">These tables and passages directly report MAE/MSE under both few-shot and standard setups, comparing the original model, several augmentation baselines, and multiple backbones (iTransformer, PatchTST, DLinear), and they show ReAugment is consistently lower in the reported settings. They support effectiveness on the evaluated benchmarks and protocols, but not beyond the text&#39;s coverage.</span></div>
-<div class="ev"><code>S1.I1.i4.p1</code><code>S5.T1</code><code>S5.T2</code><code>S5.T10</code><code>S5.SS5.p1</code></div>        </li>
-        <li class="support-partial">
-          <span class="sup">partial</span>
-          <span lang="zh">基于模型库方差的样本选择能定位更易受训练分布暴露影响的锚点，并在实验中对应更大的见/未见模型误差差异。</span><span lang="en">Model-zoo variance can identify anchor points that are more sensitive to exposure to the training distribution, and the experiments show larger seen-versus-unseen model error gaps on those regions.</span>
-          <div class="why"><span lang="zh">控制实验和 Table 5 直接显示，未见过对应局部区域的模型在这些样本上的误差更大，说明方差信号与暴露敏感性相关。证据支持的是“在所用模型库和数据集上，这一信号能区分更脆弱的区域”，但没有把这一关系证明成跨任务、跨构造都成立的普遍定律。</span><span lang="en">The controlled experiment and Table 5 directly show that models that have not seen the corresponding local region incur larger errors on these samples, indicating that the variance signal tracks exposure sensitivity. The evidence supports that, within the chosen zoo and datasets, this signal separates more fragile regions, but it does not establish a universal law across all tasks or constructions.</span></div>
-<div class="ev"><code>S3.SS1.SSS0.Px1.p1</code><code>S3.SS1.SSS0.Px2.p1</code><code>S3.SS2.p1</code><code>S3.SS2.p3</code><code>S3.SS2.p4</code><code>S5.T5</code><code>S5.SS4.SSS0.Px2.p1</code><code>S5.SS4.SSS0.Px3.p1</code></div>        </li>
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">用 VMAE 先验作为策略并结合 GRPO 的 RL 微调，优于不做 RL、直接优化全 VMAE 或直接优化解码器等备选设计，并且训练开销可控。</span><span lang="en">Using the VMAE prior as the policy and fine-tuning it with GRPO outperforms alternatives such as no RL, directly optimizing the full VMAE, or directly optimizing the decoder, while keeping training overhead manageable.</span>
-          <div class="why"><span lang="zh">Figure 4、Table 7 和 Table 8 直接比较了去掉 RL、REINFORCE/直接反传、decoder/全 VMAE 作为策略以及 prior 作为策略等设计，并报告 prior+GRPO 方案的更稳定表现和较低的训练成本。它们支持的是相对于这些对照设计的优势；“避免梯度消失”这一机理性说法在文本中有解释，但未被单独做成独立实验检验。</span><span lang="en">Figure 4, Table 7, and Table 8 directly compare removing RL, REINFORCE/direct backpropagation, using the decoder or full VMAE as the policy, and using the prior as the policy, and they report better stability and lower training cost for the prior+GRPO design. They support superiority over these compared designs; the gradient-vanishing explanation is stated mechanistically, but it is not separately tested as an independent claim.</span></div>
-<div class="ev"><code>S4.SS3.p1</code><code>S4.I3.i1.p1</code><code>S4.I3.i2.p1</code><code>S4.I3.i3.p1</code><code>S5.F4</code><code>S5.T7</code><code>S5.T8</code><code>S5.SS4.SSS0.Px5.p1</code><code>S5.SS4.SSS0.Px6.p1</code></div>        </li>
-      </ul>
-
-      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
-      <ul>
-        <li><span class="tag">baseline</span>
-          <span lang="zh">主要性能对比依赖所选基线与骨干；例如少样本主表以 iTransformer 为骨干，而与基础模型的对比又对部分数据集做了省略以保证公平。</span><span lang="en">The main performance comparisons depend on the chosen baselines and backbone; for example, the few-shot main table uses iTransformer, and the comparison with foundation models omits some datasets for fairness.</span>
-<span class="ev"><code>S5.T1</code><code>S5.T2</code><code>S5.T4</code><code>S5.SS3.p1</code></span></li>
-        <li><span class="tag">generalisation</span>
-          <span lang="zh">主实验主要在固定的 96/96 预测协议和 10%/20% 少样本切分下展开，因此换到其他时间跨度或数据稀缺程度时，结论只得到部分验证。</span><span lang="en">The main experiments are run under a fixed 96/96 forecasting protocol and 10%/20% few-shot splits, so transfer to other horizons or scarcity regimes is only partially verified.</span>
-<span class="ev"><code>S5.SS1.SSS0.Px1.p1</code><code>S5.I1.i1.p1</code><code>S5.I1.i2.p1</code><code>S5.SS4.SSS0.Px9.p1</code></span></li>
-        <li><span class="tag">construction</span>
-          <span lang="zh">锚点选择依赖时间上连续的 K 折模型库以及默认 K=4；改变切分方式或模型库规模，可能会改变被选中的高方差样本和报告的增益。</span><span lang="en">Anchor selection depends on a temporally contiguous K-fold model zoo and the default K=4; changing the split scheme or zoo size could alter the selected high-variance samples and the reported gains.</span>
-<span class="ev"><code>S3.SS1.SSS0.Px1.p1</code><code>S5.SS4.SSS0.Px4.p1</code><code>S5.F5.sf2</code><code>S5.T5</code></span></li>
-      </ul>
-
-
-      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
-      <ul>
-        <li class="reader"><span lang="zh">摘要没有给出具体数据集、指标和提升幅度。</span><span
-          lang="en">The abstract gives no datasets, metrics, or gain sizes.</span><span class="tag">reader</span></li>
-        <li class="reader"><span lang="zh">仅有摘要，无法判断 RL 是否优于更简单的启发式增广。</span><span
-          lang="en">With abstract only, it is unclear whether RL beats simpler augmentation heuristics.</span><span class="tag">reader</span></li>
-        <li class="reader"><span lang="zh">没有看到对多变量、缺失采样或长预测窗的专门测试。</span><span
-          lang="en">No dedicated test on multivariate, missing-sampling, or long-horizon settings is shown.</span><span class="tag">reader</span></li>
-      </ul>
-
-      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
-      <blockquote class="relevance"><span lang="zh">直接相关：少样本时间序列预测和数据增广。</span><span
-        lang="en">Directly relevant to few-shot time-series forecasting and data augmentation.</span></blockquote>
-
-      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
-      <dl class="kv">
-          <dt lang="zh">入选理由</dt><dd lang="zh">少样本预测的数据增强与建模</dd>
-          <dt lang="en">why selected</dt><dd lang="en">Few-shot forecasting data augmentation</dd>
-          <dt lang="zh">可信度</dt>
-          <dd lang="zh">low —— 仅有摘要</dd>
-          <dt lang="en">confidence</dt>
-          <dd lang="en">low — abstract only</dd>
-      </dl>
-    </div>
-  </details>
-</article>
-<article class="card">
-  <div class="chips">
-<span class="chip score" title="三级筛选相关性打分">8/10</span>    <span class="chip ">
-      <span lang="zh">仅摘要</span><span
-        lang="en">abstract only</span></span>
-<span class="chip">notable</span>  </div>
-
-  <h2><a href="https://arxiv.org/abs/2608.19966">Rethinking Patch Based Multivariate Time Series Forecasting with Semantic Structured Partitioning</a></h2>
-<p class="lead" lang="zh">SCPaT 用语义分块+动态图路由改进 MTSF</p><p class="lead" lang="en">SCPaT improves multivariate forecasting by semantic partitioning, a dynamic semantic graph, and importance-aware expert routing.</p>
-  <dl class="meta">
-    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
-    <dd>Jiazhe Wang, Zhiquan Huang, Linjing Xue, Ming Liu<span lang="zh"> 等 6 人</span><span lang="en"> +2 more</span></dd>
-    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
-    <dd>cs.AI<span class="sep">|</span>2026-08-20<span class="sep">|</span>2608.19966</dd>
-<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>time-series-forecasting · multivariate-time-series · patch-based-models · transformer · semantic-partitioning</dd>    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
+    <dd>cs.CL<span class="sep">|</span>2026-08-20<span class="sep">|</span>2606.09498</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agents · harness · self-improvement · benchmark · regression-testing</dd>    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
     <dd class="thread">
-      <span lang="zh">与 2026-08-20 的<a href="../2026-08-20/">《Structured Latent Space Modeling over Mul…》</a>相近
+      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《Living-Harness Is an Interactive-Agent Evolver》</a>相近
         (0.88)</span>
-      <span lang="en">close to <a href="../2026-08-20/">“Structured Latent Space Modeling over Mul…”</a>        from 2026-08-20 (0.88)</span>
-<br>      <span lang="zh">与 2026-08-19 的<a href="../2026-08-19/">《SCENARIODIFF: A Scenario-level Guidance F…》</a>相近
+      <span lang="en">close to <a href="../2026-07-30/">“Living-Harness Is an Interactive-Agent Evolver”</a>        from 2026-07-30 (0.88)</span>
+<br>      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《Scores Are Not Decisions: Cost-Aware Stop…》</a>相近
         (0.85)</span>
-      <span lang="en">close to <a href="../2026-08-19/">“SCENARIODIFF: A Scenario-level Guidance F…”</a>        from 2026-08-19 (0.85)</span>
+      <span lang="en">close to <a href="../2026-07-30/">“Scores Are Not Decisions: Cost-Aware Stop…”</a>        from 2026-07-30 (0.85)</span>
     </dd>
   </dl>
 
-  <div class="rate" data-arxiv="2608.19966" data-date="2026-08-21"
-       data-signals="{&#34;relevance&#34;: 8, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;high&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.86, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.812}">
+  <div class="rate" data-arxiv="2606.09498" data-date="2026-08-21"
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.88, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.896}">
     <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
     <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
     <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
@@ -912,20 +336,20 @@ footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--l
     <summary><span lang="zh">展开</span><span
       lang="en">expand</span></summary>
     <div class="body">
-      <div lang="zh"><p>现有 patch-based 多变量时间序列预测常把序列切成固定块，容易切断有意义的时间边界；多尺度切法又会在不同尺度间重复编码；可扩展切法虽然更灵活，但仍缺少显式的语义组织和异质模式交互建模。</p><p>SCPaT 的核心动作是先做 semantic structured partitioning：用 adaptive semantic unit generation 把输入拆成语义一致的单元，再用 dynamic semantic graph 建立这些单元之间的有向依赖，并把它们组织成更高层的 semantic blocks。随后，importance-aware routing 把不同语义块分派给不同 experts 做定制化建模。</p><p>摘要只报告了在 12 个真实世界数据集上的 extensive experiments，结论是 SCPaT 有效，但没有给出具体指标、提升幅度或消融结果，无法判断优势主要来自分块、图建模还是路由。</p><p>这篇和时间序列预测直接相关，尤其是 patch 化建模、长程依赖和结构化表示学习；但目前只有摘要，证据还不足以评估它是否真优于强基线，或是否只是在更复杂的模块堆叠下获益。</p></div>
-      <div lang="en"><p>Current patch-based multivariate time series forecasters often cut sequences into fixed chunks, which can split meaningful temporal boundaries. Multi-scale partitioning can duplicate representations across scales, while extendable partitioning is more flexible but still lacks an explicit way to organize semantic structure or model interactions between heterogeneous temporal patterns.</p><p>SCPaT’s move is to partition by semantics first. It generates semantically consistent units, builds a dynamic semantic graph to encode directed dependencies and assemble higher-order semantic blocks, then uses importance-aware routing to send different blocks to different experts for specialized modeling.</p><p>The abstract only says the method was tested on 12 real-world datasets and that the experiments were extensive. It gives no metrics, no baseline numbers, and no ablations, so the size of the gain and the contribution of each module remain unclear.</p><p>For a time-series reader, the paper sits squarely in patch-based forecasting and structured representation learning. But with abstract-only evidence, the claim is still more architectural than demonstrated: it suggests a useful way to preserve semantics, yet does not show whether that yields robust gains over stronger patch baselines.</p></div>
+      <div lang="zh"><p>现有 LLM agent 的表现不只取决于 base model，也卡在 harness；但 harness 主要靠人工调，换模型就得重做，扩展性很差。摘要里没有给出统一的失败模式刻画，只强调不同模型的行为差异会让 harness 高度 model-specific。</p><p>Self-Harness 把改 harness 这件事做成三步迭代：先从 execution traces 里做 Weakness Mining，找模型特有的失败模式；再用 Harness Proposal 生成尽量小、但和这些失败绑定的改动；最后靠 Proposal Validation 做 regression testing，只接受不过拟合旧错误的候选编辑。核心不是更强的外部 agent，而是让同一个 agent 在最小初始 harness 上自我修补。</p><p>作者把它放到 Terminal-Bench-2.0、SWE-bench Verified 和 AppWorld 上测，基座模型是 MiniMax M2.5、Qwen3.5-35B-A3B 和 GLM-5。摘要声称九个 model-benchmark 组合里，最终 harness 的 held-in 和 held-out pass rate 都提升了，整体相对增益最高到 $132	ext{%}$。</p><p>这类结果说明，harness 不只是固定脚手架，也可以被当成可学习对象；至少在这三个 benchmark 和这三个模型上，改动确实朝着 artifact handling、runtime control、software-patch verification 和 application-state retrieval 这些瓶颈去了。但摘要只给了整体趋势，没有看到每个组合的绝对值、消融或回归测试细节，所以还不能判断它对更开放环境、更多模型族是否同样稳。</p></div>
+      <div lang="en"><p>LLM agents are bottlenecked not just by the base model, but by the harness that mediates action, feedback, and state handling. In current practice that harness is hand-engineered, so it does not scale when models change behavior or new models arrive.</p><p>Self-Harness turns harness design into a loop the agent runs on itself. It mines failure patterns from execution traces, proposes minimal edits tied to those failures, and then validates each candidate with regression testing before keeping it. The point is not to summon a stronger external agent, but to let the same agent refine its own operating scaffold.</p><p>The abstract says they tested this on Terminal-Bench-2.0, SWE-bench Verified, and AppWorld, using MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. Across all nine model-benchmark combinations, the final harness improved both held-in and held-out pass rates, with overall relative gains reaching $132	ext{%}$. The retained edits were said to target benchmark-specific bottlenecks in artifact handling and runtime control, software-patch verification, and application-state retrieval.</p><p>The main takeaway is that harnesses can be treated as adaptive objects, not fixed wrappers. But this is still abstract-only evidence: there are no absolute scores, no ablations, and no detail on how strong the regression tests were or how many edits survived them. So the claim looks plausible and practically relevant, but its robustness beyond these three benchmarks and three model families remains unshown.</p></div>
 
 
       <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
-      <ul lang="zh"><li>提出 SCPaT，将 patch-based 预测改为先做语义一致单元划分。</li><li>用 dynamic semantic graph 显式建模单元间有向依赖并形成 semantic blocks。</li><li>用 importance-aware routing 将不同语义块分派给不同 experts。</li></ul>
-      <ul lang="en"><li>Introduces SCPaT, turning patch-based forecasting into semantics-first unit partitioning.</li><li>Uses a dynamic semantic graph to model directed dependencies and form semantic blocks.</li><li>Applies importance-aware routing to dispatch different semantic blocks to different experts.</li></ul>
+      <ul lang="zh"><li>提出 Self-Harness：让 LLM-based agent 通过自我迭代改进自己的 harness。</li><li>把 harness 优化拆成 Weakness Mining、Harness Proposal 和 Proposal Validation 三步。</li><li>在 Terminal-Bench-2.0、SWE-bench Verified、AppWorld 的九个组合上都报告了提升，最高相对增益 $132\text{%}$。</li></ul>
+      <ul lang="en"><li>Introduces Self-Harness, where an LLM-based agent improves its own harness.</li><li>Decomposes harness optimization into Weakness Mining, Harness Proposal, and Proposal Validation.</li><li>Reports gains on all nine combinations across Terminal-Bench-2.0, SWE-bench Verified, and AppWorld, with relative improvement up to $132\text{%}$.</li></ul>
 
       <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
       <dl class="kv">
         <dt>core idea</dt>
-        <dd lang="zh">SCPaT 是一个 Transformer-based framework。它先通过 adaptive semantic unit generation 将输入序列切成语义一致的单元，再构建 dynamic semantic graph 来表示单元间的有向关系，并把这些单元聚合为 higher-order semantic blocks。最后，importance-aware routing 根据块的重要性把它们送入不同 experts 进行定制化建模。</dd>
-        <dd lang="en">SCPaT is a Transformer-based framework. It first uses adaptive semantic unit generation to split the input sequence into semantically consistent units, then builds a dynamic semantic graph to represent directed relations among units and aggregates them into higher-order semantic blocks. Finally, importance-aware routing sends blocks to different experts for customized modeling based on their importance.</dd>
-<dt>architecture</dt><dd>Transformer-based framework; adaptive semantic unit generation; dynamic semantic graph; higher-order semantic blocks; importance-aware routing; experts</dd><dt>data</dt><dd>12 real-world datasets</dd>      </dl>
+        <dd lang="zh">把 harness 当成可迭代优化对象。Weakness Mining 从 execution traces 里提炼模型特有失败模式；Harness Proposal 生成与这些失败绑定、但尽量小的 harness 修改；Proposal Validation 通过 regression testing 过滤会破坏旧能力的候选。整个过程不依赖更强外部 agent。</dd>
+        <dd lang="en">Treat the harness as an object that can be optimized iteratively. Weakness Mining extracts model-specific failure patterns from execution traces; Harness Proposal generates minimal edits tied to those failures; Proposal Validation filters candidates with regression testing. The loop does not rely on a stronger external agent.</dd>
+<dt>architecture</dt><dd>minimal initial harness; iterative loop: Weakness Mining -&gt; Harness Proposal -&gt; Proposal Validation</dd><dt>data</dt><dd>Terminal-Bench-2.0; SWE-bench Verified; AppWorld; MiniMax M2.5; Qwen3.5-35B-A3B; GLM-5</dd>      </dl>
 
       <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
       <div class="scroll">
@@ -934,9 +358,12 @@ footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--l
             <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
             <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
         <tbody>
-        <tr><td>12 real-world datasets</td><td>evaluation coverage</td>
-            <td class="win">12 datasets</td>
-            <td class="num"></td><td class="num"></td></tr>
+        <tr><td>Terminal-Bench-2.0 / SWE-bench Verified / AppWorld</td><td>held-in and held-out pass rate</td>
+            <td class="win">improved across all nine model-benchmark combinations</td>
+            <td class="num">minimal initial harness</td><td class="num"></td></tr>
+        <tr><td>All evaluated combinations</td><td>relative gain</td>
+            <td class="win">up to 132%</td>
+            <td class="num">baseline harness</td><td class="num">+132%</td></tr>
         </tbody>
       </table>
       </div>
@@ -952,64 +379,66 @@ footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--l
       <div class="profile">
         <span class="pill grade-A">evidence A</span>
         <span class="pill risk-medium">eval risk medium</span>
-        <span class="pill risk-high">method risk high</span>
+        <span class="pill risk-medium">method risk medium</span>
         <span class="pill">empirical method</span>
-        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.86</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.88</span>
       </div>
 
       <ul class="claims">
         <li class="support-direct">
           <span class="sup">direct</span>
-          <span lang="zh">在提供的12个公开基准上，SCPaT在长短期预测中大多取得最优或次优误差，并总体优于所列的固定、多尺度和可扩展分区基线。</span><span lang="en">Across the 12 benchmarks provided, SCPaT mostly attains the best or second-best errors in both long-term and short-term forecasting, and overall outperforms the listed fixed, multi-scale, and extendable partitioning baselines.</span>
-          <div class="why"><span lang="zh">表2和表3给出逐数据集、逐预测长度的MSE/MAE，正文也明确总结为在长短期预测的大多数设置下表现为最优或次优。它们支持的是这些基准上的经验改进，而不是对所有MTSF场景的普遍保证。</span><span lang="en">Tables 2 and 3 report MSE/MAE by dataset and horizon, and the text explicitly summarizes the method as best or second-best in most long- and short-term settings. This supports empirical gains on the listed benchmarks, not a universal guarantee for all MTSF settings.</span></div>
-<div class="ev"><code>S4.T2.7.1</code><code>S4.T3.7.1</code><code>S4.SS2.SSS1.p1</code><code>S4.SS2.SSS2.p1</code></div>        </li>
+          <span lang="zh">Self-Harness 将固定模型置于“弱点挖掘—harness 提案—回归验证”的迭代循环中，通过执行轨迹产生的证据来生成并筛选有界的 harness 修改。</span><span lang="en">Self-Harness places a fixed model in an iterative loop of weakness mining, harness proposal, and regression validation, using evidence from execution traces to generate and filter bounded harness edits.</span>
+          <div class="why"><span lang="zh">S1.p4、S3.p1、S3.F2 以及 3.2–3.4 节把 Self-Harness 明确定义为一个固定模型在当前 harness 下先挖掘失败模式、再提出有界编辑、最后经 held-in/held-out 回归门控筛选的循环；这些段落正好测试了该机制本身。</span><span lang="en">S1.p4, S3.p1, S3.F2, and Sections 3.2–3.4 explicitly define Self-Harness as a loop in which a fixed model mines failure patterns, proposes bounded edits, and then passes them through held-in/held-out regression gating; these passages test the mechanism itself.</span></div>
+<div class="ev"><code>S1.p4</code><code>S3.p1</code><code>S3.F2</code><code>S3.SS2.p1</code><code>S3.SS3.p1</code><code>S3.SS4.p1</code><code>S3.SS4.p2</code></div>        </li>
         <li class="support-direct">
           <span class="sup">direct</span>
-          <span lang="zh">消融实验表明，语义向量编码器、转移熵图和重要性感知路由三个模块都对性能有贡献，去掉任一模块都会使误差上升。</span><span lang="en">The ablation study shows that the semantic vector encoder, transfer-entropy graph, and importance-aware routing each contribute to performance, and removing any one of them increases error.</span>
-          <div class="why"><span lang="zh">表6直接比较了完整模型与去掉SV Encoder、IAR或TE Graph的变体，三类删除都会在多个数据集和预测长度上带来更高误差。正文的总结与表中的数值一致，因此对模块贡献的支持是直接的。</span><span lang="en">Table 6 directly compares the full model against variants without the SV Encoder, IAR, or TE Graph, and all three removals increase error across multiple datasets and horizons. The narrative summary matches the table values, so the support for module contribution is direct.</span></div>
-<div class="ev"><code>S4.T6.7</code><code>S4.SS5.p1</code></div>        </li>
+          <span lang="zh">在 Terminal-Bench-2.0、SWE-bench Verified 和 AppWorld 的九种模型–基准组合上，最终 harness 的 Pass 都同时提升了 held-in 与 held-out 表现，最高相对增益达到 132%，最高绝对增益达到 40.6 个百分点。</span><span lang="en">Across the nine model–benchmark combinations on Terminal-Bench-2.0, SWE-bench Verified, and AppWorld, the final harness improves both held-in and held-out Pass rates, with up to 132% relative gain and 40.6 percentage points absolute gain.</span>
+          <div class="why"><span lang="zh">Table 1 和 S4.SS2.p1 明确列出三模型×三基准的初始与最终 Pass，并给出最高 132% 相对增益和 40.6 个百分点绝对增益；这直接支持“九种组合都提升”这一陈述，但只限于文中报告的子集与协议。</span><span lang="en">Table 1 and S4.SS2.p1 explicitly list the initial and final Pass rates for the three-model × three-benchmark setup and report the 132% relative gain and 40.6-point absolute gain; this directly supports the claim that all nine combinations improved, but only within the reported subsets and protocol.</span></div>
+<div class="ev"><code>S1.p5</code><code>S4.T1.3</code><code>S4.SS2.p1</code></div>        </li>
         <li class="support-direct">
           <span class="sup">direct</span>
-          <span lang="zh">在随机缺失、高斯噪声和不同回看窗口下，SCPaT在所选数据集上都表现出比基线更慢的性能退化。</span><span lang="en">Under random missingness, Gaussian noise, and different look-back windows, SCPaT shows slower performance degradation than the baselines on the selected datasets.</span>
-          <div class="why"><span lang="zh">表5对应缺失率扰动，图4对应高斯噪声，图5对应回看窗口变化，正文明确写出SCPaT在这些设置下退化更慢且更稳定。支持范围限于文本中给出的数据集和扰动设置。</span><span lang="en">Table 5 covers missingness, Figure 4 covers Gaussian noise, and Figure 5 covers look-back-window changes; the text explicitly states that SCPaT degrades more slowly and remains more stable under these settings. The support is limited to the datasets and perturbations shown in the provided text.</span></div>
-<div class="ev"><code>S4.T5.5</code><code>S4.F4</code><code>S4.F5</code><code>S4.SS3.SSS3.p1</code><code>S4.SS3.SSS3.p2</code><code>S4.SS3.SSS4.p1</code></div>        </li>
+          <span lang="zh">质性分析显示，保留下来的编辑是面向具体失败机制的定向 harness 变更，分别针对 artifact 处理、运行时控制、补丁验证和状态检索等问题。</span><span lang="en">Qualitative analyses show that the retained edits are targeted harness changes aimed at specific failure mechanisms, including artifact handling, runtime control, patch validation, and state retrieval.</span>
+          <div class="why"><span lang="zh">S1.p6 与 4.3 节的代表性轨迹把保留编辑对应到具体失败机制，例如 artifact 生成、循环控制、补丁验证和状态恢复；这些分析直接说明修改是针对性 harness 变更，并且每个例子都说明了它所解决的机制。</span><span lang="en">S1.p6 and the representative traces in Section 4.3 map the retained edits to concrete failure mechanisms such as artifact generation, loop control, patch validation, and state recovery; these analyses directly show that the modifications are targeted harness changes, with each example identifying the mechanism it addresses.</span></div>
+<div class="ev"><code>S1.p6</code><code>S4.SS3.SSS0.Px1.p1</code><code>S4.SS3.SSS0.Px1.p2</code><code>S4.SS3.SSS0.Px1.p3</code><code>S4.SS3.SSS0.Px1.p4</code><code>S4.SS3.SSS0.Px2.p2</code><code>S4.SS3.SSS0.Px2.p3</code><code>S4.SS3.SSS0.Px2.p4</code><code>S4.SS3.SSS0.Px2.p5</code></div>        </li>
       </ul>
 
       <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
       <ul>
-        <li><span class="tag">baseline</span>
-          <span lang="zh">基线比较依赖作者重训和超参数搜索的统一协议；若不同模型的调参预算或实现细节不完全可比，性能排序可能改变。</span><span lang="en">The baseline comparison depends on the authors&#39; unified retraining and hyperparameter-search protocol; if tuning budgets or implementation details are not fully comparable across models, the ranking could change.</span>
-<span class="ev"><code>S4.SS1.SSS2.p1</code><code>S4.SS1.SSS3.p1</code></span></li>
-        <li><span class="tag">construction</span>
-          <span lang="zh">语义单元长度由方差阈值δ决定，图再经α稀疏化和Top-P路由裁剪，说明结论可能对这些构造性超参数较敏感。</span><span lang="en">Semantic-unit length is determined by the variance threshold δ, and the graph is further shaped by α sparsification and Top-P routing, so the conclusion may be sensitive to these construction hyperparameters.</span>
-<span class="ev"><code>S3.SS2.SSS3.p3</code><code>S3.SS3.SSS2.p1</code><code>S3.SS4.SSS2.p2</code><code>S4.SS3.SSS2.p1</code></span></li>
         <li><span class="tag">generalisation</span>
-          <span lang="zh">鲁棒性只在少量缺失率、噪声强度和回看窗口上验证，若换成其他扰动类型、领域或更长预测跨度，结论可能变化。</span><span lang="en">Robustness is verified only on a small set of missingness rates, noise levels, and look-back windows; the conclusion may change under other perturbation types, domains, or longer prediction horizons.</span>
-<span class="ev"><code>S4.T5.5</code><code>S4.F4</code><code>S4.F5</code><code>S4.SS3.SSS3.p1</code><code>S4.SS3.SSS3.p2</code><code>S4.SS3.SSS4.p1</code></span></li>
+          <span lang="zh">评估只覆盖三个基准的固定子集，而且 Terminal-Bench-2.0 还排除了不稳定网页资源和多模态任务，因此换用不同任务分布可能改变结论。</span><span lang="en">The evaluation covers fixed subsets of three benchmarks, and Terminal-Bench-2.0 additionally excludes unstable web-resource and multimodal tasks, so changing the task distribution could alter the conclusion.</span>
+<span class="ev"><code>S4.SS1.SSS0.Px1.p1</code><code>S4.SS1.SSS0.Px4.p1</code></span></li>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">起始 harness 被刻意保持得很小，并且只建立在 DeepAgent 的默认文件系统和 shell 工具之上，因此增益可能部分依赖这个基线配置。</span><span lang="en">The starting harness is intentionally minimal and built only on DeepAgent&#39;s default filesystem and shell tools, so the gains may partly depend on this baseline configuration.</span>
+<span class="ev"><code>S4.F3</code><code>S4.SS1.SSS0.Px3.p1</code></span></li>
+        <li><span class="tag">statistics</span>
+          <span lang="zh">候选编辑的通过依赖于 held-in/held-out 的非退化规则，而每个候选默认只重复评估两次，所以随机性和评估方差可能影响被晋升的修改。</span><span lang="en">Candidate acceptance depends on a non-degradation rule over held-in/held-out splits, and each candidate is evaluated only twice by default, so randomness and evaluation variance could affect which edits are promoted.</span>
+<span class="ev"><code>S4.SS1.SSS0.Px5.p1</code><code>S3.SS4.p2</code></span></li>
       </ul>
 
       <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
       <ul class="unknowns">
-        <li><span lang="zh">提供的文本未显示多随机种子结果、方差或显著性检验，因此结果波动无法在此核实。</span><span lang="en">The provided text does not show multi-seed results, variance estimates, or significance tests, so result variability cannot be verified here.</span></li>
-        <li><span lang="zh">提取文本没有完整呈现 Figure 8 和任何附录/超参数搜索范围，因此效率曲线和全部实现细节不能逐项核对。</span><span lang="en">The extraction does not fully present Figure 8 or any appendix/hyperparameter-search ranges, so the efficiency curves and all implementation details cannot be checked item by item.</span></li>
+        <li><span lang="zh">提供的文本提到了附录中的更多图表和案例，但这些内容没有随摘录一并给出，因此无法检查其细节。</span><span lang="en">The provided text refers to additional appendix figures and cases, but those materials were not included with the excerpt, so their details cannot be checked.</span></li>
+        <li><span lang="zh">当前摘录没有包含更完整的消融、方差或显著性检验材料，因此这些统计细节在这里不可核实。</span><span lang="en">The excerpt does not include a fuller ablation, variance, or significance-testing section, so those statistical details are not verifiable here.</span></li>
       </ul>
 
       <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
       <ul>
-        <li class="reader"><span lang="zh">摘要没有给出任何具体指标、提升幅度或消融结果。</span><span
-          lang="en">The abstract reports no concrete metrics, gains, or ablations.</span><span class="tag">reader</span></li>
-        <li class="reader"><span lang="zh">目前无法判断优势主要来自语义分块、动态图还是路由机制。</span><span
-          lang="en">It is unclear whether the gains come mainly from partitioning, the graph, or the routing mechanism.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">摘要没有给出各 benchmark 的绝对分数和每个模型的分项结果。</span><span
+          lang="en">The abstract does not provide absolute scores or per-model breakdowns.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">摘要没有展示弱点挖掘、提案生成和验证三步各自带来的增益。</span><span
+          lang="en">The abstract does not isolate the contribution of weakness mining, proposal generation, and validation.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">仅有三个 benchmark 和三个模型，是否能外推到更开放的 agent 环境还未证明。</span><span
+          lang="en">Only three benchmarks and three model families were tested, so generalization to more open agent settings is unproven.</span><span class="tag">reader</span></li>
       </ul>
 
       <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
-      <blockquote class="relevance"><span lang="zh">和 patch-based 时间序列预测、长程依赖与结构化表示学习直接相关。</span><span
-        lang="en">Directly relevant to patch-based forecasting, long-range dependency modeling, and structured representations.</span></blockquote>
+      <blockquote class="relevance"><span lang="zh">和 agent 直接相关：它把 memory/harness 当成可自我改写的对象。</span><span
+        lang="en">Directly relevant to agents: it treats harnesses and memory-like scaffolding as self-modifiable.</span></blockquote>
 
       <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
       <dl class="kv">
-          <dt lang="zh">入选理由</dt><dd lang="zh">语义分块与多变量预测</dd>
-          <dt lang="en">why selected</dt><dd lang="en">Semantic partitioning for multivariate forecasting</dd>
+          <dt lang="zh">入选理由</dt><dd lang="zh">自改进agent harness</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Self-improving agent harness</dd>
           <dt lang="zh">可信度</dt>
           <dd lang="zh">low —— 仅有摘要</dd>
           <dt lang="en">confidence</dt>
@@ -1020,7 +449,177 @@ footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--l
 </article>
 <article class="card">
   <div class="chips">
-<span class="chip score" title="三级筛选相关性打分">8/10</span>    <span class="chip deep">
+<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip deep">
+      <span lang="zh">全文精读</span><span
+        lang="en">full text</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2608.19652">Can Agent Memory Systems Track Evolving State?</a></h2>
+<p class="lead" lang="zh">StateMem 显式追踪状态更新，StateMemBench 上提 $1.8\times$。</p><p class="lead" lang="en">StateMem explicitly tracks supersession and dependencies, lifting StateMemBench current-state accuracy $1.8\times$ over the strongest same-backbone baseline.</p>
+  <dl class="meta">
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Xinyi Fan, Miri Liu, Ruozhen Yang, Siru Ouyang<span lang="zh"> 等 5 人</span><span lang="en"> +1 more</span></dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.AI · cs.CL<span class="sep">|</span>2026-08-20<span class="sep">|</span>2608.19652</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>agent-memory · state-tracking · state-drift · llm-agents · memory-benchmark</dd>    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
+    <dd class="thread">
+      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《Metis: Memory Foundation Model》</a>相近
+        (0.88)</span>
+      <span lang="en">close to <a href="../2026-07-30/">“Metis: Memory Foundation Model”</a>        from 2026-07-30 (0.88)</span>
+<br>      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《Living-Harness Is an Interactive-Agent Evolver》</a>相近
+        (0.87)</span>
+      <span lang="en">close to <a href="../2026-07-30/">“Living-Harness Is an Interactive-Agent Evolver”</a>        from 2026-07-30 (0.87)</span>
+    </dd>
+  </dl>
+
+  <div class="rate" data-arxiv="2608.19652" data-date="2026-08-21"
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;low&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.89, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.898}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开精读</span><span
+      lang="en">read the digest</span></summary>
+    <div class="body">
+      <div lang="zh"><p>现有 agent memory 多在追 recall：把相关片段捞出来，却不管后续 session 已经把它覆盖了。于是会出现 state drift，答案里明明带着旧值，模型却按旧值行动。作者把缺口从“找不找得到”拆成“当前到底谁生效”，把 state tracking 定为与 recall 不同的能力。</p><p>关键动作是把记忆改成 state-first。StateMemBench 用 symbolic event program 生成多 session 场景，把 facts、rules 和 derived quantities 的 supersession 与依赖写死，再用 closed-pool 评分区分 drift、off-pool 和其他错误。StateMem 先把每轮对话解析成 state units，再在更新时显式标记 superseded，并沿依赖图 $G=(U,E)$ 做 deterministic recheck；回答时只对活跃状态重算。</p><p>在 $234$ 个场景上，长上下文、retrieval 和现有 memory baseline 都被这些陷阱压住。DeepSeek-V4-Flash 上，StateMem 准确率 $0.363$，高于最强同骨干基线 $0.205$；Qwen-3.5-9B 上是 $0.233$ 对 $0.149$。作为 wrapper，它在 $6$ 个 backend 上还能带来 $+31.7$ 到 $+66.6$ 个点，其中 $+15.0$ 到 $+31.7$ 个点来自状态结构本身。</p><p>这说明 state tracking 不是 recall 的副产物，而是可以单独设计、单独评测的能力；显式状态结构确实有用，但前提是答题模型不能太弱。它的短板也明显：salience 仍然很吃力，而且 StateMemBench 的冲突是人为构造、closed-pool 的，测得更像受控状态维护，不是开放世界记忆。</p></div>
+      <div lang="en"><p>Most agent memory work chases recall: can the system surface the right snippet? That misses state drift, where the relevant fact is present but the agent acts on an outdated value after later revisions. The paper argues the real gap is not retrieval but maintaining the currently operative state across sessions.</p><p>The trick is to make state a first-class object. StateMemBench generates multi-session scenarios from symbolic event programs, with explicit supersession and dependency structure, then scores closed-pool answers so drift is separated from generic errors. StateMem parses each turn into state units, marks units as superseded, propagates invalidation over a dependency graph $G=(U,E)$, and asks the model to recompute only from the surviving state.</p><p>On $234$ scenarios, existing memory, retrieval, and long-context baselines struggle. StateMem reaches $0.363$ on DeepSeek-V4-Flash, up from $0.205$ for the strongest same-backbone baseline, and $0.233$ on Qwen-3.5-9B versus $0.149$ for the strongest memory system. As a wrapper, the same state tracing adds $31.7$ to $66.6$ points over $6$ backends on StateMemBench, with $15.0$ to $31.7$ points attributed to structure rather than extra text.</p><p>The main takeaway is that state tracking is a separable capability, not a side effect of better recall. But the wins are uneven: salience remains weak on the Qwen backbone, and the wrapper can beat the full persistent system when the transcript still fits in context. The benchmark also uses explicit, closed-pool conflicts, so it measures controlled state maintenance more cleanly than messy real-world memory.</p></div>
+
+      <h3><span lang="zh">论文原图</span><span lang="en">Figures from the paper</span></h3>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2608.19652v1/state_drift_teaser1.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2608.19652v1/state_drift_teaser1.png" alt="Figure 1" loading="lazy">
+        </a>
+<p class="why" lang="zh">直接定义 state tracking，并说明它和 recall 可分离。</p><p class="why" lang="en">Defines state tracking and shows it is separable from recall.</p>
+        <figcaption><span class="figlabel">Figure 1</span>
+          StateMemBench targets state tracking: maintaining currently operative values of facts, rules, and derived quantities under cross-session revision, separable from recall.</figcaption>
+      </figure>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2608.19652v1/1eaf.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2608.19652v1/1eaf.png" alt="Figure 2" loading="lazy">
+        </a>
+<p class="why" lang="zh">把 ingestion、update、test time 的三段流程一次画清。</p><p class="why" lang="en">Shows the three-stage ingestion, update, and test-time pipeline.</p>
+        <figcaption><span class="figlabel">Figure 2</span>
+          StateMem has three stages: an ingestion stage in which a conversation turn is parsed into state units, an update stage that updates the value of existing units, and a test time stage where the agent draws upon the valid state to answer the question. Here, we show how StateMem would handle a finance-based scenario.</figcaption>
+      </figure>
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>把 state drift 从 recall/reasoning 里剥离出来，并给出可判别的标注流程。</li><li>构建 StateMemBench：$234$ 个多 session 场景，$5$ 类 failure mode，覆盖 $3$ 个领域。</li><li>提出 StateMem 与 StateMemWrapper，在 DeepSeek-V4-Flash 上把准确率从 $0.205$ 提到 $0.363$，wrapper 还能再加 $31.7$ 到 $66.6$ 个点。</li></ul>
+      <ul lang="en"><li>Separates state drift from recall and reasoning with a labeling scheme that isolates it.</li><li>Builds StateMemBench: $234$ multi-session scenarios, $5$ failure modes, and $3$ domains.</li><li>Introduces StateMem and StateMemWrapper, raising DeepSeek-V4-Flash accuracy from $0.205$ to $0.363$ and adding $31.7$ to $66.6$ points as a wrapper.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">StateMem 把多轮记忆表示成 state units，每个 unit 记录 $id$、content、priority、source 和 $deps$。输入阶段每轮一次 LLM 抽取，更新阶段先做 supersession，再沿依赖图 $G=(U,E)$ 做 deterministic recheck；测试时把活跃状态渲染成结构块 $\mathcal{S}$，再用一轮 LLM 只对当前有效状态重算答案。这样把“谁被覆盖了、谁还有效”从生成模型里拆开。</dd>
+        <dd lang="en">StateMem represents multi-turn memory as state units, each with $id$, content, priority, source, and $deps$. Ingestion uses one LLM call per turn to extract units, update applies supersession and then runs a deterministic recheck over the dependency graph $G=(U,E)$; test time renders the active state as a structured block $\mathcal{S}$ and uses one more LLM call to recompute the answer from current state only. The point is to separate “what was overwritten” from “what is still in force.”</dd>
+<dt>architecture</dt><dd>TurnEncoder -&gt; StateStore -&gt; Rechecker on $G=(U,E)$ -&gt; render $\mathcal{S}$ -&gt; answer call; $u=(id,content,priority,source,deps)$, $priority\in\{hard,soft\}$, $deps\in\{derived\_from,coupled\_with\}$</dd><dt>data</dt><dd>StateMemBench: $234$ multi-session scenarios; Set A $190$ single-probe scenarios, $18$ sessions each ($\sim165$ turns, $\sim3$k tokens); Set B $44$ fused scenarios, $\sim38$ sessions each ($\sim599$ turns, $\sim7$-$15$k tokens). Domains: research, shopping, personal finance. Also evaluated on LongMemEval ($n=500$, $k=20$) and LoCoMo ($n=1,985$).</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>StateMemBench (DeepSeek-V4-Flash)</td><td>current-state accuracy</td>
+            <td class="win">0.363</td>
+            <td class="num">strongest same-backbone baseline 0.205</td><td class="num">1.8×</td></tr>
+        <tr><td>StateMemBench (Qwen-3.5-9B)</td><td>current-state accuracy</td>
+            <td class="win">0.233</td>
+            <td class="num">strongest memory system 0.149</td><td class="num">1.6×</td></tr>
+        <tr><td>StateMemBench wrapper over 6 backends</td><td>accuracy lift</td>
+            <td class="win">+31.7 to +66.6 points</td>
+            <td class="num">backend alone</td><td class="num">+15.0 to +31.7 points from state structure</td></tr>
+        <tr><td>LongMemEval (DeepSeek-V4-Flash)</td><td>accuracy</td>
+            <td class="win">0.656</td>
+            <td class="num">Mem0 0.594</td><td class="num">+0.062</td></tr>
+        <tr><td>LoCoMo (DeepSeek-V4-Flash)</td><td>accuracy</td>
+            <td class="win">0.592</td>
+            <td class="num">long-context 0.587</td><td class="num">+0.005</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-A">evidence A</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-low">method risk low</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.89</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">StateMemBench 是一个面向 state tracking 的多会话基准，覆盖三个领域、234 个场景以及短/长两种对话长度，并用 closed-pool 评分把当前状态、被 supersede 的状态和其他错误区分开。</span><span lang="en">StateMemBench is a multi-session benchmark for state tracking that spans three domains, 234 scenarios, and short/long conversation-length regimes, and uses closed-pool scoring to separate current-state answers, superseded-state answers, and other errors.</span>
+          <div class="why"><span lang="zh">S4.SS1.p1 给出符号事件程序、确定性求值器和失败模式签名的构造方式；S4.SS2.p1 说明三个领域；S4.SS3.p1 明确给出短/长两种长度条件、234 个场景和 322 个 probes；S4.SS3.SSS0.Px2.p1 说明 closed-pool 里把 drift 与其他错误分开。因此证据直接支撑“这是一个针对 state tracking 的构造型基准”这一表述。</span><span lang="en">S4.SS1.p1 describes the symbolic event program, deterministic evaluator, and failure-mode signatures; S4.SS2.p1 specifies the three domains; S4.SS3.p1 gives the short/long length conditions, 234 scenarios, and 322 probes; and S4.SS3.SSS0.Px2.p1 explains the closed-pool separation of drift from other errors. The cited evidence directly supports the benchmark claim.</span></div>
+<div class="ev"><code>S4.p1</code><code>S4.SS1.p1</code><code>S4.SS2.p1</code><code>S4.SS3.p1</code><code>S4.SS3.SSS0.Px2.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">StateMem 在 StateMemBench 上优于同骨干的 long-context 基线和最强 memory baselines，例如在 DeepSeek-V4-Flash 上从 0.149 提升到 0.363，在 Qwen-3.5-9B 上从 0.149 提升到 0.233。</span><span lang="en">StateMem outperforms same-backbone long-context baselines and the strongest memory baselines on StateMemBench, for example rising from 0.149 to 0.363 on DeepSeek-V4-Flash and from 0.149 to 0.233 on Qwen-3.5-9B.</span>
+          <div class="why"><span lang="zh">S5.T3.9 直接列出 StateMem、各 memory baseline 和 long-context baseline 在两个 backbone 上的分数；S6.SS2.p2 直接总结了 0.363 对 0.205、以及 0.233 对 0.149 的比较。证据足以支撑这些具体数值层面的性能主张。</span><span lang="en">S5.T3.9 directly lists StateMem, memory baselines, and long-context baselines on both backbones; S6.SS2.p2 explicitly summarizes the 0.363 vs. 0.205 and 0.233 vs. 0.149 comparisons. The evidence directly supports the numerical performance claim.</span></div>
+<div class="ev"><code>S5.T3.9</code><code>S6.SS2.p2</code><code>S6.SS2.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">作为 answer-time wrapper，StateMemWrapper 在所测试的每个 backend 上都提升了结果，而长度/成本匹配的 control 用来分离结构带来的收益与纯粹增加文本量带来的收益。</span><span lang="en">As an answer-time wrapper, StateMemWrapper improves every tested backend, and the length- and cost-matched control is used to separate gains from structure from gains due merely to added text.</span>
+          <div class="why"><span lang="zh">S6.SS4.p1-p3 定义了 wrapper、matched control 以及“structure from sheer text volume”的隔离思路；S6.SS4.SSSx1.p2 报告它在所有测试 backend 上都提升，并且 control 与 wrapper 的差异可解释结构贡献。表 6 的数值把这一点具体化了。</span><span lang="en">S6.SS4.p1-p3 define the wrapper, the matched control, and the isolation of structure from sheer text volume; S6.SS4.SSSx1.p2 reports improvements on every tested backend and interprets the wrapper-control gap as structural contribution. Table 6 provides the concrete numbers.</span></div>
+<div class="ev"><code>S6.SS4.p1</code><code>S6.SS4.p3</code><code>S6.SS4.SSSx1.p1</code><code>S6.SS4.SSSx1.p2</code><code>S6.T6.11</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">相对增益对 backbone 和 baseline 家族很敏感；在弱 backbone 上 memory layer 几乎不改变闭池结果，而在强 backbone 上 control 也能回收不少增益。</span><span lang="en">Relative gains are sensitive to the backbone and baseline family; on the weaker backbone the memory layer barely changes closed-pool outcomes, while on the stronger backbone the control recovers much of the lift.</span>
+<span class="ev"><code>S6.SS3.p2</code><code>S6.SS4.SSSx1.p2</code><code>S6.T6.11</code></span></li>
+        <li><span class="tag">statistics</span>
+          <span lang="zh">每个配置只跑一次，且很多结论依赖配对显著性检验，所以随机波动和方差估计在提供文本里不可充分验证。</span><span lang="en">Each configuration is run only once, and many conclusions rely on paired significance tests, so random variation and variance estimates cannot be fully checked from the provided text.</span>
+<span class="ev"><code>S6.p1</code><code>S6.SS4.SSSx1.p2</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">场景由显式符号程序生成，依赖关系也被直接写出，因此结果主要验证对构造出的 state drift 的处理，向自然出现的长期记忆场景外推仍有限。</span><span lang="en">The scenarios are generated from explicit symbolic programs and the dependencies are written in directly, so the results mainly validate handling of constructed state drift; extrapolation to naturally occurring long-horizon memory settings remains limited.</span>
+<span class="ev"><code>S4.SS1.p1</code><code>S4.SS3.p1</code><code>S4.SS3.SSS0.Px1.p1</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">附录 A/F/G 中引用的标注协议、提示词、后端实现和成本分析未出现在提供文本里，因此这些细节无法在这里核验。</span><span lang="en">The appendix material referenced for labeling protocol, prompts, backend implementation, and cost analysis is not included in the provided text, so those details cannot be verified here.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="reader"><span lang="zh">StateMemBench 用的是 synthetic、closed-pool 冲突，所以它更像受控状态维护测试，而不是开放世界记忆。</span><span
+          lang="en">StateMemBench uses synthetic, closed-pool conflicts, so it measures controlled state maintenance rather than open-world memory.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">Qwen backbone 上的 salience 仍然很弱，说明显式状态结构并不能修好所有失败模式。</span><span
+          lang="en">Salience remains weak on the Qwen backbone, so explicit state structure does not fix every failure mode.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">当 transcript 还能直接放进 context 时，wrapper 甚至能超过完整的 persistent system，说明持久存储不是总是必要。</span><span
+          lang="en">When the transcript still fits in context, the wrapper can outperform the full persistent system, so persistence is not always necessary.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">直击 agent memory：把记忆从 recall 拆成 current-state 维护。</span><span
+        lang="en">Directly relevant to agent memory: it reframes memory as current-state maintenance, not just recall.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">LLM智能体记忆状态跟踪</dd>
+          <dt lang="en">why selected</dt><dd lang="en">LLM agent memory state tracking</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip deep">
       <span lang="zh">全文精读</span><span
         lang="en">full text</span></span>
 <span class="chip">notable</span>  </div>
@@ -1042,7 +641,7 @@ footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--l
   </dl>
 
   <div class="rate" data-arxiv="2608.20005" data-date="2026-08-21"
-       data-signals="{&#34;relevance&#34;: 8, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.89, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.818}">
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.89, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.898}">
     <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
     <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
     <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
@@ -1185,8 +784,646 @@ footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--l
 
       <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
       <dl class="kv">
-          <dt lang="zh">入选理由</dt><dd lang="zh">多尺度预训练与token对齐</dd>
-          <dt lang="en">why selected</dt><dd lang="en">Multi-scale TS pretraining and token alignment</dd>
+          <dt lang="zh">入选理由</dt><dd lang="zh">多尺度补丁对齐预训练</dd>
+          <dt lang="en">why selected</dt><dd lang="en">multi-scale patch alignment pretraining</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip ">
+      <span lang="zh">仅摘要</span><span
+        lang="en">abstract only</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2608.20202">MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use</a></h2>
+<p class="lead" lang="zh">记忆反而拖累推理：MemTrapBench 上所有方法都输给无记忆，最强也跌超 10%。</p><p class="lead" lang="en">MemTrapBench shows retrieved memories can hurt reasoning: every tested memory method lagged no-memory, and the best dropped by over 10%.</p>
+  <dl class="meta">
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Mengru Wang, Haozhe Luo, Zhenqian Xu, Zhixiang Cui<span lang="zh"> 等 9 人</span><span lang="en"> +5 more</span></dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.AI · cs.CL · cs.CY · cs.DB · cs.LG<span class="sep">|</span>2026-08-20<span class="sep">|</span>2608.20202</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agents · memory · benchmarking · reasoning · evaluation</dd>    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
+    <dd class="thread">
+      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《Metis: Memory Foundation Model》</a>相近
+        (0.85)</span>
+      <span lang="en">close to <a href="../2026-07-30/">“Metis: Memory Foundation Model”</a>        from 2026-07-30 (0.85)</span>
+    </dd>
+  </dl>
+
+  <div class="rate" data-arxiv="2608.20202" data-date="2026-08-21"
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.9, &#34;paper_type&#34;: &#34;benchmark&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.9}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开</span><span
+      lang="en">expand</span></summary>
+    <div class="body">
+      <div lang="zh"><p>现有 memory benchmark 多看记没记住、找没找回，却没看被找回的记忆会不会把当前推理带偏。结果是，语义相关、记录无误的 memory 也可能让模型在新任务里更固执或改信错结论，性能反而下降。</p><p>关键动作是把这种失效拆成两类 cognitive traps：Reasoning Fixation 和 Belief Distortion，并做成 MemTrapBench。作者再给出 AdaptiveMem，在推理时提示 LLM 避开 memory trap，不改训练流程，直接作用在使用记忆的那一刻。</p><p>摘要只给了总体结论：跨两个 model families 和五种代表性 memory framework，所有评测的 memory 策略都不如 no-memory；最强方法的性能跌幅超过 $10\%$。AdaptiveMem 则在 MemTrapBench 上缓解了这些问题，同时在标准 memory benchmark 上保持或提升表现。</p><p>这篇工作的价值不在更强的检索，而在提醒我们 memory 还有“副作用”这条线没测全。它对 agent 和记忆系统都相关，但摘要没有给出具体任务、指标和消融，所以还不能判断 AdaptiveMem 究竟是稳健修补，还是只对这批设置有效。</p></div>
+      <div lang="en"><p>Existing memory benchmarks mostly ask whether information was extracted, stored, and retrieved correctly. They largely miss a different failure mode: a faithful, relevant memory can still push the model into worse reasoning on the current task.</p><p>The core move is to turn that failure into a benchmark. MemTrapBench separates two cognitive traps, Reasoning Fixation and Belief Distortion, and AdaptiveMem is a simple inference-time prompt that tells the LLM to avoid memory traps instead of changing the memory stack itself.</p><p>In the abstract’s reported experiments, two model families and five representative memory frameworks were tested. Every memory strategy underperformed the no-memory setting, and the strongest method still dropped by more than 10%. AdaptiveMem reduced these failures on MemTrapBench while preserving or improving results on standard memory benchmarks.</p><p>The paper’s main contribution is to widen evaluation from recall accuracy to downstream reasoning damage. That is directly relevant to agent memory, but with abstract-only evidence it is still unclear how much of the gain comes from the method versus the benchmark setting, or whether the effect holds beyond the tested frameworks.</p></div>
+
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>提出 MemTrapBench，用来测量 retrieval 记忆对当前推理的负面影响，而不只看检索是否正确。</li><li>将 cognitive traps 划分为 Reasoning Fixation 和 Belief Distortion 两类。</li><li>提出推理时方法 AdaptiveMem，在缓解 trap 的同时尽量不损伤标准 memory benchmark。</li></ul>
+      <ul lang="en"><li>Introduces MemTrapBench to measure how retrieved memory harms current-task reasoning, not just whether retrieval is correct.</li><li>Splits cognitive traps into two types: Reasoning Fixation and Belief Distortion.</li><li>Proposes AdaptiveMem, an inference-time method that mitigates traps while preserving standard memory performance.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">MemTrapBench 评估的是 memory 被取回后对当前推理的干扰，而不是单纯的存取准确率。作者把失效分成 Reasoning Fixation 和 Belief Distortion 两类，再用它们构造测试场景。AdaptiveMem 是一个 inference-time 提示式方法，目标是让模型在使用记忆时主动避开这些 trap。</dd>
+        <dd lang="en">MemTrapBench evaluates how retrieved memory interferes with current-task reasoning, rather than only storage and retrieval accuracy. The authors define two failure types, Reasoning Fixation and Belief Distortion, and build test cases around them. AdaptiveMem is an inference-time prompting method that tells the model to avoid these traps when using memory.</dd>
+      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>MemTrapBench</td><td>performance vs no-memory</td>
+            <td class="win">all evaluated memory strategies underperform</td>
+            <td class="num">no-memory setting</td><td class="num"></td></tr>
+        <tr><td>MemTrapBench</td><td>drop of strongest method</td>
+            <td class="win">more than 10%</td>
+            <td class="num">strongest evaluated memory method</td><td class="num">&lt;-10%</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-A">evidence A</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">benchmark</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.90</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">MemTrapBench 由 1,050 个实例组成，覆盖两类、四个场景的记忆诱发认知陷阱，并通过种子设计、多轮对话生成和两阶段质控构建。</span><span lang="en">MemTrapBench contains 1,050 instances across two categories and four scenarios of memory-induced cognitive traps, and it is built through seed design, multi-turn dialogue generation, and two-stage quality control.</span>
+          <div class="why"><span lang="zh">S1.p3 直接给出 1,050 个实例、四个场景、两类，以及构建流程；S2.SS2.SSS0.Px2.p1-p3 进一步说明了手工种子、对话扩展和两阶段质控。提供的文字足以支撑这个构造与规模，但补充材料中的全部生成细节未在此处展开。</span><span lang="en">S1.p3 directly gives the 1,050 instances, four scenarios, two categories, and the construction pipeline; S2.SS2.SSS0.Px2.p1-p3 further explain the manual seeds, dialogue expansion, and two-stage quality control. The provided text is enough to support the construction and scale, but not the full generation details referenced in the supplement.</span></div>
+<div class="ev"><code>S1.p3</code><code>S2.SS2.SSS0.Px1.p1</code><code>S2.SS2.SSS0.Px2.p1</code><code>S2.SS2.SSS0.Px2.p2</code><code>S2.SS2.SSS0.Px2.p3</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在 Gemini 与 Qwen 两个模型家族、四种记忆框架和完整历史设置下，所有被评估的记忆策略都低于无记忆基线，说明记忆内容会诱发当前任务性能下降。</span><span lang="en">Across the Gemini and Qwen model families, four memory frameworks, and the full-history setting, all evaluated memory strategies underperform the no-memory baseline, indicating that memory content can induce performance drops on the current task.</span>
+          <div class="why"><span lang="zh">S3.SS1.p1 明确列出测试的两个模型家族和五种策略，S3.SS2.p1 与表 1 显示所有记忆策略在所测任务上的平均分都低于 wo/Mem 基线。S1.p4 也概括了“所有 evaluated memory strategies” 低于无记忆的结果；这里的支持范围仍限于文中报告的模型与框架。</span><span lang="en">S3.SS1.p1 explicitly lists the two model families and the tested strategies, while S3.SS2.p1 and Table 1 show that every memory strategy under the tested tasks averages below the wo/Mem baseline. S1.p4 also summarizes that all evaluated memory strategies underperform no-memory; the support remains limited to the reported models and frameworks.</span></div>
+<div class="ev"><code>S1.p4</code><code>S3.SS1.p1</code><code>S3.SS2.p1</code><code>S3.T1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">文中报告的 AdaptiveMem 是一种提示式技能，在所测的 MemTrapBench 设置上能提升 FullText、LightMem 和 EverMemOS 的表现，并在 LongMemEval 上保持或改善大多数设置。</span><span lang="en">The reported AdaptiveMem is a prompt-based skill that improves FullText, LightMem, and EverMemOS on MemTrapBench, and it keeps or improves most settings on LongMemEval.</span>
+          <div class="why"><span lang="zh">S3.SS6.SSS0.Px1.p1 给出 AdaptiveMem 的定义，S3.SS6.SSS0.Px2.p1 报告了在 MemTrapBench 和 LongMemEval 上的具体增益，S1.p4 也举例说明了对 LightMem 的提升。这里的证据足以支撑文中报告的这些框架与基准上的效果，但不外推到所有可能的记忆系统。</span><span lang="en">S3.SS6.SSS0.Px1.p1 defines AdaptiveMem, S3.SS6.SSS0.Px2.p1 reports the concrete gains on MemTrapBench and LongMemEval, and S1.p4 gives the LightMem example. The evidence is sufficient for the reported frameworks and benchmarks, but it does not generalize to all possible memory systems.</span></div>
+<div class="ev"><code>S1.p4</code><code>S3.SS6.SSS0.Px1.p1</code><code>S3.SS6.SSS0.Px2.p1</code><code>S3.F4</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">结论只在两个模型家族和四种记忆框架上验证，其他模型或记忆系统的相对排序和降幅可能不同。</span><span lang="en">The conclusion is verified only on two model families and four memory frameworks, so the relative ranking and drop sizes may differ for other models or memory systems.</span>
+<span class="ev"><code>S3.SS1.p1</code><code>S3.T1</code><code>S3.SS6.SSS0.Px2.p1</code></span></li>
+        <li><span class="tag">construction</span>
+          <span lang="zh">MemTrapBench 由手工种子再经 GPT-5.4 扩展成合成多轮对话，而且显式排除了“ignore previous rules”这类重置线索，因此对真实对话和显式指令重置的覆盖范围有限。</span><span lang="en">MemTrapBench is created from manually designed seeds expanded by GPT-5.4 into synthetic multi-turn dialogues, and it explicitly excludes reset cues such as &#39;ignore previous rules&#39;, so coverage of real conversations and explicit instruction reset is limited.</span>
+<span class="ev"><code>S2.SS2.SSS0.Px2.p1</code><code>S2.SS2.SSS0.Px2.p2</code><code>S2.SS2.SSS0.Px2.p3</code></span></li>
+        <li><span class="tag">statistics</span>
+          <span lang="zh">AdaptiveMem 的增益来自 200 个随机样本和特定的评测判分流程，若换用不同样本、不同 judge 或更宽的任务集合，幅度可能变化。</span><span lang="en">AdaptiveMem&#39;s gains come from 200 randomly sampled instances and a specific judging pipeline, so the magnitude may change with different samples, different judges, or a broader task set.</span>
+<span class="ev"><code>S3.SS6.SSS0.Px2.p1</code><code>S3.SS3.p1</code><code>S3.SS5.p1</code><code>S3.T5</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">提供的文本提到补充材料包含生成提示、标注指南、过滤标准和数据统计，但这些补充内容未随正文一同给出。</span><span lang="en">The provided text says the supplement contains generation prompts, annotation guidelines, filtering criteria, and dataset statistics, but those supplementary materials are not included here.</span></li>
+        <li><span lang="zh">文中声明数据和代码将发布到 GitHub，但在当前摘录里无法核实实际可用性、许可或最终发布状态。</span><span lang="en">The paper says data and code will be available on GitHub, but the current excerpt does not allow verification of actual availability, licensing, or release status.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="reader"><span lang="zh">摘要只报告了总体趋势，没给出具体任务、指标和各框架的分项结果。</span><span
+          lang="en">The abstract reports only aggregate trends, not task-level, metric-level, or per-framework results.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">只看到摘要，无法核查 AdaptiveMem 是否依赖特定提示模板或特定模型家族。</span><span
+          lang="en">With only the abstract, it is impossible to verify whether AdaptiveMem depends on a specific prompt template or model family.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">直接相关：智能体记忆不只要能存取，还要不把后续推理带偏。</span><span
+        lang="en">Directly relevant: agent memory must not only store and retrieve, but also avoid distorting later reasoning.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">LLM记忆陷阱评测与推理干预</dd>
+          <dt lang="en">why selected</dt><dd lang="en">LLM memory traps benchmark and inference mitigation</dd>
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">low —— 仅有摘要</dd>
+          <dt lang="en">confidence</dt>
+          <dd lang="en">low — abstract only</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip deep">
+      <span lang="zh">全文精读</span><span
+        lang="en">full text</span></span>
+<span class="chip">notable</span><span class="chip warn" lang="zh"
+        title="正文未含附录。">正文未含附录。</span><span class="chip warn" lang="en"
+        title="Appendices are not fully visible.">Appendices are not fully visible.</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2608.20274">Break It Down, Pass It On: Cross-Task Skill Transfer in LLM Agents</a></h2>
+<p class="lead" lang="zh">子任务级技能更稳：平均 24.8% 对 22.1%</p><p class="lead" lang="en">Subtask-level skill induction transfers better than task-level, lifting average success to 24.8% vs 22.1% across 11 models.</p>
+  <dl class="meta">
+      <dt><span lang="zh">机构</span><span lang="en">institutions</span></dt><dd>Computer Science Department, Stony Brook University, Stony Brook, USA</dd>
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Yiyang Feng, Biddut Sarker Bijoy, Niranjan Balasubramanian, Jiawei Zhou</dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.AI · cs.CL<span class="sep">|</span>2026-08-20<span class="sep">|</span>2608.20274</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agents · skill-transfer · memory · subtask-decomposition · retrieval</dd>    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
+    <dd class="thread">
+      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《SkillRise: Agentic Reinforcement Learning…》</a>相近
+        (0.89)</span>
+      <span lang="en">close to <a href="../2026-07-30/">“SkillRise: Agentic Reinforcement Learning…”</a>        from 2026-07-30 (0.89)</span>
+<br>      <span lang="zh">与 2026-08-20 的<a href="../2026-08-20/">《SkillGate: Training In-Policy Skill Selec…》</a>相近
+        (0.87)</span>
+      <span lang="en">close to <a href="../2026-08-20/">“SkillGate: Training In-Policy Skill Selec…”</a>        from 2026-08-20 (0.87)</span>
+    </dd>
+  </dl>
+
+  <div class="rate" data-arxiv="2608.20274" data-date="2026-08-21"
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.91, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.902}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开精读</span><span
+      lang="en">read the digest</span></summary>
+    <div class="body">
+      <div lang="zh"><p>现有 LLM agent 会把过去经验写成 skill memory，但很多方法把整条任务轨迹压成一条 skill，结果过度贴合源任务，后续检索时常成了噪声，甚至把性能拉低。作者要问的不是“能不能记忆”，而是“哪种诱导方式真的能跨任务复用”。</p><p>关键动作是把两个维度拆开：诱导粒度是 task-level 还是 subtask-level，存储格式是 text 还是 code。任务级 agent 把整条 ReAct 轨迹压成一个 skill；子任务级 agent 先分解子任务，再由 planner/executor/summarizer 轮转，每个 sub-trajectory 产出一条 skill。两类 memory 用同一 prompt、同一检索器，只比较 skill 本身；再定义 $utility(s)=specificity(s)\cdot abstractness(s)$。</p><p>作者在 AppWorld、OfficeBench、KramaBench 上跑了 11 个模型。结果很一致：task-level skills 平均伤害表现，Text 让 success 下降 $1.2$ 点，Code 下降 $4.1$ 点；subtask-level skills 则稳定增益，Text 提升 $1.9$ 点，Code 提升 $0.5$ 点。总体上，subtask-level 平均 $24.8\%$，高于 task-level 的 $22.1\%$；Text 也普遍优于 Code。</p><p>这篇工作的价值在于，它把“记忆有没有用”改写成“记忆怎样才有用”，而且 utility 不需要实际执行就能算出来。边界也很清楚：只测了三个长程基准，memory 是固定 induction/retrieval/dedup 规则，且只看最终状态，没法分析中间决策。</p></div>
+      <div lang="en"><p>LLM agents can turn past trajectories into skill memory, but whole-trajectory skills often become source-task replicas. When retrieved later, they are noisy or misaligned context that can drag performance below a no-memory baseline. The real question is not whether memory exists, but which kind of induced skill actually transfers.</p><p>The paper isolates two axes: induction level and storage format. A task-level agent induces one skill from an entire ReAct trajectory. A subtask-level agent decomposes the task, runs a planner/executor/summarizer cycle, and emits one skill per subtrajectory. Each skill is stored as text or code, but both levels share the same prompt and retrieval pipeline. The authors then define skill utility as $utility(s)=specificity(s)\cdot abstractness(s)$, aiming to capture both match to real tasks and breadth of reuse.</p><p>They test this on AppWorld, OfficeBench, and KramaBench with 11 open-weight and proprietary models. The pattern is stable: task-level skills usually hurt, lowering average success by 1.2 points with text and 4.1 with code, while subtask-level skills help, improving success by 1.9 and 0.5 points. Across all 11 models and the three benchmarks, the average success is 24.8% for subtask-level versus 22.1% for task-level. Text transfers better than code at both levels, and the cost curves in the latency/dependency analysis cross in favor of subtask-level skills once the budget is no longer tiny.</p><p>The useful part is the diagnostic. Utility, which is execution-free, tracks both task success and actual reuse density in the stream, so it can screen a skill memory before you spend on deployment. The caveat is scope: the study stays within three long-horizon benchmarks, fixed memory rules, and final-state grading, so it does not yet tell us how the result behaves in computer use, coding, or evolving memories.</p></div>
+
+      <h3><span lang="zh">论文原图</span><span lang="en">Figures from the paper</span></h3>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2608.20274v1/figures/ai-agent.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2608.20274v1/figures/ai-agent.png" alt="Figure 2" loading="lazy">
+        </a>
+<p class="why" lang="zh">把 task-level 与 subtask-level、text 与 code 的六个条件一次讲清。</p><p class="why" lang="en">Shows the six conditions from task-level vs. subtask-level and text vs. code in one place.</p>
+        <figcaption><span class="figlabel">Figure 2</span>
+          Illustration of two skill induction levels and two skill formats. (i) The task-level agent runs the current task as one trajectory of actions and observations and induces one skill from the whole trajectory. The subtask-level agent decomposes the task into subtasks, passes a running summary between consecutive subtasks, and induces one skill from each sub-trajectory. The two agents differ only in the skill induction level. (ii) Each agent stores its induced skills in its own memory as text notes or code functions and retrieves relevant skills back into its context, so skills induced on earlier tasks serve later ones. Crossing the two levels with the two formats and a no-memory baseline gives the six conditions we compare.</figcaption>
+      </figure>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2608.20274v1/q6_transfer_heatmaps.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2608.20274v1/q6_transfer_heatmaps.png" alt="Figure 6" loading="lazy">
+        </a>
+<p class="why" lang="zh">直接看出子任务级技能在任务流里复用得更密。</p><p class="why" lang="en">Shows that subtask-level skills are reused more densely along the task stream.</p>
+        <figcaption><span class="figlabel">Figure 6</span>
+          Transfer density. The task stream of each benchmark is cut into 50 bins in stream order, and a cell is colored when a skill induced in the earlier bin is retrieved in a later bin, darker when more of the runs do so. Blue upper triangles are the subtask-level agent and green lower triangles are the task-level agent, pooled over models and both skill formats, and the number in each triangle is its transfer density. The subtask-level agent reuses skills more densely than the task-level agent on all three benchmarks.</figcaption>
+      </figure>
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>在 3 个长程基准和 11 个模型上，控制比较 task-level 与 subtask-level skill induction，以及 text 与 code 两种格式。</li><li>发现 task-level skills 多数伤害表现，而 subtask-level skills 稳定增益；Text 也普遍优于 Code。</li><li>提出 $utility(s)=specificity(s)\cdot abstractness(s)$，并证明它能预测 task success 与实际复用密度。</li></ul>
+      <ul lang="en"><li>Across 3 long-horizon benchmarks and 11 models, the paper controls for task-level vs. subtask-level skill induction and text vs. code storage.</li><li>It finds that task-level skills usually hurt performance, while subtask-level skills reliably help; text also transfers better than code.</li><li>It introduces $utility(s)=specificity(s)\cdot abstractness(s)$ and shows that it predicts task success and actual reuse density.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">我们把 skill memory 固定为诱导、存储、检索三步，并只改两个变量：task-level/subtask-level 的诱导粒度，以及 text/code 的存储格式。task-level agent 用整条轨迹诱导一个 skill；subtask-level agent 先拆分子任务，再在每个 sub-trajectory 上诱导 skill。检索时用 all-MiniLM-L6-v2 只按 description 匹配，把 top skills 注入上下文；skill utility 定义为 $utility(s)=specificity(s)\cdot abstractness(s)$。</dd>
+        <dd lang="en">The skill memory is held fixed as induction, storage, and retrieval, and the paper varies only two axes: task-level vs. subtask-level induction, and text vs. code storage. A task-level agent induces one skill from the whole trajectory; a subtask-level agent decomposes the task and induces one skill per sub-trajectory. Retrieval uses all-MiniLM-L6-v2 on skill descriptions only, injects the top matches into context, and defines skill utility as $utility(s)=specificity(s)\cdot abstractness(s)$.</dd>
+<dt>architecture</dt><dd>Task-level: flat ReAct; Subtask-level: planner + executor + summarizer; Memory: text note or Python function; Retrieval: all-MiniLM-L6-v2, top matches injected; 6 conditions: Task, Task+Text, Task+Code, Subtask, Subtask+Text, Subtask+Code.</dd><dt>data</dt><dd>AppWorld test-challenge 417 tasks; OfficeBench 300 tasks; KramaBench 92 deterministically graded tasks.</dd><dt>compute</dt><dd>Amazon Bedrock; Google Cloud; vLLM on 1×96 GB NVIDIA GH200; max 8192 generated tokens/call.</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>Average (11 models, 3 benchmarks)</td><td>task success (%)</td>
+            <td class="win">Task+Text 20.9</td>
+            <td class="num">Task none 22.1</td><td class="num">-1.2pp</td></tr>
+        <tr><td>Average (11 models, 3 benchmarks)</td><td>task success (%)</td>
+            <td class="win">Task+Code 18.0</td>
+            <td class="num">Task none 22.1</td><td class="num">-4.1pp</td></tr>
+        <tr><td>Average (11 models, 3 benchmarks)</td><td>task success (%)</td>
+            <td class="win">Subtask+Text 26.7</td>
+            <td class="num">Subtask none 24.8</td><td class="num">+1.9pp</td></tr>
+        <tr><td>Average (11 models, 3 benchmarks)</td><td>task success (%)</td>
+            <td class="win">Subtask+Code 25.3</td>
+            <td class="num">Subtask none 24.8</td><td class="num">+0.5pp</td></tr>
+        <tr><td>Utility bins</td><td>task success (%)</td>
+            <td class="win">14.0%→24.5% (task); 22.8%→31.0% (subtask)</td>
+            <td class="num">lowest utility bin</td><td class="num">+10.5pp / +8.2pp</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-A">evidence A</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.91</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在文中评估的三项长程基准和11个模型上，子任务级诱导的技能通常把成功率提高到无记忆基线之上，而任务级诱导的技能通常把成功率压到基线之下，且文本技能整体比代码技能更能提升转移效果。</span><span lang="en">Across the three long-horizon benchmarks and 11 models evaluated, subtask-level induced skills usually lift success above the no-memory baseline, task-level induced skills usually lower it below baseline, and text skills transfer better than code skills.</span>
+          <div class="why"><span lang="zh">表2给出了三项基准、11个模型和六种条件的成功率及置信区间，正文进一步汇总了任务级平均下降、子任务级平均上升以及文本优于代码的数值。证据足以支撑“在所测设置中”的比较，但只覆盖这些基准、模型和固定预算。</span><span lang="en">Table 2 reports success rates and confidence intervals for three benchmarks, 11 models, and the six conditions, and the text summarizes the task-level drops, subtask-level gains, and the text-over-code ranking. The evidence supports the comparison within the tested setup, but only for these benchmarks, models, and fixed budgets.</span></div>
+<div class="ev"><code>S5.T2</code><code>S5.SS1.p2</code><code>S5.SS2.p2</code><code>S5.SS2.p3</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">技能效用定义为特异性与抽象性的乘积，并且在任务层面与任务成功率单调相关，同时子任务级和文本技能的效用更高。</span><span lang="en">Skill utility is defined as the product of specificity and abstractness, and it is monotonically related to task success while subtask-level and text skills have higher utility.</span>
+          <div class="why"><span lang="zh">公式部分明确给出效用、特异性和抽象性的定义，图5a显示随效用分箱成功率上升，图5c–e显示子任务级和文本技能的中位效用更高。这里支撑的是文中所测数据上的相关关系，不是对任意新任务的普遍定理。</span><span lang="en">The formula section explicitly defines utility, specificity, and abstractness; Fig. 5a shows success rising across utility bins, and Fig. 5c–e show higher median utility for subtask-level and text skills. This supports the relationship on the measured data, not a universal theorem for arbitrary new tasks.</span></div>
+<div class="ev"><code>S6.SS1.p1</code><code>S6.SS1.p2</code><code>S6.SS1.p3</code><code>S6.SS1.p4</code><code>S6.Ex3</code><code>S6.SS2.p2</code><code>S6.SS2.p4</code><code>S6.F5</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">技能效用还与实际跨任务复用密度一致，因此作者把它作为一种无需执行任务即可诊断技能记忆的指标。</span><span lang="en">Skill utility also matches actual cross-task reuse density, so the authors use it as an execution-free diagnostic of skill memory.</span>
+          <div class="why"><span lang="zh">正文说明该分数只需要技能和任务描述即可计算，然后在图6和对应文字中展示，高效用条件对应更高复用密度。证据支持“在这些实验里它能对齐复用”，但对其他记忆设计的可迁移性仍未在正文中单独验证。</span><span lang="en">The text says the score can be computed from skills and task descriptions only, and Fig. 6 plus the accompanying text show that higher-utility conditions correspond to denser reuse. The evidence supports alignment with reuse in these experiments, but portability to other memory designs is not separately verified in the provided text.</span></div>
+<div class="ev"><code>S1.p5</code><code>S1.p6</code><code>S6.SS3.p1</code><code>S6.SS3.p2</code><code>S6.SS3.p3</code><code>S6.F6</code><code>S7.p1</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">结论只在三项长程基准和11个模型上被验证，换到计算机使用、代理式编码或网页搜索等设置时，转移行为可能不同。</span><span lang="en">The conclusions are verified only on three long-horizon benchmarks and 11 models; transfer behavior could differ in settings such as computer use, agentic coding, or web search.</span>
+<span class="ev"><code>S4.p1</code><code>S4.p2</code><code>Sx1.p1</code></span></li>
+        <li><span class="tag">construction</span>
+          <span lang="zh">技能复用和效用都依赖固定的诱导、检索和去重规则以及 all-MiniLM-L6-v2 检索嵌入，换用不同记忆构造或检索器可能改变排序。</span><span lang="en">Both reuse and utility depend on fixed induction, retrieval, and deduplication rules plus the all-MiniLM-L6-v2 retrieval embedder, so changing the memory construction or retriever could alter the ranking.</span>
+<span class="ev"><code>S3.SS2.p3</code><code>S3.SS2.p4</code><code>S3.SS3.p2</code><code>S6.SS1.p1</code><code>S6.SS1.p4</code></span></li>
+        <li><span class="tag">scale</span>
+          <span lang="zh">效率结论依赖固定的50步 ReAct 预算、15个子任务上限和提供方默认采样，因此在不同成本预算或更强调优下，任务级与子任务级的交叉点可能移动。</span><span lang="en">The efficiency result depends on a fixed 50-step ReAct budget, a 15-subtask cap, and provider-default sampling, so the crossover between task-level and subtask-level agents could shift under different cost budgets or stronger tuning.</span>
+<span class="ev"><code>S4.p2</code><code>S4.p3</code><code>S5.F3</code><code>S5.SS1.p3</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">提供文本提到 App. A/B/C/D/E 和 Fig. 26–28，但这些内容未展开，因此附录中的提示词、更多消融和扩展图表无法在当前摘录中核实。</span><span lang="en">The provided text mentions Apps. A/B/C/D/E and Figs. 26–28, but these materials are not expanded here, so appendix prompts, additional ablations, and extended figures cannot be verified from the excerpt.</span></li>
+        <li><span lang="zh">正文引用了 Gemma-3-4B 和 Gemma-3-12B 的结果表，但该表没有出现在提供文本中。</span><span lang="en">The main text refers to a table with results for Gemma-3-4B and Gemma-3-12B, but that table is not present in the provided text.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="author"><span lang="zh">只评测了 AppWorld、OfficeBench 和 KramaBench，computer use、agentic coding、web search 未验证。</span><span
+          lang="en">The study only evaluates AppWorld, OfficeBench, and KramaBench; computer use, agentic coding, and web search are untested.</span><span class="tag">author</span></li>
+        <li class="author"><span lang="zh">memory 采用固定的 induction、retrieval 和 dedup 规则，没有覆盖会自我修改的 evolving memory。</span><span
+          lang="en">The memory uses fixed induction, retrieval, and dedup rules, so it does not cover self-modifying evolving memory.</span><span class="tag">author</span></li>
+        <li class="author"><span lang="zh">只按最终环境状态评分，没有 step-level ground truth，无法分析中间决策。</span><span
+          lang="en">Scoring uses only the final environment state, with no step-level ground truth for intermediate decisions.</span><span class="tag">author</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">直接关乎 LLM agent 记忆：子任务级诱导更易跨任务复用，utility 还能在不跑任务前筛 memory。</span><span
+        lang="en">Directly relevant to LLM-agent memory: subtask-level induction transfers better, and utility can screen memories before execution.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">LLM代理技能记忆跨任务转移</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Cross-task skill transfer in LLM agents</dd>
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">medium —— 正文未含附录。</dd>
+          <dt lang="en">confidence</dt>
+          <dd lang="en">medium — Appendices are not fully visible.</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">9/10</span>    <span class="chip deep">
+      <span lang="zh">全文精读</span><span
+        lang="en">full text</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2608.20314">MidTool: Mid-training Data Synthesis for Agentic Tool Use</a></h2>
+<p class="lead" lang="zh">MidTool 用 20.3B 中训补轨迹，BFCL 总分到 54.18%。</p><p class="lead" lang="en">MidTool’s 20.3B-token mid-training adds trajectories and lifts BFCL overall to 54.18%.</p>
+  <dl class="meta">
+      <dt><span lang="zh">机构</span><span lang="en">institutions</span></dt><dd>University of Washington · Snowflake · University of North Carolina at Chapel Hill</dd>
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Fengqing Jiang, Yite Wang, Boyi Liu, Zhaoyang Wang<span lang="zh"> 等 8 人</span><span lang="en"> +4 more</span></dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.AI<span class="sep">|</span>2026-08-20<span class="sep">|</span>2608.20314</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>llm-agent · tool-use · mid-training · data-synthesis · mcp</dd>    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
+    <dd class="thread">
+      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《Behavioral Controllability of Agentic Mod…》</a>相近
+        (0.86)</span>
+      <span lang="en">close to <a href="../2026-07-30/">“Behavioral Controllability of Agentic Mod…”</a>        from 2026-07-30 (0.86)</span>
+<br>      <span lang="zh">与 2026-07-30 的<a href="../2026-07-30/">《SkillRise: Agentic Reinforcement Learning…》</a>相近
+        (0.85)</span>
+      <span lang="en">close to <a href="../2026-07-30/">“SkillRise: Agentic Reinforcement Learning…”</a>        from 2026-07-30 (0.85)</span>
+    </dd>
+  </dl>
+
+  <div class="rate" data-arxiv="2608.20314" data-date="2026-08-21"
+       data-signals="{&#34;relevance&#34;: 9, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;deep&#34;, &#34;evidence_grade&#34;: &#34;B&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.86, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;html&#34;, &#34;priority&#34;: 0.849}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开精读</span><span
+      lang="en">read the digest</span></summary>
+    <div class="body">
+      <div lang="zh"><p>工具调用的难点不在会不会发 API，而在能否从文档、PDF、代码和不完整上下文里认出工具边界、补齐参数、串起 workflow，再在缺信息时恢复。现有方法多把这件事压给 post-training，用少量轨迹做 SFT/RL；问题是关键知识本来就分散在手册、schema、代码和开发文档里，而不是干净示范里。</p><p>MidTool 的动作是把这层能力前移到 mid-training。它先收 web、PDF、code 和 structured tool artifacts，再走两条合成支路：context-grounded augmentation 把文档/代码转成 tool 选择、参数补全和 workflow 识别监督；native agentic synthesis 则从真实 APIs、MCP skills、AWM rollouts 和 Nemotron Agentic traces 直接造可执行多轮轨迹，并对 schema grounding、turn order、required arguments 和 tool-response consistency 做硬校验。</p><p>他们用 MidTool-Mix 的 $20.3$B tokens 先 mid-train Qwen3-4B-Base 和 Qwen3-8B-Base，再接同样的 TOUCAN SFT，必要时加 RL。BFCLv3 上，$4$B 的 overall 从 39.51% 到 54.18%，multi-turn 平均到 27.63%；$\tau^{2}$-Bench 上，$4$B 的 Pass@1 / Pass@4 到 19.96% / 38.49%；MCP-Universe 上，$4$B 的 score / pass 到 23.80 / 10.06%。RL 通常继续放大这些增益。</p><p>消融说明两条支路缺一不可：只加 native agentic trajectories 更利于 BFCL，而 context-grounded augmentation 更利于 $\tau^{2}$-Bench 和 MCP-Universe。更关键的是，MCP-Universe 里的 web search 仍是 0.00，说明 general tool use 还没覆盖 deep-search 这类更强探索行为。它更像是在给 agent 补一层通用工具先验，而不是把所有 agentic 能力一次补齐。</p></div>
+      <div lang="en"><p>Tool use fails less at making the call than at recognizing when a tool applies, extracting arguments from messy context, composing multi-step workflows, and recovering when information is missing. Most recent systems push that burden into post-training: SFT and RL on curated traces. The catch is that much of the relevant knowledge lives in manuals, PDFs, code, and schema documents rather than in clean demonstrations.</p><p>MidTool moves that shaping earlier, into mid-training. It starts from web, PDF, code, and structured tool artifacts, then synthesizes supervision through two branches. Context-grounded augmentation turns documents and code into training for tool selection, parameter completion, and workflow recognition. Native agentic synthesis builds executable multi-turn trajectories from real APIs, MCP skills, AWM rollouts, and Nemotron Agentic traces, with strict checks for schema grounding, turn order, required arguments, and tool-response consistency.</p><p>The authors mid-train Qwen3-4B-Base and Qwen3-8B-Base on MidTool-Mix, then run the same TOUCAN SFT recipe and optional RL. On BFCLv3, the 4B model’s overall score rises from 39.51% to 54.18%, with multi-turn average reaching 27.63%. On $\tau^{2}$-Bench, 4B Pass@1 / Pass@4 reaches 19.96% / 38.49%. On MCP-Universe, 4B score / pass reaches 23.80 / 10.06%. RL usually adds more on top.</p><p>The ablations say the two synthesis branches are complementary: native agentic trajectories help BFCL more, while context-grounded augmentation matters more for $\tau^{2}$-Bench and MCP-Universe. The boundary is just as important as the gains: web search on MCP-Universe stays at 0.00, so this corpus does not solve deep-search-style exploration. The practical read is that MidTool supplies a reusable tool-use prior, not a universal agent recipe.</p></div>
+
+      <h3><span lang="zh">论文原图</span><span lang="en">Figures from the paper</span></h3>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2608.20314v1/teaser.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2608.20314v1/teaser.png" alt="Figure 1" loading="lazy">
+        </a>
+<p class="why" lang="zh">左侧直接给出 20.3B-token 语料构成，右侧把主结果绑在一起。</p><p class="why" lang="en">Shows the 20.3B-token corpus mix on the left and the main result on the right.</p>
+        <figcaption><span class="figlabel">Figure 1</span>
+          Left: MidTool-Mix is a 20.3B-token mid-training corpus built from web, PDF, code, and tool sources with synthesized agentic trajectories. Middle: Training pipeline from base model. Right: On MCP-Universe, our mid-trained 4B and 8B models outperform Qwen3 official models, showing that dedicated mid-training yields stronger agentic capability than scaling alone.</figcaption>
+      </figure>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2608.20314v1/sft_loss.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2608.20314v1/sft_loss.png" alt="Figure 4" loading="lazy">
+        </a>
+<p class="why" lang="zh">显示 MidTool-Mix 让 SFT loss 起点更低、收敛更快。</p><p class="why" lang="en">Shows MidTool-Mix starts SFT from a lower loss and converges faster.</p>
+        <figcaption><span class="figlabel">Figure 4</span>
+          SFT loss trajectories on the same downstream tool-use corpus for three Qwen3-4B initializations. MidTool-Mix starts from a lower loss, converges faster, and maintains the best loss throughout training compared with both the raw base model and the Dolmino mid-trained baseline.</figcaption>
+      </figure>
+      <figure class="paperfig">
+        <a href="https://arxiv.org/html/2608.20314v1/training_rl_reward_4b.png" target="_blank" rel="noopener">
+          <img src="https://arxiv.org/html/2608.20314v1/training_rl_reward_4b.png" alt="Figure 5" loading="lazy">
+        </a>
+<p class="why" lang="zh">显示 RL 早期 reward 也更高，说明收益不只体现在静态 SFT。</p><p class="why" lang="en">Shows higher early RL reward, so the gain is not limited to static SFT.</p>
+        <figcaption><span class="figlabel">Figure 5</span>
+          Average RL reward during training for 4B (left) and 8B (right) models. In both scales, MidTool-Mix starts from a stronger point and improves more quickly in the early stage of RL, while the non-mid-trained baseline gradually catches up later within the same training environment.</figcaption>
+      </figure>
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>提出 MidTool 这一面向 general tool use 的开源 mid-training pipeline，并构造 MidTool-Mix。</li><li>用 context-grounded augmentation 和 native agentic trajectory synthesis，把文档、PDF、代码和 tool artifacts 变成监督。</li><li>证明 mid-training 在 BFCL、$\tau^{2}$-Bench 和 MCP-Universe 上都能优于只做 post-training，并暴露搜索型能力边界。</li></ul>
+      <ul lang="en"><li>Introduce MidTool, an open mid-training pipeline for general tool use, and build MidTool-Mix.</li><li>Use context-grounded augmentation and native agentic trajectory synthesis to turn web, PDF, code, and tool artifacts into supervision.</li><li>Show that mid-training beats post-training-only recipes on BFCL, $\tau^{2}$-Bench, and MCP-Universe, while exposing a search-heavy boundary.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">MidTool 先收集 web、PDF、code 和 structured tool artifacts，再把它们转成 plain chat-style agent trajectories。context-grounded 分支从文档和代码里抽 affordance profile，合成 tool selection、parameter completion、format-constrained calls 和 workflow recognition 的监督。native 分支从 real APIs、MCP skills、AWM rollouts 和 filtered Nemotron Agentic traces 里直接合成可执行多轮轨迹，并对 schema grounding、turn order、required arguments 和 tool-response consistency 做验证。</dd>
+        <dd lang="en">MidTool first collects web, PDF, code, and structured tool artifacts, then turns them into plain chat-style agent trajectories. The context-grounded branch extracts affordance profiles from documents and code, and synthesizes supervision for tool selection, parameter completion, format-constrained calls, and workflow recognition. The native branch synthesizes executable multi-turn trajectories from real APIs, MCP skills, AWM rollouts, and filtered Nemotron Agentic traces, with checks for schema grounding, turn order, required arguments, and tool-response consistency.</dd>
+<dt>architecture</dt><dd>Source collection -&gt; source-specific preprocessing/dedup -&gt; context-grounded trajectory augmentation + native agentic trajectory synthesis -&gt; plain chat-style template; MidTool-Mix 20.3B tokens, 11.22M samples; Qwen3-4B-Base, Qwen3-8B-Base; downstream SFT on TOUCAN 100K subset; optional RL with AWM 526 synthetic tool-use environments</dd><dt>data</dt><dd>FineWeb; FinePDFs; Snowflake GH Archive; GitHub repos; REST APIs; MCP skills; AWM rollouts; filtered Nemotron Agentic dataset; MidTool-Mix: 20.3B tokens, 11.22M samples (42% web, 26% code, 23% PDF, 9% native agentic)</dd><dt>compute</dt><dd>32 H200 GPUs for mid-training and SFT; 8 B200 GPUs for RL</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>BFCLv3 (overall, Qwen3-4B-Base)</td><td>Overall</td>
+            <td class="win">54.18%</td>
+            <td class="num">Qwen3-4B-Base + SFT + RL 39.51%</td><td class="num">+14.67pp</td></tr>
+        <tr><td>$\tau^{2}$-Bench (overall, Qwen3-4B-Base)</td><td>Pass@1 / Pass@4</td>
+            <td class="win">19.96% / 38.49%</td>
+            <td class="num">Qwen3-4B-Base + SFT + RL 13.04% / 25.54%</td><td class="num">+6.92pp / +12.95pp</td></tr>
+        <tr><td>MCP-Universe (overall, Qwen3-4B-Base)</td><td>Score / Pass</td>
+            <td class="win">23.80 / 10.06%</td>
+            <td class="num">Qwen3-4B-Base + SFT + RL 14.50 / 2.23%</td><td class="num">+9.30 / +7.83pp</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-B">evidence B</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-medium">method risk medium</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.86</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在作者固定的训练流程下，MidTool-Mix在Qwen3-4B/8B上相较仅SFT基线，持续提升BFCLv3、τ²-Bench和MCP-Universe上的工具使用表现，且RL通常进一步放大这些增益。</span><span lang="en">Under the fixed training recipe used by the authors, MidTool-Mix consistently improves tool-use performance on BFCLv3, τ²-Bench, and MCP-Universe over SFT-only baselines for Qwen3-4B/8B, and RL usually compounds these gains.</span>
+          <div class="why"><span lang="zh">表3、表4和表5直接比较了4B与8B在“仅SFT”和“MidTool-Mix+SFT/+RL”下的结果，三项基准上都呈现一致的提升；作者在设置中也明确固定了下游SFT/RL流程。证据只覆盖Qwen3-4B/8B和这组三个基准，但在这些设置内对主张是直接支撑的。</span><span lang="en">Tables 3, 4, and 5 directly compare SFT-only against MidTool-Mix+SFT/+RL for 4B and 8B, and the pattern is consistently favorable across the three benchmarks; the setup also states that the downstream SFT/RL recipe is fixed. The evidence is limited to Qwen3-4B/8B and these benchmarks, but within that scope it directly supports the claim.</span></div>
+<div class="ev"><code>S3.SS1.p1</code><code>S3.SS1.p2</code><code>S3.SS2.p1</code><code>S3.SS2.p2</code><code>S3.SS2.p3</code><code>S3.T3</code><code>S3.T4</code><code>S3.T5</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在4B固定SFT的消融里，原始语料、context-grounded augmentation和native agentic trajectories各自提供不同增益，完整MidTool-Mix同时优于无mid-training和匹配预算的Dolmino-20BT。</span><span lang="en">In the 4B fixed-SFT ablation, the raw sources, context-grounded augmentation, and native agentic trajectories each contribute different gains, and the full MidTool-Mix beats both no mid-training and the matched-budget Dolmino-20BT.</span>
+          <div class="why"><span lang="zh">表6在“4B + 固定SFT”条件下逐行分解了语料与两条合成分支的作用，显示完整MidTool-Mix在BFCLv3、τ²-Bench和MCP-Universe上都优于无mid-training与Dolmino-20BT，而两条分支各自带来不同侧重的提升。这里的结论是对该固定消融设置的直接读出。</span><span lang="en">Table 6 decomposes the corpus and the two synthesis branches under the fixed 4B+SFT setting, showing that the full MidTool-Mix outperforms both no mid-training and Dolmino-20BT on BFCLv3, τ²-Bench, and MCP-Universe, while the two branches contribute with different strengths. The claim is a direct reading of this fixed ablation setting.</span></div>
+<div class="ev"><code>S3.SS3.p1</code><code>S3.SS3.p2</code><code>S3.SS3.p3</code><code>S3.T6</code></div>        </li>
+        <li class="support-partial">
+          <span class="sup">partial</span>
+          <span lang="zh">MCP-Universe中web search子集仍为0.00，而浏览器自动化、金融和位置子集有所提升，因此作者把该结果解释为通用工具使用与深度搜索式探索之间存在能力边界。</span><span lang="en">On MCP-Universe, the web-search subset remains at 0.00 while browser automation, finance, and location improve, so the authors interpret this as a capability boundary between general tool use and deep-search-style exploration.</span>
+          <div class="why"><span lang="zh">表5确实显示web search子集为0.00，同时其他MCP子域有明显提升；但“能力边界”是作者基于这一子域模式做出的解释，而不是对所有搜索型任务的直接测试。该结论因此只被部分支撑。</span><span lang="en">Table 5 does show web-search at 0.00 while other MCP subdomains improve meaningfully; however, the &#39;capability boundary&#39; is the authors&#39; interpretation of this subset pattern rather than a direct test over all search-like tasks. So the claim is only partially supported.</span></div>
+<div class="ev"><code>S3.SS2.p4</code><code>S3.T5</code><code>S3.T5.6.1</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">下游SFT只用了TOUCAN抽样的100K工具数据，RL也固定为AWM设置；若更换后训练数据量、质量或RL环境，增益幅度可能变化。</span><span lang="en">Downstream SFT uses only a 100K tool-use sample from TOUCAN, and RL is fixed to the AWM setup; changing the amount, quality, or environment of post-training data could alter the observed gains.</span>
+<span class="ev"><code>S3.SS1.p1</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">主实验只在Qwen3-4B/8B和BFCLv3、τ²-Bench、MCP-Universe三项基准上展开，外推到其他底座模型、规模或工具生态尚未同样验证。</span><span lang="en">The main experiments are conducted only on Qwen3-4B/8B and the three benchmarks BFCLv3, τ²-Bench, and MCP-Universe, so extrapolation to other base models, scales, or tool ecosystems is not equally verified.</span>
+<span class="ev"><code>S3.SS1.p1</code><code>S3.SS1.p2</code></span></li>
+        <li><span class="tag">construction</span>
+          <span lang="zh">native agentic trajectories依赖GPT-5、GPT-5.1、GPT-5.2、Qwen3-235B-A22B-Instruct-2507以及质量/可行性/预算控制器生成，构造策略改变会直接影响合成数据分布。</span><span lang="en">The native agentic trajectories depend on GPT-5, GPT-5.1, GPT-5.2, Qwen3-235B-A22B-Instruct-2507, and quality/feasibility/budget controllers, so changes to the construction policy would directly affect the synthesized data distribution.</span>
+<span class="ev"><code>S2.SS3.p2</code><code>S2.SS3.p3</code><code>S2.SS3.p4</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">附录A/B/C未包含在给定文本中，因此更细的预处理阈值、超参数、泄漏审计细节、训练动态和视觉工具使用试点结果都无法在这里核验。</span><span lang="en">Appendices A/B/C are not included in the provided text, so finer preprocessing thresholds, hyperparameters, leakage-audit details, training dynamics, and the visual-tool-use pilot cannot be verified here.</span></li>
+        <li><span lang="zh">多随机种子方差、显著性检验以及完整评测哈希/运行环境细节在给定摘录中不可见。</span><span lang="en">Multi-seed variance, significance testing, and the full evaluation harness / runtime-environment details are not visible in the provided excerpt.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="author"><span lang="zh">MCP-Universe 的 web search 仍是 0.00，说明 deep-search 型探索没被覆盖。</span><span
+          lang="en">Web search on MCP-Universe is still 0.00, so deep-search-style exploration is not covered.</span><span class="tag">author</span></li>
+        <li class="reader"><span lang="zh">消融只固定 4B SFT，8B 或 RL 下的支路互补性没有单独拆开。</span><span
+          lang="en">The ablation fixes 4B SFT, so branch complementarity under 8B or RL is not separately isolated.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">直接相关：它把 tool calling、multi-turn planning 和 MCP 交互前移到中训。</span><span
+        lang="en">Directly relevant: it moves tool calling, multi-turn planning, and MCP interaction into mid-training rather than relying only on post-training.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">通用工具调用中训练数据合成</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Mid-training data synthesis for tool use</dd>
+      </dl>
+    </div>
+  </details>
+</article>
+<article class="card">
+  <div class="chips">
+<span class="chip score" title="三级筛选相关性打分">8/10</span>    <span class="chip ">
+      <span lang="zh">仅摘要</span><span
+        lang="en">abstract only</span></span>
+<span class="chip">notable</span>  </div>
+
+  <h2><a href="https://arxiv.org/abs/2608.19966">Rethinking Patch Based Multivariate Time Series Forecasting with Semantic Structured Partitioning</a></h2>
+<p class="lead" lang="zh">SCPaT 用语义分块+动态图路由改进 MTSF</p><p class="lead" lang="en">SCPaT improves multivariate forecasting by semantic partitioning, a dynamic semantic graph, and importance-aware expert routing.</p>
+  <dl class="meta">
+    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
+    <dd>Jiazhe Wang, Zhiquan Huang, Linjing Xue, Ming Liu<span lang="zh"> 等 6 人</span><span lang="en"> +2 more</span></dd>
+    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
+    <dd>cs.AI<span class="sep">|</span>2026-08-20<span class="sep">|</span>2608.19966</dd>
+<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>time-series-forecasting · multivariate-time-series · patch-based-models · transformer · semantic-partitioning</dd>    <dt><span lang="zh">脉络</span><span lang="en">thread</span></dt>
+    <dd class="thread">
+      <span lang="zh">与 2026-08-20 的<a href="../2026-08-20/">《Structured Latent Space Modeling over Mul…》</a>相近
+        (0.88)</span>
+      <span lang="en">close to <a href="../2026-08-20/">“Structured Latent Space Modeling over Mul…”</a>        from 2026-08-20 (0.88)</span>
+<br>      <span lang="zh">与 2026-08-19 的<a href="../2026-08-19/">《SCENARIODIFF: A Scenario-level Guidance F…》</a>相近
+        (0.85)</span>
+      <span lang="en">close to <a href="../2026-08-19/">“SCENARIODIFF: A Scenario-level Guidance F…”</a>        from 2026-08-19 (0.85)</span>
+    </dd>
+  </dl>
+
+  <div class="rate" data-arxiv="2608.19966" data-date="2026-08-21"
+       data-signals="{&#34;relevance&#34;: 8, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;A&#34;, &#34;method_risk&#34;: &#34;high&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.86, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.812}">
+    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
+    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
+    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
+    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
+    <span class="rate-state"></span>
+  </div>
+
+  <details>
+    <summary><span lang="zh">展开</span><span
+      lang="en">expand</span></summary>
+    <div class="body">
+      <div lang="zh"><p>现有 patch-based 多变量时间序列预测常把序列切成固定块，容易切断有意义的时间边界；多尺度切法又会在不同尺度间重复编码；可扩展切法虽然更灵活，但仍缺少显式的语义组织和异质模式交互建模。</p><p>SCPaT 的核心动作是先做 semantic structured partitioning：用 adaptive semantic unit generation 把输入拆成语义一致的单元，再用 dynamic semantic graph 建立这些单元之间的有向依赖，并把它们组织成更高层的 semantic blocks。随后，importance-aware routing 把不同语义块分派给不同 experts 做定制化建模。</p><p>摘要只报告了在 12 个真实世界数据集上的 extensive experiments，结论是 SCPaT 有效，但没有给出具体指标、提升幅度或消融结果，无法判断优势主要来自分块、图建模还是路由。</p><p>这篇和时间序列预测直接相关，尤其是 patch 化建模、长程依赖和结构化表示学习；但目前只有摘要，证据还不足以评估它是否真优于强基线，或是否只是在更复杂的模块堆叠下获益。</p></div>
+      <div lang="en"><p>Current patch-based multivariate time series forecasters often cut sequences into fixed chunks, which can split meaningful temporal boundaries. Multi-scale partitioning can duplicate representations across scales, while extendable partitioning is more flexible but still lacks an explicit way to organize semantic structure or model interactions between heterogeneous temporal patterns.</p><p>SCPaT’s move is to partition by semantics first. It generates semantically consistent units, builds a dynamic semantic graph to encode directed dependencies and assemble higher-order semantic blocks, then uses importance-aware routing to send different blocks to different experts for specialized modeling.</p><p>The abstract only says the method was tested on 12 real-world datasets and that the experiments were extensive. It gives no metrics, no baseline numbers, and no ablations, so the size of the gain and the contribution of each module remain unclear.</p><p>For a time-series reader, the paper sits squarely in patch-based forecasting and structured representation learning. But with abstract-only evidence, the claim is still more architectural than demonstrated: it suggests a useful way to preserve semantics, yet does not show whether that yields robust gains over stronger patch baselines.</p></div>
+
+
+      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
+      <ul lang="zh"><li>提出 SCPaT，将 patch-based 预测改为先做语义一致单元划分。</li><li>用 dynamic semantic graph 显式建模单元间有向依赖并形成 semantic blocks。</li><li>用 importance-aware routing 将不同语义块分派给不同 experts。</li></ul>
+      <ul lang="en"><li>Introduces SCPaT, turning patch-based forecasting into semantics-first unit partitioning.</li><li>Uses a dynamic semantic graph to model directed dependencies and form semantic blocks.</li><li>Applies importance-aware routing to dispatch different semantic blocks to different experts.</li></ul>
+
+      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
+      <dl class="kv">
+        <dt>core idea</dt>
+        <dd lang="zh">SCPaT 是一个 Transformer-based framework。它先通过 adaptive semantic unit generation 将输入序列切成语义一致的单元，再构建 dynamic semantic graph 来表示单元间的有向关系，并把这些单元聚合为 higher-order semantic blocks。最后，importance-aware routing 根据块的重要性把它们送入不同 experts 进行定制化建模。</dd>
+        <dd lang="en">SCPaT is a Transformer-based framework. It first uses adaptive semantic unit generation to split the input sequence into semantically consistent units, then builds a dynamic semantic graph to represent directed relations among units and aggregates them into higher-order semantic blocks. Finally, importance-aware routing sends blocks to different experts for customized modeling based on their importance.</dd>
+<dt>architecture</dt><dd>Transformer-based framework; adaptive semantic unit generation; dynamic semantic graph; higher-order semantic blocks; importance-aware routing; experts</dd><dt>data</dt><dd>12 real-world datasets</dd>      </dl>
+
+      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
+      <div class="scroll">
+      <table>
+        <thead><tr><th>benchmark</th><th>metric</th>
+            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
+            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
+        <tbody>
+        <tr><td>12 real-world datasets</td><td>evaluation coverage</td>
+            <td class="win">12 datasets</td>
+            <td class="num"></td><td class="num"></td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
+      <p class="audit-note">
+        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
+          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
+        <span lang="en">This is not a quality score. It answers one question: does the
+          paper's own evidence carry its own claims. Every judgement cites the paragraph,
+          table or figure id it was read from.</span>
+      </p>
+      <div class="profile">
+        <span class="pill grade-A">evidence A</span>
+        <span class="pill risk-medium">eval risk medium</span>
+        <span class="pill risk-high">method risk high</span>
+        <span class="pill">empirical method</span>
+        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.86</span>
+      </div>
+
+      <ul class="claims">
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在提供的12个公开基准上，SCPaT在长短期预测中大多取得最优或次优误差，并总体优于所列的固定、多尺度和可扩展分区基线。</span><span lang="en">Across the 12 benchmarks provided, SCPaT mostly attains the best or second-best errors in both long-term and short-term forecasting, and overall outperforms the listed fixed, multi-scale, and extendable partitioning baselines.</span>
+          <div class="why"><span lang="zh">表2和表3给出逐数据集、逐预测长度的MSE/MAE，正文也明确总结为在长短期预测的大多数设置下表现为最优或次优。它们支持的是这些基准上的经验改进，而不是对所有MTSF场景的普遍保证。</span><span lang="en">Tables 2 and 3 report MSE/MAE by dataset and horizon, and the text explicitly summarizes the method as best or second-best in most long- and short-term settings. This supports empirical gains on the listed benchmarks, not a universal guarantee for all MTSF settings.</span></div>
+<div class="ev"><code>S4.T2.7.1</code><code>S4.T3.7.1</code><code>S4.SS2.SSS1.p1</code><code>S4.SS2.SSS2.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">消融实验表明，语义向量编码器、转移熵图和重要性感知路由三个模块都对性能有贡献，去掉任一模块都会使误差上升。</span><span lang="en">The ablation study shows that the semantic vector encoder, transfer-entropy graph, and importance-aware routing each contribute to performance, and removing any one of them increases error.</span>
+          <div class="why"><span lang="zh">表6直接比较了完整模型与去掉SV Encoder、IAR或TE Graph的变体，三类删除都会在多个数据集和预测长度上带来更高误差。正文的总结与表中的数值一致，因此对模块贡献的支持是直接的。</span><span lang="en">Table 6 directly compares the full model against variants without the SV Encoder, IAR, or TE Graph, and all three removals increase error across multiple datasets and horizons. The narrative summary matches the table values, so the support for module contribution is direct.</span></div>
+<div class="ev"><code>S4.T6.7</code><code>S4.SS5.p1</code></div>        </li>
+        <li class="support-direct">
+          <span class="sup">direct</span>
+          <span lang="zh">在随机缺失、高斯噪声和不同回看窗口下，SCPaT在所选数据集上都表现出比基线更慢的性能退化。</span><span lang="en">Under random missingness, Gaussian noise, and different look-back windows, SCPaT shows slower performance degradation than the baselines on the selected datasets.</span>
+          <div class="why"><span lang="zh">表5对应缺失率扰动，图4对应高斯噪声，图5对应回看窗口变化，正文明确写出SCPaT在这些设置下退化更慢且更稳定。支持范围限于文本中给出的数据集和扰动设置。</span><span lang="en">Table 5 covers missingness, Figure 4 covers Gaussian noise, and Figure 5 covers look-back-window changes; the text explicitly states that SCPaT degrades more slowly and remains more stable under these settings. The support is limited to the datasets and perturbations shown in the provided text.</span></div>
+<div class="ev"><code>S4.T5.5</code><code>S4.F4</code><code>S4.F5</code><code>S4.SS3.SSS3.p1</code><code>S4.SS3.SSS3.p2</code><code>S4.SS3.SSS4.p1</code></div>        </li>
+      </ul>
+
+      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
+      <ul>
+        <li><span class="tag">baseline</span>
+          <span lang="zh">基线比较依赖作者重训和超参数搜索的统一协议；若不同模型的调参预算或实现细节不完全可比，性能排序可能改变。</span><span lang="en">The baseline comparison depends on the authors&#39; unified retraining and hyperparameter-search protocol; if tuning budgets or implementation details are not fully comparable across models, the ranking could change.</span>
+<span class="ev"><code>S4.SS1.SSS2.p1</code><code>S4.SS1.SSS3.p1</code></span></li>
+        <li><span class="tag">construction</span>
+          <span lang="zh">语义单元长度由方差阈值δ决定，图再经α稀疏化和Top-P路由裁剪，说明结论可能对这些构造性超参数较敏感。</span><span lang="en">Semantic-unit length is determined by the variance threshold δ, and the graph is further shaped by α sparsification and Top-P routing, so the conclusion may be sensitive to these construction hyperparameters.</span>
+<span class="ev"><code>S3.SS2.SSS3.p3</code><code>S3.SS3.SSS2.p1</code><code>S3.SS4.SSS2.p2</code><code>S4.SS3.SSS2.p1</code></span></li>
+        <li><span class="tag">generalisation</span>
+          <span lang="zh">鲁棒性只在少量缺失率、噪声强度和回看窗口上验证，若换成其他扰动类型、领域或更长预测跨度，结论可能变化。</span><span lang="en">Robustness is verified only on a small set of missingness rates, noise levels, and look-back windows; the conclusion may change under other perturbation types, domains, or longer prediction horizons.</span>
+<span class="ev"><code>S4.T5.5</code><code>S4.F4</code><code>S4.F5</code><code>S4.SS3.SSS3.p1</code><code>S4.SS3.SSS3.p2</code><code>S4.SS3.SSS4.p1</code></span></li>
+      </ul>
+
+      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
+      <ul class="unknowns">
+        <li><span lang="zh">提供的文本未显示多随机种子结果、方差或显著性检验，因此结果波动无法在此核实。</span><span lang="en">The provided text does not show multi-seed results, variance estimates, or significance tests, so result variability cannot be verified here.</span></li>
+        <li><span lang="zh">提取文本没有完整呈现 Figure 8 和任何附录/超参数搜索范围，因此效率曲线和全部实现细节不能逐项核对。</span><span lang="en">The extraction does not fully present Figure 8 or any appendix/hyperparameter-search ranges, so the efficiency curves and all implementation details cannot be checked item by item.</span></li>
+      </ul>
+
+      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
+      <ul>
+        <li class="reader"><span lang="zh">摘要没有给出任何具体指标、提升幅度或消融结果。</span><span
+          lang="en">The abstract reports no concrete metrics, gains, or ablations.</span><span class="tag">reader</span></li>
+        <li class="reader"><span lang="zh">目前无法判断优势主要来自语义分块、动态图还是路由机制。</span><span
+          lang="en">It is unclear whether the gains come mainly from partitioning, the graph, or the routing mechanism.</span><span class="tag">reader</span></li>
+      </ul>
+
+      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
+      <blockquote class="relevance"><span lang="zh">和 patch-based 时间序列预测、长程依赖与结构化表示学习直接相关。</span><span
+        lang="en">Directly relevant to patch-based forecasting, long-range dependency modeling, and structured representations.</span></blockquote>
+
+      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
+      <dl class="kv">
+          <dt lang="zh">入选理由</dt><dd lang="zh">语义分块+多变量预测</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Semantic partitioning for multivariate forecasting</dd>
+          <dt lang="zh">可信度</dt>
+          <dd lang="zh">low —— 仅有摘要</dd>
+          <dt lang="en">confidence</dt>
+          <dd lang="en">low — abstract only</dd>
       </dl>
     </div>
   </details>
@@ -1328,160 +1565,8 @@ footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--l
 
       <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
       <dl class="kv">
-          <dt lang="zh">入选理由</dt><dd lang="zh">对概率时序预测的对比式VAE方法</dd>
-          <dt lang="en">why selected</dt><dd lang="en">Contrastive VAE for probabilistic time-series forecasting</dd>
-          <dt lang="zh">可信度</dt>
-          <dd lang="zh">low —— 仅有摘要</dd>
-          <dt lang="en">confidence</dt>
-          <dd lang="en">low — abstract only</dd>
-      </dl>
-    </div>
-  </details>
-</article>
-<article class="card">
-  <div class="chips">
-<span class="chip score" title="三级筛选相关性打分">8/10</span>    <span class="chip ">
-      <span lang="zh">仅摘要</span><span
-        lang="en">abstract only</span></span>
-<span class="chip">notable</span>  </div>
-
-  <h2><a href="https://arxiv.org/abs/2608.20052">DecoVAE: a Lightweight Interpretable Trend-Seasonal VAE Framework for Efficient Probabilistic Time Series Forecasting</a></h2>
-<p class="lead" lang="zh">分解趋势/季节项，CRPS 最多降 14.96%</p><p class="lead" lang="en">DecoVAE disentangles trend and seasonality, cutting CRPS by up to 14.96% while shrinking weights by 93%.</p>
-  <dl class="meta">
-    <dt><span lang="zh">作者</span><span lang="en">authors</span></dt>
-    <dd>Alexander Marusov, Dmitry Anikin, Alexey Zaytsev</dd>
-    <dt><span lang="zh">分类</span><span lang="en">categories</span></dt>
-    <dd>cs.LG<span class="sep">|</span>2026-08-20<span class="sep">|</span>2608.20052</dd>
-<dt><span lang="zh">标签</span><span lang="en">tags</span></dt><dd>time-series · probabilistic-forecasting · vae · frequency-domain · interpretable-models</dd>  </dl>
-
-  <div class="rate" data-arxiv="2608.20052" data-date="2026-08-21"
-       data-signals="{&#34;relevance&#34;: 8, &#34;novelty&#34;: &#34;notable&#34;, &#34;read_depth&#34;: &#34;deep&#34;, &#34;depth&#34;: &#34;shallow&#34;, &#34;evidence_grade&#34;: &#34;B&#34;, &#34;method_risk&#34;: &#34;medium&#34;, &#34;evaluation_risk&#34;: &#34;medium&#34;, &#34;quality_confidence&#34;: 0.84, &#34;paper_type&#34;: &#34;empirical_method&#34;, &#34;reviewed&#34;: true, &#34;fulltext_source&#34;: &#34;abstract&#34;, &#34;priority&#34;: 0.766}">
-    <span class="rate-label"><span lang="zh">读后标记</span><span lang="en">after reading</span></span>
-    <button data-label="deep"><span lang="zh">值得深读</span><span lang="en">worth a deep read</span></button>
-    <button data-label="weak_evidence"><span lang="zh">有趣但证据弱</span><span lang="en">interesting, weak evidence</span></button>
-    <button data-label="skip"><span lang="zh">可跳过</span><span lang="en">skippable</span></button>
-    <span class="rate-state"></span>
-  </div>
-
-  <details>
-    <summary><span lang="zh">展开</span><span
-      lang="en">expand</span></summary>
-    <div class="body">
-      <div lang="zh"><p>概率时间序列预测常卡在两点：趋势和季节性被混在一起学，模型又往往又重又难解释。很多方法要么只擅长一类结构，要么靠更大的网络堆出效果，代价是内存和推理开销。</p><p>关键动作是把序列显式拆成两条流。趋势流在潜变量轨迹上加差分正则，逼它保持平滑，思路类比 Hodrick-Prescott filter；季节流则在 frequency domain 里用 complex Gaussian VAE，直接建模幅度和相位，从而把周期模式写进先验。</p><p>作者说在七个真实基准上做了广泛评估，DecoVAE 一直优于强基线。摘要给出的幅度包括：短期预测 CRPS 最多降 $14.96\%$，NMAE 最多降 $23.30\%$；长周期预测分别最多降 $52.68\%$ 和 $26.51\%$。它还声称参数量最多少 $93\%$，速度最多快 $74\%$，且是对第二名方法相比。</p><p>这篇工作的价值在于把“可解释的分解”直接做成可训练的生成模型，而不是事后分图看结果。问题是目前只能看到摘要，七个基准、第二名是谁、以及这些收益是否来自同一设置下的公平比较，都还没法核实。</p></div>
-      <div lang="en"><p>Probabilistic forecasting often still entangles trend and seasonality, then pays for it with bulky models and weak interpretability. Many methods either specialize in one component or recover both only by scaling up the network, which raises memory and runtime costs.</p><p>The key move is to split the series into two streams. The trend stream regularizes the latent trajectory toward smoothness with a differential penalty, like a Hodrick-Prescott filter in latent space. The seasonal stream works in the frequency domain through a complex Gaussian VAE, so amplitude and phase of periodic structure are modeled natively rather than inferred indirectly.</p><p>The abstract says the method was evaluated on seven real-world benchmarks and consistently beat strong baselines. The reported gains reach 14.96% lower CRPS and 23.30% lower NMAE for short-term forecasting, and 52.68% and 26.51% for long-term horizons. It also claims up to 93% smaller model weights and up to 74% faster speed versus the second-best method.</p><p>The appeal is straightforward: make the decomposition itself part of the probabilistic model, so explanations are not just post hoc plots. But with abstract-only evidence, the real question is still open: which datasets, which competitors, and whether the efficiency gains hold under matched settings.</p></div>
-
-
-      <h3><span lang="zh">核心贡献</span><span lang="en">Key contributions</span></h3>
-      <ul lang="zh"><li>提出一个把趋势与季节性显式分开的轻量 VAE 框架。</li><li>趋势流用潜变量上的差分正则约束平滑性，季节流用 complex Gaussian VAE 建模频域幅度和相位。</li><li>摘要称其在七个基准上同时提升精度与效率。</li></ul>
-      <ul lang="en"><li>A lightweight VAE framework that explicitly separates trend and seasonality.</li><li>The trend stream uses a differential regularizer in latent space, while the seasonal stream uses a complex Gaussian VAE in the frequency domain.</li><li>The abstract claims improvements in both accuracy and efficiency across seven benchmarks.</li></ul>
-
-      <h3><span lang="zh">方法</span><span lang="en">Method</span></h3>
-      <dl class="kv">
-        <dt>core idea</dt>
-        <dd lang="zh">DecoVAE 将输入序列分解为 trend 与 seasonal 两条潜在通道。trend 通道在 latent trajectory 上施加 differential regularizer，约束其平滑，类比 Hodrick-Prescott filter；seasonal 通道在 frequency domain 中使用 complex Gaussian VAE，显式表示周期成分的 amplitude 与 phase。</dd>
-        <dd lang="en">DecoVAE decomposes each input series into trend and seasonal latent streams. The trend stream applies a differential regularizer to the latent trajectory to enforce smoothness, analogous to a Hodrick-Prescott filter. The seasonal stream uses a complex Gaussian VAE in the frequency domain to represent amplitude and phase explicitly.</dd>
-<dt>architecture</dt><dd>trend stream + seasonal stream; differential regularizer; complex Gaussian VAE</dd><dt>data</dt><dd>7 real-world benchmarks</dd>      </dl>
-
-      <h3><span lang="zh">实验结果</span><span lang="en">Results</span></h3>
-      <div class="scroll">
-      <table>
-        <thead><tr><th>benchmark</th><th>metric</th>
-            <th><span lang="zh">本文</span><span lang="en">this paper</span></th>
-            <th><span lang="zh">对照</span><span lang="en">baseline</span></th><th>Δ</th></tr></thead>
-        <tbody>
-        <tr><td>7 real-world benchmarks</td><td>CRPS</td>
-            <td class="win">up to 14.96% reduction</td>
-            <td class="num">strong baselines; second-best method for efficiency claims</td><td class="num"></td></tr>
-        <tr><td>7 real-world benchmarks</td><td>NMAE</td>
-            <td class="win">up to 23.30% reduction</td>
-            <td class="num">strong baselines</td><td class="num"></td></tr>
-        <tr><td>long-term horizons</td><td>CRPS</td>
-            <td class="win">up to 52.68% reduction</td>
-            <td class="num">strong baselines</td><td class="num"></td></tr>
-        <tr><td>long-term horizons</td><td>NMAE</td>
-            <td class="win">up to 26.51% reduction</td>
-            <td class="num">strong baselines</td><td class="num"></td></tr>
-        <tr><td>7 real-world benchmarks</td><td>model weight</td>
-            <td class="win">up to 93% reduction</td>
-            <td class="num">second-best method</td><td class="num"></td></tr>
-        <tr><td>7 real-world benchmarks</td><td>speed</td>
-            <td class="win">up to 74% acceleration</td>
-            <td class="num">second-best method</td><td class="num"></td></tr>
-        </tbody>
-      </table>
-      </div>
-
-      <h3><span lang="zh">证据审计</span><span lang="en">Evidence audit</span></h3>
-      <p class="audit-note">
-        <span lang="zh">这不是论文质量评分。下面只回答一个问题：论文自己的证据，
-          撑不撑得住它自己的主张。每条判断都标注了它读的段落/表/图编号。</span>
-        <span lang="en">This is not a quality score. It answers one question: does the
-          paper's own evidence carry its own claims. Every judgement cites the paragraph,
-          table or figure id it was read from.</span>
-      </p>
-      <div class="profile">
-        <span class="pill grade-B">evidence B</span>
-        <span class="pill risk-medium">eval risk medium</span>
-        <span class="pill risk-medium">method risk medium</span>
-        <span class="pill">empirical method</span>
-        <span class="pill" title="模型对这次审计本身的把握，不是论文质量 / confidence in the audit, not the paper">audit conf 0.84</span>
-      </div>
-
-      <ul class="claims">
-        <li class="support-partial">
-          <span class="sup">partial</span>
-          <span lang="zh">在所报告的七个真实世界数据集上，DecoVAE 在短期和长期预测中总体上取得了最好的平均名次，并在多数数据集/指标上优于对比方法，但并非每个单元格都领先。</span><span lang="en">Across the seven reported real-world datasets, DecoVAE attains the best average rank in both short- and long-horizon forecasting and beats the compared methods on many dataset-metric cells, but it is not the top method in every cell.</span>
-          <div class="why"><span lang="zh">表 I/II 的平均名次和若干数据集的最优值支撑了“整体表现较强”的说法；但表中也能看到 Electricity、Traffic 和 Weather 的若干指标由 K² VAE 或 TSDiff 领先，因此“始终领先”只能算强部分支持。</span><span lang="en">The average ranks in Tables I/II and the many best cells support the narrower claim that the method performs strongly overall; however, several Electricity, Traffic, and Weather cells are still won by K2 VAE or TSDiff, so “always better” is only strongly but not fully supported.</span></div>
-<div class="ev"><code>S3.T1</code><code>S4.T2</code><code>S4.SS2.SSS0.Px1.p1</code><code>S4.SS2.SSS0.Px2.p1</code></div>        </li>
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">在提供的效率评测中，DecoVAE 仅在 Electricity 和 Traffic 上与 K2VAE/TSDiff 对比，但在训练、推理、内存和模型大小上都显示出显著节省，最大小模型和加速分别达到 93% 和 74%。</span><span lang="en">In the reported efficiency evaluation, DecoVAE is compared only with K2VAE and TSDiff on Electricity and Traffic, yet it shows large savings in training time, inference time, memory, and model size, with up to 93% smaller models and 74% faster speed.</span>
-          <div class="why"><span lang="zh">图 2/3 的文字总结给出了相对 K2VAE/TSDiff 的具体降幅，并明确限定了数据集范围，因此这条效率结论在提供文本中是直接可核的。</span><span lang="en">The prose around Figures 2/3 gives explicit percentage reductions relative to K2VAE/TSDiff and clearly limits the scope to Electricity and Traffic, so this efficiency claim is directly verifiable from the provided text.</span></div>
-<div class="ev"><code>S4.SS3.p1</code><code>S4.SS3.SSS0.Px1.p1</code><code>S4.SS3.SSS0.Px2.p1</code></div>        </li>
-        <li class="support-direct">
-          <span class="sup">direct</span>
-          <span lang="zh">论文给出了形式化结果：在趋势解码器线性时，潜在空间目标与经典 Hodrick–Prescott 目标接近；在趋势解码器满足 Lipschitz 条件时，高频趋势能量可被上界控制。</span><span lang="en">The paper gives formal results: under a linear trend decoder, the latent-space objective approximates the classical Hodrick–Prescott objective; under a Lipschitz trend decoder, the trend’s high-frequency energy is bounded.</span>
-          <div class="why"><span lang="zh">贡献段和定理 III.1/III.2 直接写出了线性解码器下的 HP 近似关系以及 Lipschitz 解码器下的高频能量上界；这些是附带假设的形式化结论，而不是实验现象。</span><span lang="en">The contribution section and Theorems III.1/III.2 explicitly state the HP-approximation relation under a linear decoder and the high-frequency energy bound under a Lipschitz decoder; these are formal results under stated assumptions, not empirical observations.</span></div>
-<div class="ev"><code>S1.I1.i2.p1</code><code>S3.SS4.SSS1.p5</code><code>S3.Thmtheorem1.p1</code><code>S3.E24</code><code>S3.Thmtheorem2.p1</code><code>S3.E26</code><code>S4.SS5.p2</code></div>        </li>
-      </ul>
-
-      <h3><span lang="zh">可能改变结论的设置</span><span lang="en">Setup that could change the conclusion</span></h3>
-      <ul>
-        <li><span class="tag">baseline</span>
-          <span lang="zh">主要性能结论对基线集合敏感：实验只比较了 K² VAE、LaST、DeepAR、TFM、TSDiff 和 DeNOTS，而且若干单元格仍由这些方法领先。</span><span lang="en">The main performance conclusions are sensitive to the baseline set: the experiments only compare against K2 VAE, LaST, DeepAR, TFM, TSDiff, and DeNOTS, and several cells are still won by those methods.</span>
-<span class="ev"><code>S4.SS1.SSS0.Px3</code><code>S3.T1</code><code>S4.T2</code></span></li>
-        <li><span class="tag">generalisation</span>
-          <span lang="zh">效率结论只在 Electricity 和 Traffic 两个数据集上、且只与 K2VAE/TSDiff 对比，因而对其他数据集、硬件或工作负载的外推未被验证。</span><span lang="en">The efficiency conclusion is only measured on Electricity and Traffic, and only against K2VAE and TSDiff, so extrapolation to other datasets, hardware, or workloads is unverified.</span>
-<span class="ev"><code>S4.SS3.p1</code><code>S4.SS3.SSS0.Px1.p1</code><code>S4.SS3.SSS0.Px2.p1</code></span></li>
-        <li><span class="tag">ablation</span>
-          <span lang="zh">趋势正则化的消融只在 ETTh1 长期预测上做过，季节模块的参数化消融则只覆盖短期任务中的五个数据集，因此正则项和季节表示的作用幅度未在全套场景上验证。</span><span lang="en">The trend-regularization ablation is only run on ETTh1 in the long-horizon setting, and the seasonal parameterization ablation only covers five datasets in the short-horizon setting, so the effect sizes of the regularizer and seasonal representation are not validated across the full range of scenarios.</span>
-<span class="ev"><code>S4.SS5.p1</code><code>S4.SS5.p2</code><code>A0.SS3.SSS1.p1</code><code>A0.T3</code></span></li>
-      </ul>
-
-      <h3><span lang="zh">无法核实</span><span lang="en">Could not verify</span></h3>
-      <ul class="unknowns">
-        <li><span lang="zh">提供的摘录没有完整附录 A/B/C 和补充证明，因此预处理细节、超参数、损失权重与证明细节无法逐项核验。</span><span lang="en">The provided excerpt does not include the full Appendix A/B/C or the supplementary proofs, so preprocessing details, hyperparameters, loss weights, and proof steps cannot be checked item by item.</span></li>
-        <li><span lang="zh">所给文本在 Table IV 处被截断，后续对比和部分附录内容不可见。</span><span lang="en">The supplied text truncates at Table IV, so later comparisons and parts of the appendices are not visible.</span></li>
-      </ul>
-
-      <h3><span lang="zh">局限</span><span lang="en">Limitations</span></h3>
-      <ul>
-        <li class="reader"><span lang="zh">只有摘要，无法核实七个基准的具体名称、划分和比较对象。</span><span
-          lang="en">Only the abstract is available, so the seven benchmarks, splits, and comparators cannot be verified.</span><span class="tag">reader</span></li>
-        <li class="reader"><span lang="zh">效率提升只说相对第二名方法，缺少绝对延迟、显存和推理设置。</span><span
-          lang="en">The efficiency claims are only relative to the second-best method; absolute latency, memory, and inference setup are missing.</span><span class="tag">reader</span></li>
-        <li class="reader"><span lang="zh">摘要未给出消融，无法判断性能来自分解本身还是某一条流。</span><span
-          lang="en">The abstract gives no ablations, so it is unclear whether the gains come from the decomposition itself or one stream.</span><span class="tag">reader</span></li>
-      </ul>
-
-      <h3><span lang="zh">与我的相关性</span><span lang="en">Why it matters to me</span></h3>
-      <blockquote class="relevance"><span lang="zh">和 probabilistic forecasting、长程趋势/季节分解、效率权衡都直接相关。</span><span
-        lang="en">Directly relevant to probabilistic forecasting, trend/seasonality decomposition, and accuracy-efficiency tradeoffs.</span></blockquote>
-
-      <h3><span lang="zh">附注</span><span lang="en">Notes</span></h3>
-      <dl class="kv">
-          <dt lang="zh">入选理由</dt><dd lang="zh">趋势-季节概率预测方法</dd>
-          <dt lang="en">why selected</dt><dd lang="en">Trend-seasonal probabilistic forecasting method</dd>
+          <dt lang="zh">入选理由</dt><dd lang="zh">概率时间序列预测的VAE方法</dd>
+          <dt lang="en">why selected</dt><dd lang="en">Probabilistic time-series forecasting VAE</dd>
           <dt lang="zh">可信度</dt>
           <dd lang="zh">low —— 仅有摘要</dd>
           <dt lang="en">confidence</dt>

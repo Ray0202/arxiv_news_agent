@@ -2,11 +2,11 @@
   {
     "date": "2026-08-21",
     "count": 8,
-    "deep": 3,
+    "deep": 4,
     "titles": [
-      "TS-Reasoner: Aligning Time Series Foundation Models with LLM Reasoning",
-      "ReCache: Efficient KV Cache Reuse and Compression for Tool-Augmented LLM Agents",
-      "An Irreducible Quantum Advantage in Aligning World Models with Reality"
+      "Self-Harness: Harnesses That Improve Themselves",
+      "Can Agent Memory Systems Track Evolving State?",
+      "Scale-Aware Pretraining of Time Series Foundation Models via Multi-Patch Token Alignment and Hybrid Masking"
     ]
   },
   {
