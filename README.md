@@ -140,3 +140,16 @@ SRI 哈希必须用 `openssl dgst -sha384` 从真实文件算，**不能凭记�
 4. **`why_it_matters_to_me` 无解**：精读 prompt 里没注入兴趣画像，模型只能回答
    "读者研究方向未明确提供"。
 5. **字数超标改不动**：见 `config/interests.yaml` 的注释，最后是调上限而不是加压 prompt。
+
+## 定时部署
+
+`deploy/com.paper-news-agent.daily.plist` 是 launchd 任务的副本，纳入版本控制是因为
+它是这套部署的一部分，而 `~/Library/LaunchAgents/` 不在任何备份链里。安装：
+
+```bash
+cp deploy/com.paper-news-agent.daily.plist ~/Library/LaunchAgents/
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.paper-news-agent.daily.plist
+```
+
+周一到周五 12:00 起，每小时一次共 5 次机会（本地时间，自动跟随夏令时）。
+成功后当天剩下的触发在毫秒级退出。周末不触发：arXiv 周末不公告。
