@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-08-24",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Two Heads are Better Than One: Test-time Scaling of Multi-agent Collaborative Reasoning",
+      "ClawSentry: A Progressive Multi-Tier Security Monitor for Safeguarding Autonomous LLM Agents",
+      "GroupSegment-SHAP: Shapley Value Explanations with Group-Segment Players for Multivariate Time Series"
+    ]
+  },
+  {
     "date": "2026-08-21",
     "count": 8,
     "deep": 4,
