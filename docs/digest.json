@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-08-25",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Training Proactive and Personalized LLM Agents",
+      "ST-EVO: Towards Generative Spatio-Temporal Evolution of Multi-Agent Communication Topologies",
+      "MemGuard: Persisting Verifier Signals for LLM-Agent Memory Governance"
+    ]
+  },
+  {
     "date": "2026-08-24",
     "count": 8,
     "deep": 3,
