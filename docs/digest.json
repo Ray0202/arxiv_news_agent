@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-08-26",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "ST-Lite: Training-Free KV Cache Compression with Spatio-Trajectory Guidance for Long-Horizon GUI Agents",
+      "Eluna: An Agentic LLM System for Automating Warehouse Operations with Reasoning and Task Execution",
+      "MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks"
+    ]
+  },
+  {
     "date": "2026-08-25",
     "count": 8,
     "deep": 3,
