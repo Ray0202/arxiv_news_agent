@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-08-27",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "APPA: Recoverable Information-Flow Control for Real-World LLM Agents",
+      "Think Short, Defer Smart, Act, and Repeat: Calibrated Reasoning and Uncertainty-Aware Deferral for Edge LLM Agents",
+      "EDGE: Experience-Distillation for Guided Exploration in Agentic Reinforcement Learning"
+    ]
+  },
+  {
     "date": "2026-08-26",
     "count": 8,
     "deep": 3,
