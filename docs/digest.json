@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-08-31",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Multimodal Collaborative Debate for Zero-Shot Time Series Reasoning",
+      "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
+      "When Stale Constraints Go Unchecked: Budgeted Verification Failures in Inherited Agent Memory"
+    ]
+  },
+  {
     "date": "2026-08-28",
     "count": 8,
     "deep": 3,
@@ -77,16 +87,6 @@
       "Wuying-Browser-Agent: Real-World Centric Fundamental Long-Horizon Browser Agents",
       "SOD: Step-wise On-policy Distillation for Small Language Model Agents",
       "Continuous Evolution Pool: Taming Recurring Concept Drift in Online Time Series Forecasting"
-    ]
-  },
-  {
-    "date": "2026-07-30",
-    "count": 8,
-    "deep": 3,
-    "titles": [
-      "Living-Harness Is an Interactive-Agent Evolver",
-      "Metis: Memory Foundation Model",
-      "SkillRise: Agentic Reinforcement Learning for Cross-Task Skill Evolution"
     ]
   }
 ]
