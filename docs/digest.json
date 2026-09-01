@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-01",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "LLMs Can't Play Hangman: On the Necessity of a Private Working Memory for Language Agents",
+      "AgentRx: Diagnosing AI Agent Failures from Execution Trajectories",
+      "Ouroboros: A Self-Developing Frontier Coding Agent with Reviewed Core Evolution"
+    ]
+  },
+  {
     "date": "2026-08-31",
     "count": 8,
     "deep": 3,
