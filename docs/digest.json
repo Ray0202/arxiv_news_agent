@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-02",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Deploying and Evaluating a Smart-Agriculture Agentic Engine for Full-Season Soybean Farm Operations",
+      "Oblivion: Self-Adaptive Agentic Memory Control through Decay-Driven Activation",
+      "HiMPO: Hindsight-Informed Memory Policy Optimization for Less-Entangled Credit in Long-Horizon Agents"
+    ]
+  },
+  {
     "date": "2026-09-01",
     "count": 8,
     "deep": 3,
@@ -87,16 +97,6 @@
       "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
       "EgoCITE: Context-Augmented Indexing and Time-Aware Retrieval for Long-Horizon Egocentric Memory",
       "From Sequence to Structure: Relational Uncertainty Propagation for LLM Agents"
-    ]
-  },
-  {
-    "date": "2026-08-19",
-    "count": 8,
-    "deep": 4,
-    "titles": [
-      "Wuying-Browser-Agent: Real-World Centric Fundamental Long-Horizon Browser Agents",
-      "SOD: Step-wise On-policy Distillation for Small Language Model Agents",
-      "Continuous Evolution Pool: Taming Recurring Concept Drift in Online Time Series Forecasting"
     ]
   }
 ]
