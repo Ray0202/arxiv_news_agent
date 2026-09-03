@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-03",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "LLMs Can't Play Hangman: On the Necessity of a Private Working Memory for Language Agents",
+      "AdaMem: Learning What to Remember with Adaptive Memory Policies for Personalized Agents",
+      "Heaviside Continuity of Rolling Coefficients for Eliminating Epistemic Entropy in Large Language Models"
+    ]
+  },
+  {
     "date": "2026-09-02",
     "count": 8,
     "deep": 3,
@@ -87,16 +97,6 @@
       "Self-Harness: Harnesses That Improve Themselves",
       "Can Agent Memory Systems Track Evolving State?",
       "Scale-Aware Pretraining of Time Series Foundation Models via Multi-Patch Token Alignment and Hybrid Masking"
-    ]
-  },
-  {
-    "date": "2026-08-20",
-    "count": 8,
-    "deep": 3,
-    "titles": [
-      "SkillGate: Training In-Policy Skill Selection in Long-Horizon Agents",
-      "EgoCITE: Context-Augmented Indexing and Time-Aware Retrieval for Long-Horizon Egocentric Memory",
-      "From Sequence to Structure: Relational Uncertainty Propagation for LLM Agents"
     ]
   }
 ]
