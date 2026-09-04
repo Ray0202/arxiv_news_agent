@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-04",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "PaperScout: An Autonomous Agent for Academic Paper Search with Process-Aware Sequence-Level Policy Optimization",
+      "CORAL: Towards Autonomous Multi-Agent Evolution for Open-Ended Discovery",
+      "CoMAP: Co-Evolving World Models and Agent Policies for LLM Agents"
+    ]
+  },
+  {
     "date": "2026-09-03",
     "count": 8,
     "deep": 3,
@@ -87,16 +97,6 @@
       "Two Heads are Better Than One: Test-time Scaling of Multi-agent Collaborative Reasoning",
       "ClawSentry: A Progressive Multi-Tier Security Monitor for Safeguarding Autonomous LLM Agents",
       "GroupSegment-SHAP: Shapley Value Explanations with Group-Segment Players for Multivariate Time Series"
-    ]
-  },
-  {
-    "date": "2026-08-21",
-    "count": 8,
-    "deep": 4,
-    "titles": [
-      "Self-Harness: Harnesses That Improve Themselves",
-      "Can Agent Memory Systems Track Evolving State?",
-      "Scale-Aware Pretraining of Time Series Foundation Models via Multi-Patch Token Alignment and Hybrid Masking"
     ]
   }
 ]

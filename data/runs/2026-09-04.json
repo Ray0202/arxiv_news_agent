@@ -1,0 +1,149 @@
+{
+  "ingest": {
+    "oai_records": 1115,
+    "kept": 1043,
+    "added": 1043,
+    "partial": false
+  },
+  "written_at": "2026-09-04T19:33:50+00:00",
+  "filter": {
+    "total": 1043,
+    "passed": 140
+  },
+  "criteria": {
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL",
+      "cs.MA",
+      "stat.ML"
+    ],
+    "topics": [
+      {
+        "name": "time-series",
+        "weight": 1.0,
+        "keywords": [
+          "time series",
+          "time-series",
+          "forecasting",
+          "temporal",
+          "sequence model",
+          "state space model",
+          "irregular sampling",
+          "anomaly detection"
+        ],
+        "description": "时间序列预测与表征学习：基础模型（TSFM）、长程依赖建模、多变量与协变量 建模、不规则/缺失采样、概率预测与不确定性量化。",
+        "avoid": "纯金融量化策略与回测、纯信号处理硬件实现、单一垂直行业的应用报告 （如仅在某个电网数据集上调参且无方法贡献）。",
+        "description_en": "Time-series forecasting and representation learning: foundation models (TSFM), long-range dependencies, multivariate and covariate modelling, irregular or missing sampling, probabilistic forecasting and uncertainty quantification.",
+        "avoid_en": "Pure quantitative-finance strategies and backtests, signal-processing hardware, and single-vertical application reports with no methodological contribution (e.g. tuning on one grid dataset)."
+      },
+      {
+        "name": "agent",
+        "weight": 1.0,
+        "keywords": [
+          "LLM agent",
+          "language agent",
+          "tool use",
+          "tool calling",
+          "multi-agent",
+          "planning",
+          "ReAct",
+          "agentic",
+          "memory",
+          "environment interaction"
+        ],
+        "description": "基于大模型的智能体：工具调用与函数执行、长程规划与任务分解、多智能体 协作与通信协议、记忆机制、与环境/代码库/操作系统的交互，以及相应的 评测基准。",
+        "avoid": "传统强化学习中不涉及语言模型的 multi-agent RL、纯博弈论理论分析、 仅做 prompt 微调的经验性报告。",
+        "description_en": "LLM-based agents: tool and function calling, long-horizon planning and task decomposition, multi-agent collaboration and communication protocols, memory mechanisms, interaction with environments, codebases and operating systems, and the benchmarks that evaluate them.",
+        "avoid_en": "Classical multi-agent RL with no language model involved, purely game-theoretic analysis, and empirical reports that only tune prompts."
+      }
+    ],
+    "thresholds": {
+      "keyword_min_score": 1.0,
+      "llm_min_score": 8
+    },
+    "budget": {
+      "deep_read_max_per_day": 3,
+      "shallow_max_per_day": 5,
+      "reviewer_max_per_day": 8
+    },
+    "selection": {
+      "evidence_influence": "deep_order",
+      "pure_relevance_slots": 2,
+      "weights": {
+        "relevance": 0.8,
+        "evidence": 0.2,
+        "high_risk_penalty": 0.5
+      }
+    },
+    "models": {
+      "triage": "gpt-5.4-mini",
+      "deep": "gpt-5.4-mini",
+      "shallow": "gpt-5.4-mini",
+      "reviewer": "gpt-5.4-mini",
+      "deep_effort": "high",
+      "reviewer_effort": "high"
+    }
+  },
+  "triage": {
+    "scored": 155,
+    "errors": 0,
+    "kept": 44,
+    "usage": {
+      "calls": 155,
+      "retries": 0,
+      "input_tokens": 190054,
+      "output_tokens": 9477,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "usd": 0.1852,
+      "by_model": {
+        "gpt-5.4-mini": 0.185191
+      }
+    }
+  },
+  "review": {
+    "audited": 8,
+    "skipped": 0,
+    "errors": 0,
+    "valid_ids": 233,
+    "invalid_ids": 3,
+    "demoted": 0,
+    "usage": {
+      "calls": 8,
+      "retries": 0,
+      "input_tokens": 102937,
+      "output_tokens": 65580,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "usd": 0.3723,
+      "by_model": {
+        "gpt-5.4-mini": 0.372313
+      }
+    }
+  },
+  "summarize": {
+    "deep": 3,
+    "shallow": 5,
+    "errors": 0,
+    "flagged": [
+      "2606.20954"
+    ],
+    "usage": {
+      "calls": 8,
+      "retries": 0,
+      "input_tokens": 36852,
+      "output_tokens": 59395,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 14080,
+      "usd": 0.296,
+      "by_model": {
+        "gpt-5.4-mini": 0.295971
+      }
+    }
+  },
+  "relate": {
+    "history": 96,
+    "marked": 8
+  }
+}
