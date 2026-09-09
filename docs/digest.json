@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-09",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Learning to Configure Agentic AI Systems",
+      "Latent Preference Modeling for Multi-Session Personalized Tool Calling",
+      "Marginal-Contribution Policy Gradients under Filtered Feedback for Multi-Agent LLMs"
+    ]
+  },
+  {
     "date": "2026-09-07",
     "count": 8,
     "deep": 3,
@@ -77,16 +87,6 @@
       "APPA: Recoverable Information-Flow Control for Real-World LLM Agents",
       "Think Short, Defer Smart, Act, and Repeat: Calibrated Reasoning and Uncertainty-Aware Deferral for Edge LLM Agents",
       "EDGE: Experience-Distillation for Guided Exploration in Agentic Reinforcement Learning"
-    ]
-  },
-  {
-    "date": "2026-08-26",
-    "count": 8,
-    "deep": 3,
-    "titles": [
-      "ST-Lite: Training-Free KV Cache Compression with Spatio-Trajectory Guidance for Long-Horizon GUI Agents",
-      "Eluna: An Agentic LLM System for Automating Warehouse Operations with Reasoning and Task Execution",
-      "MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks"
     ]
   }
 ]
