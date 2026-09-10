@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-10",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Continuum: Efficient and Robust Multi-Turn LLM Agent Scheduling with KV Cache Time-to-Live",
+      "KairosAgent: Agentic Time Series Forecasting with Fused Semantic Reasoning",
+      "Physics of Agents: Statistical Mechanics Predicts Collective Behavior of AI Agents"
+    ]
+  },
+  {
     "date": "2026-09-09",
     "count": 8,
     "deep": 3,
@@ -77,16 +87,6 @@
       "Learning Generalizable Behaviors for Terminal Agents",
       "SPT: Skills as Pre-Training Data for Agentic Language Models",
       "Knowing When Not to Reuse: Conditional Experience Transfer in Autonomous LLM Post-Training"
-    ]
-  },
-  {
-    "date": "2026-08-27",
-    "count": 8,
-    "deep": 3,
-    "titles": [
-      "APPA: Recoverable Information-Flow Control for Real-World LLM Agents",
-      "Think Short, Defer Smart, Act, and Repeat: Calibrated Reasoning and Uncertainty-Aware Deferral for Edge LLM Agents",
-      "EDGE: Experience-Distillation for Guided Exploration in Agentic Reinforcement Learning"
     ]
   }
 ]
