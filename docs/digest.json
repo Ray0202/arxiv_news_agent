@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-11",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Mr.LHDR: A Benchmark for Multimodal Real-World Long-Horizon Deep Research Agents",
+      "Evaluating Time-Series Foundation Models and Multimodal Dietary Context for CGM Forecasting",
+      "Learning Intrinsic Water-Quality Dynamics with Rainfall for Data-Driven Forecasting"
+    ]
+  },
+  {
     "date": "2026-09-10",
     "count": 8,
     "deep": 3,
@@ -77,16 +87,6 @@
       "Multimodal Collaborative Debate for Zero-Shot Time Series Reasoning",
       "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
       "When Stale Constraints Go Unchecked: Budgeted Verification Failures in Inherited Agent Memory"
-    ]
-  },
-  {
-    "date": "2026-08-28",
-    "count": 8,
-    "deep": 3,
-    "titles": [
-      "Learning Generalizable Behaviors for Terminal Agents",
-      "SPT: Skills as Pre-Training Data for Agentic Language Models",
-      "Knowing When Not to Reuse: Conditional Experience Transfer in Autonomous LLM Post-Training"
     ]
   }
 ]
