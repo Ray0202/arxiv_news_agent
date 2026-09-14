@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-14",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "LifeFuse-Mem: Lifecycle-Aware State Fusion Against Temporary Overwriting for Long-Term Memory",
+      "LifeMem: Enabling Lifelong Experience Reuse for LLM Agents",
+      "Multi-Modal Time Series Prediction via Mixture of Modulated Experts"
+    ]
+  },
+  {
     "date": "2026-09-11",
     "count": 8,
     "deep": 3,
@@ -77,16 +87,6 @@
       "LLMs Can't Play Hangman: On the Necessity of a Private Working Memory for Language Agents",
       "AgentRx: Diagnosing AI Agent Failures from Execution Trajectories",
       "Ouroboros: A Self-Developing Frontier Coding Agent with Reviewed Core Evolution"
-    ]
-  },
-  {
-    "date": "2026-08-31",
-    "count": 8,
-    "deep": 3,
-    "titles": [
-      "Multimodal Collaborative Debate for Zero-Shot Time Series Reasoning",
-      "RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training",
-      "When Stale Constraints Go Unchecked: Budgeted Verification Failures in Inherited Agent Memory"
     ]
   }
 ]
