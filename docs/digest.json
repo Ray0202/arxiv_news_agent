@@ -1,5 +1,15 @@
 [
   {
+    "date": "2026-09-15",
+    "count": 8,
+    "deep": 3,
+    "titles": [
+      "Tabby: An Open Pretraining Recipe for Time Series Foundation Models",
+      "Skynet: Workflow-Level Anomaly Detection for Agentic AI via Semantic and Structural Modeling",
+      "AgentKV: Phase-Aware KV Eviction for Agentic LLMs"
+    ]
+  },
+  {
     "date": "2026-09-14",
     "count": 8,
     "deep": 3,
@@ -77,16 +87,6 @@
       "Deploying and Evaluating a Smart-Agriculture Agentic Engine for Full-Season Soybean Farm Operations",
       "Oblivion: Self-Adaptive Agentic Memory Control through Decay-Driven Activation",
       "HiMPO: Hindsight-Informed Memory Policy Optimization for Less-Entangled Credit in Long-Horizon Agents"
-    ]
-  },
-  {
-    "date": "2026-09-01",
-    "count": 8,
-    "deep": 3,
-    "titles": [
-      "LLMs Can't Play Hangman: On the Necessity of a Private Working Memory for Language Agents",
-      "AgentRx: Diagnosing AI Agent Failures from Execution Trajectories",
-      "Ouroboros: A Self-Developing Frontier Coding Agent with Reviewed Core Evolution"
     ]
   }
 ]
